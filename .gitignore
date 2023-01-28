@@ -1,0 +1,12 @@
+
+bin/
+obj/
+*.glb
+output.json
+input.json
+.vs/
+server/
+test/Generated/
+.DS_Store
+nupkg/
+.vscode
