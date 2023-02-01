@@ -162,6 +162,7 @@ namespace Elements
             {
                 newS.AddFace(face.Value.Outer.ToPolygon().Reversed(), face.Value.Inner?.Select(i => i.ToPolygon().Reversed())?.ToList());
             }
+            // TODO - this bloats our JSON, since it has to serialize the whole solid! We should be able to create an "inside-out" solid.
             var cs = new ConstructedSolid(newS);
             Representation = new Representation(new[] { cs });
             var bbox = new BBox3(this);

@@ -123,6 +123,13 @@
       "overrides": {
         "Program Assignment": {
           "name": "Space Settings"
+        },
+        "Level Layout": {
+          "schema": {
+            "Profiles": {
+              "name": "Spaces"
+            }
+          }
         }
       }
     }
