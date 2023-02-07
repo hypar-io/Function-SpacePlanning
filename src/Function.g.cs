@@ -17,6 +17,11 @@ namespace SpacePlanning
 {
     public class Function
     {
+        
+         public Function() {
+            Elements.Validators.Validator.DisableValidationOnConstruction = true;
+        }
+
         // Cache the model store for use by subsequent
         // executions of this lambda.
         private IModelStore<SpacePlanningInputs> store;

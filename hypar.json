@@ -149,5 +149,6 @@
   ],
   "repository_url": "https://github.com/hypar-io/function",
   "last_updated": "0001-01-01T00:00:00",
-  "cli_version": "1.2.0-alpha.12"
+  "cli_version": "1.2.0-alpha.12",
+  "skip_validation_on_deserialization": true
 }
