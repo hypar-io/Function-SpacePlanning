@@ -46,11 +46,6 @@ namespace Elements
 
         [Newtonsoft.Json.JsonIgnore]
         public ProgramRequirement FulfilledProgramRequirement = null;
-
-        // We need to maintain a pointer back to the original profile contained
-        // in the level layout, so we can update its color and name.
-        [Newtonsoft.Json.JsonIgnore]
-        public Profile UnmodifiedProfile { get; set; }
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
             Requirements = new Dictionary<string, ProgramRequirement>();
@@ -84,7 +79,7 @@ namespace Elements
             MaterialDict = new Dictionary<string, Material>(materialDefaults);
         }
 
-        public bool Match(ProgramAssignmentIdentity identity)
+        public bool Match(ISpaceBoundaryIdentity identity)
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             var levelMatch = identity.LevelAddId == this.LevelAddId;
@@ -133,6 +128,38 @@ namespace Elements
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             var internalPoint = this.Boundary.Perimeter.PointInternal();
+            // TODO: add this to Elements as Profile.PointInternal().
+            if (this.Boundary.Voids.Any())
+            {
+                var perimeterPoints = this.Boundary.Perimeter.Vertices.ToList();
+                var voidPoints = this.Boundary.Voids.SelectMany(v => v.Vertices).ToList();
+                var currVoidPoint = 0;
+                var currPerimeterPoint = 0;
+                while (true)
+                {
+                    var ptA = perimeterPoints[currPerimeterPoint];
+                    var ptB = voidPoints[currVoidPoint];
+                    var midPt = (ptA + ptB) / 2;
+                    if (this.Boundary.Contains(midPt) && !this.Boundary.Voids.Any(v => v.Contains(midPt)))
+                    {
+                        internalPoint = midPt;
+                        break;
+                    }
+                    currVoidPoint++;
+                    if (currVoidPoint >= voidPoints.Count)
+                    {
+                        currVoidPoint = 0;
+                        currPerimeterPoint++;
+                    }
+                    if (currPerimeterPoint >= perimeterPoints.Count)
+                    {
+                        // we give up. There was no diagonal between any void
+                        // vertex and any perimeter vertex that was inside the
+                        // boundary. This shouldn't be possible, I think?
+                        break;
+                    }
+                }
+            }
             this.RelativePosition = lcs.Inverted().OfPoint(internalPoint);
         }
 
@@ -156,15 +183,18 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var baseExtrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis, false);
-            var newS = new Solid();
-            foreach (var face in baseExtrude.Solid.Faces)
+            var baseExtrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
-                newS.AddFace(face.Value.Outer.ToPolygon().Reversed(), face.Value.Inner?.Select(i => i.ToPolygon().Reversed())?.ToList());
-            }
-            // TODO - this bloats our JSON, since it has to serialize the whole solid! We should be able to create an "inside-out" solid.
-            var cs = new ConstructedSolid(newS);
-            Representation = new Representation(new[] { cs });
+                Flipped = true
+            };
+            // var newS = new Solid();
+            // foreach (var face in baseExtrude.Solid.Faces)
+            // {
+            //     newS.AddFace(face.Value.Outer.ToPolygon().Reversed(), face.Value.Inner?.Select(i => i.ToPolygon().Reversed())?.ToList());
+            // }
+            // // TODO - this bloats our JSON, since it has to serialize the whole solid! We should be able to create an "inside-out" solid.
+            // var cs = new ConstructedSolid(newS);
+            Representation = baseExtrude;
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
             RoomView = new ViewScope()
@@ -230,6 +260,10 @@ namespace Elements
         }
         public void SetProgram(string displayName)
         {
+            if (displayName == null)
+            {
+                return;
+            }
             if (!MaterialDict.TryGetValue(displayName ?? "unrecognized", out var material))
             {
                 var color = random.NextColor();
@@ -237,8 +271,8 @@ namespace Elements
                 MaterialDict[displayName] = new Material(displayName, color, doubleSided: false);
                 material = MaterialDict[displayName];
             }
-            this.UnmodifiedProfile.AdditionalProperties["Color"] = material.Color;
-            this.UnmodifiedProfile.Name = displayName;
+            this.Boundary.AdditionalProperties["Color"] = material.Color;
+            this.Boundary.Name = displayName;
             this.Material = material;
             this.ProgramName = displayName;
             if (this.FulfilledProgramRequirement != null)
@@ -269,5 +303,23 @@ namespace Elements
             return this;
         }
 
+        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
+        {
+            var matchingLevelLayout =
+                levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Value?.LevelLayout?.AddId) ??
+                levelLayouts.FirstOrDefault(ll => ll.Name == edit.Value?.LevelLayout?.Name) ??
+                levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
+            matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
+            return this;
+        }
+
+        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
+        {
+            var matchingLevelLayout = levelLayouts.FirstOrDefault(ll => ll.AddId == add.Value.LevelLayout?.AddId) ?? levelLayouts.FirstOrDefault(ll => ll.Name == add.Value.LevelLayout?.Name);
+            matchingLevelLayout ??= levelLayouts.FirstOrDefault();
+            var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
+            sb?.SetProgram(add.Value.ProgramType);
+            return sb;
+        }
     }
 }

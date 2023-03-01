@@ -2,7 +2,7 @@
 
 # Space Planning
 
-Define program uses for spaces.
+Lay out and define program uses for spaces.
 
 |Input Name|Type|Description|
 |---|---|---|
@@ -18,6 +18,34 @@ Define program uses for spaces.
 <br>
 
 ## Additional Information
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

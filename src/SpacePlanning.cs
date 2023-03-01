@@ -130,7 +130,7 @@ namespace SpacePlanning
                             sb.LevelElements = le;
                         }
                     }
-                    var levelLayout = levelLayouts.FirstOrDefault(l => l.LevelVolumes.First().Id == group.Key);
+                    var levelLayout = levelLayouts.FirstOrDefault(l => l.LevelVolume.Id == group.Key);
                     levelLayout?.AddExistingSpaces(group.ToList());
                 }
             }
@@ -141,23 +141,45 @@ namespace SpacePlanning
                 var oldSpacesByLevel = oldSpaces.GroupBy(s => s.Level);
                 foreach (var group in oldSpacesByLevel)
                 {
-                    var levelLayout = levelLayouts.FirstOrDefault(l => l.LevelVolumes.First().Id == group.Key);
+                    var levelLayout = levelLayouts.FirstOrDefault(l => l.LevelVolume.Id == group.Key);
                     levelLayout?.AddExistingSpaces(group.ToList());
                 }
             }
 
-            var levelUnitLayoutsOverridden = input.Overrides.LevelLayout.Apply(
+            // deprecated, old overrides pathway
+            var levelLayoutsOverridden = input.Overrides.LevelLayout.Apply(
               levelLayouts,
               (lul, identity) => lul.Match(identity),
               (lul, edit) => lul.Update(edit, levelGroupedElements));
 
 
-            var spaces = levelUnitLayoutsOverridden.SelectMany(lul => lul.CreateSpaces()).ToList();
+            var spaces = levelLayoutsOverridden.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
+
             spaces = input.Overrides.ProgramAssignment.Apply(
                 spaces,
                 (sb, identity) => sb.Match(identity),
                 (sb, edit) => sb.Update(edit));
             var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
+
+            // end deprecated pathway
+            spaces = input.Overrides.Spaces.CreateElements(
+                input.Overrides.Additions.Spaces,
+                input.Overrides.Removals.Spaces,
+                (add) => SpaceBoundary.Create(add, levelLayoutsOverridden),
+                (sb, identity) => sb.Match(identity),
+                (sb, edit) => sb.Update(edit, levelLayoutsOverridden),
+                spaces);
+
+            foreach (var removal in input.Overrides.Removals.Spaces)
+            {
+                foreach (var lul in levelLayoutsOverridden)
+                {
+                    lul.RemoveSpace(removal);
+                }
+            }
+
+            // TODO: clean profiles
+
             foreach (var space in spaces)
             {
                 var spaceLevelElements = space.LevelElements;
@@ -167,8 +189,8 @@ namespace SpacePlanning
                 space.LevelVolume = null;
                 output.Model.AddElement(space);
             }
-            output.Model.AddElements(levelUnitLayoutsOverridden);
-            output.Model.AddElements(levelUnitLayoutsOverridden.SelectMany(lul => lul.CreateModelLines()));
+            output.Model.AddElements(levelLayoutsOverridden);
+            output.Model.AddElements(levelLayoutsOverridden.SelectMany(lul => lul.CreateModelLines()));
             output.Model.AddElements(levelElements);
             output.Model.AddElements(spaces);
 

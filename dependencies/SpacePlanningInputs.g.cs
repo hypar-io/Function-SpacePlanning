@@ -22,7 +22,7 @@ namespace SpacePlanning
 {
     #pragma warning disable // Disable all warnings
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public  class SpacePlanningInputs : S3Args
     
@@ -56,7 +56,7 @@ namespace SpacePlanning
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class Overrides 
     
@@ -64,15 +64,18 @@ namespace SpacePlanning
         public Overrides() { }
         
         [Newtonsoft.Json.JsonConstructor]
-        public Overrides(IList<LevelLayoutOverride> @levelLayout, IList<ProgramAssignmentOverride> @programAssignment)
+        public Overrides(OverrideAdditions @additions, OverrideRemovals @removals, IList<LevelLayoutOverride> @levelLayout, IList<SpacesOverride> @spaces, IList<ProgramAssignmentOverride> @programAssignment)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<Overrides>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @levelLayout, @programAssignment});
+                validator.PreConstruct(new object[]{ @additions, @removals, @levelLayout, @spaces, @programAssignment});
             }
         
+            this.Additions = @additions ?? this.Additions;
+            this.Removals = @removals ?? this.Removals;
             this.LevelLayout = @levelLayout ?? this.LevelLayout;
+            this.Spaces = @spaces ?? this.Spaces;
             this.ProgramAssignment = @programAssignment ?? this.ProgramAssignment;
         
             if(validator != null)
@@ -81,15 +84,82 @@ namespace SpacePlanning
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Additions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OverrideAdditions Additions { get; set; } = new OverrideAdditions();
+    
+        [Newtonsoft.Json.JsonProperty("Removals", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OverrideRemovals Removals { get; set; } = new OverrideRemovals();
+    
         [Newtonsoft.Json.JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<LevelLayoutOverride> LevelLayout { get; set; } = new List<LevelLayoutOverride>();
+    
+        [Newtonsoft.Json.JsonProperty("Spaces", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpacesOverride> Spaces { get; set; } = new List<SpacesOverride>();
     
         [Newtonsoft.Json.JsonProperty("Program Assignment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<ProgramAssignmentOverride> ProgramAssignment { get; set; } = new List<ProgramAssignmentOverride>();
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class OverrideAdditions 
+    
+    {
+        public OverrideAdditions() { }
+        
+        [Newtonsoft.Json.JsonConstructor]
+        public OverrideAdditions(IList<SpacesOverrideAddition> @spaces)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<OverrideAdditions>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @spaces});
+            }
+        
+            this.Spaces = @spaces ?? this.Spaces;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Spaces", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpacesOverrideAddition> Spaces { get; set; } = new List<SpacesOverrideAddition>();
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class OverrideRemovals 
+    
+    {
+        public OverrideRemovals() { }
+        
+        [Newtonsoft.Json.JsonConstructor]
+        public OverrideRemovals(IList<SpacesOverrideRemoval> @spaces)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<OverrideRemovals>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @spaces});
+            }
+        
+            this.Spaces = @spaces ?? this.Spaces;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Spaces", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IList<SpacesOverrideRemoval> Spaces { get; set; } = new List<SpacesOverrideRemoval>();
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class LevelLayoutOverride 
     
@@ -124,7 +194,42 @@ namespace SpacePlanning
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverride 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverride(string @id, SpacesIdentity @identity, SpacesValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverride>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesValue Value { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class ProgramAssignmentOverride 
     
@@ -159,7 +264,73 @@ namespace SpacePlanning
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverrideAddition 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverrideAddition(string @id, SpacesIdentity @identity, SpacesOverrideAdditionValue @value)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAddition>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity, @value});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+            this.Value = @value;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesIdentity Identity { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesOverrideAdditionValue Value { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverrideRemoval 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverrideRemoval(string @id, SpacesIdentity @identity)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideRemoval>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @id, @identity});
+            }
+        
+            this.Id = @id;
+            this.Identity = @identity;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Identity", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesIdentity Identity { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class LevelLayoutIdentity 
     
@@ -186,7 +357,7 @@ namespace SpacePlanning
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class LevelLayoutValue 
     
@@ -213,7 +384,74 @@ namespace SpacePlanning
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesIdentity 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesIdentity(string @levelAddId, Vector3 @relativePosition)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesIdentity>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @levelAddId, @relativePosition});
+            }
+        
+            this.LevelAddId = @levelAddId;
+            this.RelativePosition = @relativePosition;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Level Add Id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string LevelAddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Relative Position", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Vector3 RelativePosition { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesValue(SpacesValueLevelLayout @levelLayout, string @programType, Profile @boundary)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @levelLayout, @programType, @boundary});
+            }
+        
+            this.LevelLayout = @levelLayout;
+            this.ProgramType = @programType;
+            this.Boundary = @boundary;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesValueLevelLayout LevelLayout { get; set; }
+    
+        /// <summary>What program should be assigned to this zone?</summary>
+        [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProgramType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Profile Boundary { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class ProgramAssignmentIdentity 
     
@@ -244,22 +482,22 @@ namespace SpacePlanning
     
     }
     
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v12.0.0.0)")]
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
     public partial class ProgramAssignmentValue 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public ProgramAssignmentValue(string @programType, double? @height)
+        public ProgramAssignmentValue(double? @height, string @programType)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<ProgramAssignmentValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @programType, @height});
+                validator.PreConstruct(new object[]{ @height, @programType});
             }
         
-            this.ProgramType = @programType;
             this.Height = @height;
+            this.ProgramType = @programType;
         
             if(validator != null)
             {
@@ -267,14 +505,128 @@ namespace SpacePlanning
             }
         }
     
-        /// <summary>What program should be assigned to this zone?</summary>
-        [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ProgramType { get; set; }
-    
         /// <summary>The height of this space.</summary>
         [Newtonsoft.Json.JsonProperty("Height", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [System.ComponentModel.DataAnnotations.Range(0.01D, double.MaxValue)]
         public double? Height { get; set; }
     
+        /// <summary>What program should be assigned to this zone?</summary>
+        [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProgramType { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverrideAdditionValue 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverrideAdditionValue(SpacesOverrideAdditionValueLevelLayout @levelLayout, string @programType, Profile @boundary)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValue>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @levelLayout, @programType, @boundary});
+            }
+        
+            this.LevelLayout = @levelLayout;
+            this.ProgramType = @programType;
+            this.Boundary = @boundary;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesOverrideAdditionValueLevelLayout LevelLayout { get; set; }
+    
+        /// <summary>What program should be assigned to this zone?</summary>
+        [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ProgramType { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Profile Boundary { get; set; }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesValueLevelLayout 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesValueLevelLayout(string @addId, string @name)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesValueLevelLayout>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @addId, @name});
+            }
+        
+            this.AddId = @addId;
+            this.Name = @name;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverrideAdditionValueLevelLayout 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverrideAdditionValueLevelLayout(string @addId, string @name)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValueLevelLayout>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @addId, @name});
+            }
+        
+            this.AddId = @addId;
+            this.Name = @name;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
     }
 }
