@@ -25,7 +25,7 @@ namespace SpacePlanning
             if (levelVolumes.Count == 0)
             {
                 var levels = levelsModel?.AllElementsOfType<Level>();
-                if (levels != null && levels.Count() > 0)
+                if (levels != null && levels.Any())
                 {
                     // TODO: handle separate level groups
                     var levelsOrdered = levels.OrderBy(l => l.Elevation);
@@ -74,7 +74,7 @@ namespace SpacePlanning
             SpaceBoundary.Reset();
 
             // Populate SpaceBoundary's program requirement dictionary with loaded requirements
-            if (programReqs != null && programReqs.Count() > 0)
+            if (programReqs != null && programReqs.Any())
             {
                 SpaceBoundary.SetRequirements(programReqs);
             }
@@ -93,7 +93,7 @@ namespace SpacePlanning
                 output.Model.AddElement(proxy);
             }
 
-            if (levelVolumes.Count() == 0)
+            if (levelVolumes.Count == 0)
             {
                 // If there was no conceptual mass dependency, we might have no levels.
                 // Create a new Level Layout.
