@@ -25,7 +25,7 @@ namespace SpacePlanning
             if (levelVolumes.Count == 0)
             {
                 var levels = levelsModel?.AllElementsOfType<Level>();
-                if (levels != null && levels.Count() > 0)
+                if (levels != null && levels.Any())
                 {
                     // TODO: handle separate level groups
                     var levelsOrdered = levels.OrderBy(l => l.Elevation);
@@ -74,7 +74,7 @@ namespace SpacePlanning
             SpaceBoundary.Reset();
 
             // Populate SpaceBoundary's program requirement dictionary with loaded requirements
-            if (programReqs != null && programReqs.Count() > 0)
+            if (programReqs != null && programReqs.Any())
             {
                 SpaceBoundary.SetRequirements(programReqs);
             }
@@ -93,7 +93,7 @@ namespace SpacePlanning
                 output.Model.AddElement(proxy);
             }
 
-            if (levelVolumes.Count() == 0)
+            if (levelVolumes.Count == 0)
             {
                 // If there was no conceptual mass dependency, we might have no levels.
                 // Create a new Level Layout.
@@ -134,45 +134,24 @@ namespace SpacePlanning
                     levelLayout?.AddExistingSpaces(group.ToList());
                 }
             }
-            else if (input.OldSpaceBoundaries?.LocalFilePath != null && File.Exists(input.OldSpaceBoundaries.LocalFilePath))
-            {
-                var oldSpaceBoundaryModel = Model.FromJson(File.ReadAllText(input.OldSpaceBoundaries.LocalFilePath));
-                var oldSpaces = oldSpaceBoundaryModel.AllElementsOfType<SpaceBoundary>();
-                var oldSpacesByLevel = oldSpaces.GroupBy(s => s.Level);
-                foreach (var group in oldSpacesByLevel)
-                {
-                    var levelLayout = levelLayouts.FirstOrDefault(l => l.LevelVolume.Id == group.Key);
-                    levelLayout?.AddExistingSpaces(group.ToList());
-                }
-            }
-
-            // deprecated, old overrides pathway
-            var levelLayoutsOverridden = input.Overrides.LevelLayout.Apply(
-              levelLayouts,
-              (lul, identity) => lul.Match(identity),
-              (lul, edit) => lul.Update(edit, levelGroupedElements));
 
 
-            var spaces = levelLayoutsOverridden.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
+            var spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
 
-            spaces = input.Overrides.ProgramAssignment.Apply(
-                spaces,
-                (sb, identity) => sb.Match(identity),
-                (sb, edit) => sb.Update(edit));
             var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
 
             // end deprecated pathway
             spaces = input.Overrides.Spaces.CreateElements(
                 input.Overrides.Additions.Spaces,
                 input.Overrides.Removals.Spaces,
-                (add) => SpaceBoundary.Create(add, levelLayoutsOverridden),
+                (add) => SpaceBoundary.Create(add, levelLayouts),
                 (sb, identity) => sb.Match(identity),
-                (sb, edit) => sb.Update(edit, levelLayoutsOverridden),
+                (sb, edit) => sb.Update(edit, levelLayouts),
                 spaces);
 
             foreach (var removal in input.Overrides.Removals.Spaces)
             {
-                foreach (var lul in levelLayoutsOverridden)
+                foreach (var lul in levelLayouts)
                 {
                     lul.RemoveSpace(removal);
                 }
@@ -189,8 +168,8 @@ namespace SpacePlanning
                 space.LevelVolume = null;
                 output.Model.AddElement(space);
             }
-            output.Model.AddElements(levelLayoutsOverridden);
-            output.Model.AddElements(levelLayoutsOverridden.SelectMany(lul => lul.CreateModelLines()));
+            output.Model.AddElements(levelLayouts);
+            output.Model.AddElements(levelLayouts.SelectMany(lul => lul.CreateModelLines()));
             output.Model.AddElements(levelElements);
             output.Model.AddElements(spaces);
 

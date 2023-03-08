@@ -79,7 +79,7 @@ namespace Elements
             MaterialDict = new Dictionary<string, Material>(materialDefaults);
         }
 
-        public bool Match(ISpaceBoundaryIdentity identity)
+        public bool Match(SpacesIdentity identity)
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             var levelMatch = identity.LevelAddId == this.LevelAddId;
@@ -294,13 +294,6 @@ namespace Elements
             this.AdditionalProperties["Building Name"] = volume.BuildingName;
             this.AdditionalProperties["Level Name"] = volume.Name;
             this.Level = volume.Id;
-        }
-
-        public SpaceBoundary Update(SpacePlanning.ProgramAssignmentOverride edit)
-        {
-            SetProgram(edit.Value.ProgramType ?? ProgramType);
-            Height = edit.Value.Height ?? Height;
-            return this;
         }
 
         public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)

@@ -58,7 +58,7 @@ namespace Elements
         public string ProgramName { get; set; }
     
         /// <summary>What color should be used to display this space type?</summary>
-        [JsonProperty("Color", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [JsonProperty("Color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color Color { get; set; }
     
         /// <summary>How much area should be allocated for this space?</summary>

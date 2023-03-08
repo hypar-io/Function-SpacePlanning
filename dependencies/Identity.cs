@@ -11,10 +11,6 @@ namespace SpacePlanning
         public Vector3 RelativePosition { get; set; }
     }
 
-    public partial class ProgramAssignmentIdentity : ISpaceBoundaryIdentity
-    {
-    }
-
     public partial class SpacesIdentity : ISpaceBoundaryIdentity
     {
     }

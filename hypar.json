@@ -1,8 +1,8 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "132f6a14-6e9e-4d6c-be76-fe9ffa23ea0b",
+  "id": "adc507cb-6005-41c5-a781-ccdd9dfc0956",
   "name": "Space Planning",
-  "description": "Lay out and define program uses for spaces.",
+  "description": "Lay out, sketch, and define program uses for spaces.",
   "language": "C#",
   "model_dependencies": [
     {
@@ -40,39 +40,7 @@
     }
   ],
   "model_output": "Space Planning Zones",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "Old Space Boundaries": {
-        "description": "This input is just for migration purposes. If you have an exported model containing space boundaries, you can import it here to pre-load this function with your previous results and continue editing.",
-        "$hyparDeprecated": true,
-        "$hyparOrder": 0,
-        "$ref": "https://prod-api.hypar.io/schemas/InputData",
-        "$hyparFileTypes": [
-          "json"
-        ]
-      }
-    }
-  },
   "overrides": {
-    "Level Layout": {
-      "context": "[*discriminator=Elements.LevelLayout]",
-      "identity": {
-        "Add Id": {
-          "type": "string"
-        }
-      },
-      "schema": {
-        "Profiles": {
-          "$hyparRelativeToTransform": true,
-          "type": "array",
-          "items": {
-            "$ref": "https://prod-api.hypar.io/schemas/Profile"
-          }
-        }
-      },
-      "deprecated": true
-    },
     "Spaces": {
       "context": "[*discriminator=Elements.SpaceBoundary]",
       "identity": {
@@ -197,57 +165,6 @@
       },
       "perParent": "Level Layout",
       "perProperty": true
-    },
-    "Program Assignment": {
-      "context": "[*discriminator=Elements.SpaceBoundary]",
-      "identity": {
-        "Level Add Id": {
-          "type": "string"
-        },
-        "Relative Position": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-        }
-      },
-      "schema": {
-        "Height": {
-          "multipleOf": 0.1,
-          "description": "The height of this space.",
-          "type": [
-            "number",
-            "null"
-          ],
-          "$hyparUnitType": "length",
-          "$hyparOrder": 1,
-          "minimum": 0.01
-        },
-        "Program Type": {
-          "description": "What program should be assigned to this zone?",
-          "type": [
-            "string",
-            "null"
-          ],
-          "$hyparOrder": 0,
-          "$hyparAutocomplete": [
-            "Open Office",
-            "Private Office",
-            "Lounge",
-            "Classroom",
-            "Pantry",
-            "Meeting Room",
-            "Phone Booth",
-            "Support",
-            "Reception",
-            "Open Collaboration",
-            "Data Hall"
-          ],
-          "$hyparAutocompleteQuery": {
-            "dependency": "Program Requirements",
-            "query": "[*discriminator=Elements.ProgramRequirement].Qualified Program Name"
-          }
-        }
-      },
-      "deprecated": true,
-      "perProperty": true
     }
   },
   "outputs": [],
@@ -266,21 +183,5 @@
   "repository_url": "https://github.com/hypar-io/Function-SpacePlanning",
   "filters": {},
   "last_updated": "2023-02-15T19:41:51.966009",
-  "cli_version": "1.5.0-alpha.4",
-  "messages": {
-    "en": {
-      "overrides": {
-        "Level Layout": {
-          "schema": {
-            "Profiles": {
-              "name": "Spaces"
-            }
-          }
-        },
-        "Program Assignment": {
-          "name": "Space Settings"
-        }
-      }
-    }
-  }
+  "cli_version": "1.5.0-alpha.4"
 }

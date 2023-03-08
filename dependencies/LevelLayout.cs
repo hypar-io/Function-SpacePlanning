@@ -10,7 +10,6 @@ namespace Elements
 {
     public partial class LevelLayout : Element
     {
-        private static readonly Plane XY = new Plane((0, 0), (0, 0, 1));
 
         [JsonIgnore]
         public LevelVolume LevelVolume { get; set; }
@@ -24,43 +23,6 @@ namespace Elements
 
         [JsonProperty("Add Id")]
         public string AddId { get; set; }
-
-        public LevelLayout Update(LevelLayoutOverride edit, (
-            Dictionary<string, List<CirculationSegment>> circulationSegmentsByLevel,
-            Dictionary<string, List<VerticalCirculationElement>> verticalCirculationByLevel,
-            Dictionary<string, List<ServiceCore>> coresByLevel,
-            Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements)
-        {
-            var profiles = edit.Value.Profiles?.Select(p =>
-            {
-                var projected = p.Project(XY);
-                projected.AdditionalProperties = p.AdditionalProperties;
-                projected.Name = p.Name;
-                return projected;
-            });
-            // assume that all levels for this layout have the same circulation.
-            // Circ + core probably need to become distinguishing features of
-            // the level layout.
-            var (subtractedProfiles, enclosedRooms) = GetSubtractionProfiles(LevelVolume, levelGroupedElements);
-            if (profiles.Count() > 0 && subtractedProfiles.Count > 0)
-            {
-                // subtract indivudually to avoid merging
-                profiles = profiles.SelectMany((p) =>
-                {
-                    try
-                    {
-                        return Profile.Difference(new[] { p }, subtractedProfiles);
-                    }
-                    catch
-                    {
-                        return new List<Profile> { p };
-                    }
-                }).ToList();
-            }
-            Profiles = profiles?.Cleaned() ?? Profiles;
-            Identity.AddOverrideIdentity(this, edit);
-            return this;
-        }
 
         private void CleanSpaceBoundaryProfiles()
         {
@@ -170,14 +132,9 @@ namespace Elements
             return (subtractedProfiles, enclosedRooms);
         }
 
-        public bool Match(LevelLayoutIdentity identity)
-        {
-            return identity.AddId == this.AddId;
-        }
-
         private LevelElements _levelElements = null;
 
-        private LevelElements levelElements
+        private LevelElements LevelElements
         {
             get
             {
@@ -212,14 +169,14 @@ namespace Elements
             {
                 programName = LevelVolume.PrimaryUseCategory;
             }
-            var projectedProfile = p.Project(XY);
+            var projectedProfile = p.Project(Plane.XY);
             Profiles.Add(projectedProfile);
             projectedProfile.AdditionalProperties = p.AdditionalProperties;
             projectedProfile.Name = p.Name;
             var spaceBoundary = SpaceBoundary.Make(projectedProfile, programName, LevelVolume.Transform, LevelVolume.Height - Units.FeetToMeters(1));
             spaceBoundary.Boundary.AdditionalProperties["SpaceBoundary"] = spaceBoundary.Id;
             spaceBoundary.SetLevelProperties(LevelVolume);
-            spaceBoundary.LevelElements = levelElements;
+            spaceBoundary.LevelElements = LevelElements;
             spaceBoundary.LevelAddId = LevelVolume.AddId ?? LevelVolume.Name;
             spaceBoundary.LevelVolume = LevelVolume;
             spaceBoundary.ComputeRelativePosition();
@@ -256,7 +213,7 @@ namespace Elements
 
         internal void UpdateSpace(SpaceBoundary spaceBoundary, Profile boundary, string programType)
         {
-            var boundaryProjected = boundary?.Project(XY) ?? spaceBoundary.Boundary;
+            var boundaryProjected = boundary?.Project(Plane.XY) ?? spaceBoundary.Boundary;
             var profileToReplace = Profiles.FindIndex(p => p.Id == spaceBoundary.Boundary.Id);
             if (profileToReplace != -1)
             {
