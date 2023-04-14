@@ -127,7 +127,7 @@ namespace Elements
             }
             catch
             {
-                // swallow 
+                // swallow
             }
             return (subtractedProfiles, enclosedRooms);
         }
@@ -173,6 +173,7 @@ namespace Elements
             Profiles.Add(projectedProfile);
             projectedProfile.AdditionalProperties = p.AdditionalProperties;
             projectedProfile.Name = p.Name;
+            // this 1' bump down is a hack to prevent spaces from showing up in the level above's clipping box.
             var spaceBoundary = SpaceBoundary.Make(projectedProfile, programName, LevelVolume.Transform, LevelVolume.Height - Units.FeetToMeters(1));
             spaceBoundary.Boundary.AdditionalProperties["SpaceBoundary"] = spaceBoundary.Id;
             spaceBoundary.SetLevelProperties(LevelVolume);

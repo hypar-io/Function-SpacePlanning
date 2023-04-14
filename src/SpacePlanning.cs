@@ -1,6 +1,7 @@
 using Elements;
 using Elements.Geometry;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace SpacePlanning
         public static SpacePlanningOutputs Execute(Dictionary<string, Model> inputModels, SpacePlanningInputs input)
         {
             var output = new SpacePlanningOutputs();
+            MessageManager.Initialize(output);
             inputModels.TryGetValue("Conceptual Mass", out var conceptualMassModel);
             var levelVolumes = conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>();
             inputModels.TryGetValue("Levels", out var levelsModel);
@@ -139,7 +141,7 @@ namespace SpacePlanning
             var spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
 
             var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
-
+            RemoveUnmatchedOverrides(input.Overrides.Spaces, input.Overrides.Additions.Spaces, levelLayouts);
             // end deprecated pathway
             spaces = input.Overrides.Spaces.CreateElements(
                 input.Overrides.Additions.Spaces,
@@ -174,6 +176,38 @@ namespace SpacePlanning
             output.Model.AddElements(spaces);
 
             return output;
+        }
+
+        private static void RemoveUnmatchedOverrides(IList<SpacesOverride> edits, IList<SpacesOverrideAddition> additions, List<LevelLayout> levelLayouts)
+        {
+            // If we created a single dummy level layout, just assume all spaces belong to that and don't bother filtering.
+            if (levelLayouts.Any(l => l.Name.Contains("dummy")))
+            {
+                return;
+            }
+            foreach (var edit in new List<SpacesOverride>(edits))
+            {
+                var matchingLevelLayout =
+                    levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Value?.LevelLayout?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.Name == edit.Value?.LevelLayout?.Name);
+                if (matchingLevelLayout == null)
+                {
+                    edits.Remove(edit);
+                }
+            }
+
+            foreach (var addition in new List<SpacesOverrideAddition>(additions))
+            {
+                var matchingLevelLayout =
+                    levelLayouts.FirstOrDefault(ll => ll.AddId == addition.Value?.LevelLayout?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.Name == addition.Value?.LevelLayout?.Name);
+                if (matchingLevelLayout == null)
+                {
+                    var levelName = addition.Value.LevelLayout?.Name?.Replace(" Layout", "") ?? "Unknown Level";
+                    MessageManager.AddWarning($"Some spaces assigned to {levelName} were not created because the level was not found.");
+                    additions.Remove(addition);
+                }
+            }
         }
 
         private static (

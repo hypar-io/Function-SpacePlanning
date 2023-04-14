@@ -113,12 +113,12 @@ namespace Elements
             {"Open Office", new Material("Open Office", new Color(0.435,0.627,0.745,0.5), doubleSided: false)}, //✅  https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/35cb4053-4d39-47ef-9673-2dccdae1433b/SteelcaseOpenOffice-35cb4053-4d39-47ef-9673-2dccdae1433b.json
             {"Private Office", new Material("Private Office", new Color(0.122,0.271,0.361,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/69be76de-aaa1-4097-be0c-a97eb44d62e6/Private+Office-69be76de-aaa1-4097-be0c-a97eb44d62e6.json
             {"Lounge", new Material("Lounge", new Color(1.000,0.584,0.196,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/52df2dc8-3107-43c9-8a9f-e4b745baca1c/Steelcase-Lounge-52df2dc8-3107-43c9-8a9f-e4b745baca1c.json
-            {"Classroom", new Material("Classroom", new Color(0.796,0.914,0.796,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/b23810e9-f565-4845-9b08-d6beb6223bea/Classroom-b23810e9-f565-4845-9b08-d6beb6223bea.json 
+            {"Classroom", new Material("Classroom", new Color(0.796,0.914,0.796,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/b23810e9-f565-4845-9b08-d6beb6223bea/Classroom-b23810e9-f565-4845-9b08-d6beb6223bea.json
             {"Pantry", new Material("Pantry", new Color(0.5,0.714,0.745,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/599d1640-2584-42f7-8de1-e988267c360a/Pantry-599d1640-2584-42f7-8de1-e988267c360a.json
             {"Meeting Room", new Material("Meeting Room", new Color(0.380,0.816,0.608,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/251d637c-c570-43bd-ab33-f59f337506bb/Catalog-251d637c-c570-43bd-ab33-f59f337506bb.json
             {"Phone Booth", new Material("Phone Booth", new Color(0.976,0.788,0.129,0.5), doubleSided: false)},  //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/deacf056-2d7e-4396-8bdf-f30d581f2747/Phone+Booths-deacf056-2d7e-4396-8bdf-f30d581f2747.json
             {"Support", new Material("Support", new Color(0.447,0.498,0.573,0.5), doubleSided: false)},
-            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
+            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json
             {"Open Collaboration", new Material("Open Collaboration", new Color(209.0/255, 224.0/255, 178.0/255, 0.5), doubleSided: false)},
             {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5), doubleSided: false)},
             {"Parking", new Material("Parking", new Color(0.447,0.498,0.573,0.5), doubleSided: false)}
@@ -185,7 +185,7 @@ namespace Elements
         {
             var baseExtrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
-                Flipped = true
+                FlipNormals = true
             };
             // var newS = new Solid();
             // foreach (var face in baseExtrude.Solid.Faces)
@@ -218,7 +218,7 @@ namespace Elements
             {
                 name = "Unassigned Space Type";
             }
-            var sb = new SpaceBoundary()
+            var sb = new SpaceBoundary
             {
                 Boundary = profile,
                 Cells = new List<Polygon> { profile.Perimeter },
@@ -309,7 +309,6 @@ namespace Elements
         public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
         {
             var matchingLevelLayout = levelLayouts.FirstOrDefault(ll => ll.AddId == add.Value.LevelLayout?.AddId) ?? levelLayouts.FirstOrDefault(ll => ll.Name == add.Value.LevelLayout?.Name);
-            matchingLevelLayout ??= levelLayouts.FirstOrDefault();
             var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
             sb?.SetProgram(add.Value.ProgramType);
             return sb;
