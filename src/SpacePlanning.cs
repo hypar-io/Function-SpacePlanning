@@ -188,6 +188,7 @@ namespace SpacePlanning
             foreach (var edit in new List<SpacesOverride>(edits))
             {
                 var matchingLevelLayout =
+                    levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Identity.LevelAddId + "-layout") ?? // IDK where this is coming from
                     levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Value?.LevelLayout?.AddId) ??
                     levelLayouts.FirstOrDefault(ll => ll.Name == edit.Value?.LevelLayout?.Name);
                 if (matchingLevelLayout == null)
