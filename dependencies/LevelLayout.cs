@@ -66,7 +66,35 @@ namespace Elements
                 // subtract indivudually to avoid merging
                 this.Profiles = this.Profiles.SelectMany((p) =>
                 {
-                    return Profile.Difference(new[] { p }, subtractedProfiles);
+                    try
+                    {
+                        return Profile.Difference(new[] { p }, subtractedProfiles);
+                    }
+                    catch
+                    {
+                        var diff = new List<Profile> { p };
+                        foreach (var subtractedProfile in subtractedProfiles)
+                        {
+                            try
+                            {
+                                diff = Profile.Difference(diff, new[] { subtractedProfile });
+                            }
+                            catch
+                            {
+                                // skip and print
+                                Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = true;
+                                var json = JsonConvert.SerializeObject(new { profiles = diff, subtractedProfile });
+                                Console.WriteLine("⚠️ Unable to subtract profiles");
+                                Console.WriteLine(json);
+                                // System.IO.File.WriteAllText($"/Users/andrewheumann/Dev/Function-SpacePlanning/profile-error_{++counter}.json", json);
+                                Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = false;
+                            }
+                        }
+                        return diff;
+                        // var subUnion = Profile.UnionAll(subtractedProfiles);
+                        // return Profile.Difference(new[] { p }, subUnion);
+                        // return new List<Profile> { p };
+                    }
                 }).ToList();
             }
 
@@ -95,7 +123,7 @@ namespace Elements
                     {
                         return new[] { new Profile(pgon.TransformedPolygon(vce.Transform)) };
                     }
-                    return new Profile[] { };
+                    return Array.Empty<Profile>();
                 }));
             }
             if (levelGroupedElements.coresByLevel.TryGetValue(levelVolume.Id.ToString(), out var cores))
