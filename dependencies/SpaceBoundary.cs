@@ -36,6 +36,12 @@ namespace Elements
         [JsonProperty("Relative Position")]
         public Vector3 RelativePosition { get; set; }
 
+        [JsonProperty("Original Boundary")]
+        public Polygon OriginalBoundary { get; set; }
+
+        [JsonProperty("Original Voids")]
+        public List<Polygon> OriginalVoids { get; set; }
+
         // end identity properties
 
         [JsonIgnore]
@@ -83,7 +89,13 @@ namespace Elements
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             var levelMatch = identity.LevelAddId == this.LevelAddId;
-            return levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+            var boundaryMatch = true;
+            if (identity.OriginalBoundary != null && this.OriginalBoundary != null)
+            {
+                boundaryMatch = identity.OriginalBoundary.IsAlmostEqualTo(this.OriginalBoundary, 1.0);
+            }
+            var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+            return returnVal;
         }
 
         public static bool TryGetRequirementsMatch(string nameToFind, out ProgramRequirement fullRequirement)
@@ -183,18 +195,15 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var baseExtrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
+            var slightlyOffsetBoundaries = Boundary.Offset(-0.001);
+            var extrudes = slightlyOffsetBoundaries.Select(b => new Extrude(b.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
-                FlipNormals = true
+                ReverseWinding = true
+            });
+            Representation = new Representation(new List<SolidOperation>(extrudes))
+            {
+                SkipCSGUnion = true
             };
-            // var newS = new Solid();
-            // foreach (var face in baseExtrude.Solid.Faces)
-            // {
-            //     newS.AddFace(face.Value.Outer.ToPolygon().Reversed(), face.Value.Inner?.Select(i => i.ToPolygon().Reversed())?.ToList());
-            // }
-            // // TODO - this bloats our JSON, since it has to serialize the whole solid! We should be able to create an "inside-out" solid.
-            // var cs = new ConstructedSolid(newS);
-            Representation = baseExtrude;
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
             RoomView = new ViewScope()
@@ -226,7 +235,9 @@ namespace Elements
                 Height = height,
                 Transform = xform,
                 Material = material ?? MaterialDict["unrecognized"],
-                Name = name
+                Name = name,
+                OriginalBoundary = profile.Perimeter,
+                OriginalVoids = profile.Voids.ToList()
             };
             profile.Name = name;
             profile.AdditionalProperties["Color"] = sb.Material.Color;
@@ -299,8 +310,8 @@ namespace Elements
         public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
         {
             var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Value?.LevelLayout?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.Name == edit.Value?.LevelLayout?.Name) ??
+                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
                 levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
             matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
             return this;
@@ -308,7 +319,7 @@ namespace Elements
 
         public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
         {
-            var matchingLevelLayout = levelLayouts.FirstOrDefault(ll => ll.AddId == add.Value.LevelLayout?.AddId) ?? levelLayouts.FirstOrDefault(ll => ll.Name == add.Value.LevelLayout?.Name);
+            var matchingLevelLayout = levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == add.Value.Level?.AddId) ?? levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name);
             var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
             sb?.SetProgram(add.Value.ProgramType);
             return sb;

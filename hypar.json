@@ -34,6 +34,10 @@
       "optional": true
     },
     {
+      "name": "Floors",
+      "optional": true
+    },
+    {
       "autohide": true,
       "name": "Space Planning Zone Hints",
       "optional": true
@@ -49,24 +53,37 @@
         },
         "Relative Position": {
           "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        },
+        "Original Boundary": {
+          "$ref": "https://schemas.hypar.io/Polygon.json"
+        },
+        "Original Voids": {
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.hypar.io/Polygon.json"
+          }
         }
       },
       "paradigm": "edit",
       "schema": {
-        "Level Layout": {
+        "Level": {
           "$hyparRelation": {
-            "$ref": "https://prod-api.hypar.io/schemas/LevelLayout"
+            "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
           },
           "type": "object",
           "$hyparOrder": 2,
           "properties": {
-            "Add Id": {
-              "type": "string",
-              "$hyparOrder": 1
-            },
             "Name": {
-              "type": "string",
-              "$hyparOrder": 0
+              "type": "string"
+            },
+            "Building Name": {
+              "type": "string"
+            },
+            "Add Id": {
+              "type": [
+                "string",
+                "null"
+              ]
             }
           }
         },
@@ -108,20 +125,24 @@
       "behaviors": {
         "add": {
           "schema": {
-            "Level Layout": {
+            "Level": {
               "$hyparRelation": {
-                "$ref": "https://prod-api.hypar.io/schemas/LevelLayout"
+                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
               },
               "type": "object",
               "$hyparOrder": 2,
               "properties": {
-                "Add Id": {
-                  "type": "string",
-                  "$hyparOrder": 1
-                },
                 "Name": {
-                  "type": "string",
-                  "$hyparOrder": 0
+                  "type": "string"
+                },
+                "Building Name": {
+                  "type": "string"
+                },
+                "Add Id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
                 }
               }
             },
@@ -161,9 +182,10 @@
             }
           }
         },
-        "remove": true
+        "remove": true,
+        "revert": false
       },
-      "perParent": "Level Layout",
+      "perParent": "Level",
       "perProperty": true
     }
   },
