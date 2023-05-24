@@ -10,50 +10,25 @@ namespace Elements
 {
     public partial class LevelLayout : Element
     {
-        private static readonly Plane XY = new Plane((0, 0), (0, 0, 1));
 
         [JsonIgnore]
-        public List<LevelVolume> LevelVolumes { get; set; }
+        public LevelVolume LevelVolume { get; set; }
+
+        [JsonIgnore]
+        public List<SpaceBoundary> SpaceBoundaries { get; set; } = new List<SpaceBoundary>();
+
+        // Old pathways made this the overridable property — user edits profiles, we make spaces from those. New pathway should keep this synced with the SpaceBoundaries list.
+        [JsonProperty("Profiles")]
         public List<Profile> Profiles { get; set; }
 
         [JsonProperty("Add Id")]
         public string AddId { get; set; }
 
-        public LevelLayout Update(LevelLayoutOverride edit, (
-            Dictionary<string, List<CirculationSegment>> circulationSegmentsByLevel,
-            Dictionary<string, List<VerticalCirculationElement>> verticalCirculationByLevel,
-            Dictionary<string, List<ServiceCore>> coresByLevel,
-            Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements)
+        private void CleanSpaceBoundaryProfiles()
         {
-            var profiles = edit.Value.Profiles?.Select(p =>
-            {
-                var projected = p.Project(XY);
-                projected.AdditionalProperties = p.AdditionalProperties;
-                projected.Name = p.Name;
-                return projected;
-            });
-            // assume that all levels for this layout have the same circulation.
-            // Circ + core probably need to become distinguishing features of
-            // the level layout.
-            var (subtractedProfiles, enclosedRooms) = GetSubtractionProfiles(LevelVolumes.First(), levelGroupedElements);
-            if (profiles.Count() > 0 && subtractedProfiles.Count > 0)
-            {
-                // subtract indivudually to avoid merging
-                profiles = profiles.SelectMany((p) =>
-                {
-                    try
-                    {
-                        return Profile.Difference(new[] { p }, subtractedProfiles);
-                    }
-                    catch
-                    {
-                        return new List<Profile> { p };
-                    }
-                }).ToList();
-            }
-            Profiles = profiles?.Cleaned() ?? Profiles;
-            Identity.AddOverrideIdentity(this, edit);
-            return this;
+            var profiles = this.SpaceBoundaries.Select(sb => sb.Boundary);
+            var cleaned = profiles.Cleaned();
+
         }
 
         private static Random random = new Random(11);
@@ -65,7 +40,7 @@ namespace Elements
             Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements)
         {
             this.Levels = new List<Guid> { levelVolume.Id };
-            this.LevelVolumes = new List<LevelVolume> { levelVolume };
+            this.LevelVolume = levelVolume;
             var levelPlane = new Plane(levelVolume.Transform.Origin + (0, 0, 1), (0, 0, 1));
             this.AddId = (levelVolume.AddId ?? levelVolume.Name) + "-layout";
             this.Profiles = new List<Profile>();
@@ -91,7 +66,35 @@ namespace Elements
                 // subtract indivudually to avoid merging
                 this.Profiles = this.Profiles.SelectMany((p) =>
                 {
-                    return Profile.Difference(new[] { p }, subtractedProfiles);
+                    try
+                    {
+                        return Profile.Difference(new[] { p }, subtractedProfiles);
+                    }
+                    catch
+                    {
+                        var diff = new List<Profile> { p };
+                        foreach (var subtractedProfile in subtractedProfiles)
+                        {
+                            try
+                            {
+                                diff = Profile.Difference(diff, new[] { subtractedProfile });
+                            }
+                            catch
+                            {
+                                // skip and print
+                                Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = true;
+                                var json = JsonConvert.SerializeObject(new { profiles = diff, subtractedProfile });
+                                Console.WriteLine("⚠️ Unable to subtract profiles");
+                                Console.WriteLine(json);
+                                // System.IO.File.WriteAllText($"/Users/andrewheumann/Dev/Function-SpacePlanning/profile-error_{++counter}.json", json);
+                                Elements.Serialization.JSON.JsonInheritanceConverter.ElementwiseSerialization = false;
+                            }
+                        }
+                        return diff;
+                        // var subUnion = Profile.UnionAll(subtractedProfiles);
+                        // return Profile.Difference(new[] { p }, subUnion);
+                        // return new List<Profile> { p };
+                    }
                 }).ToList();
             }
 
@@ -120,7 +123,7 @@ namespace Elements
                     {
                         return new[] { new Profile(pgon.TransformedPolygon(vce.Transform)) };
                     }
-                    return new Profile[] { };
+                    return Array.Empty<Profile>();
                 }));
             }
             if (levelGroupedElements.coresByLevel.TryGetValue(levelVolume.Id.ToString(), out var cores))
@@ -133,7 +136,7 @@ namespace Elements
             var enclosedRooms = new List<Profile>();
             try
             {
-                if (levelGroupedElements.wallsByLevel.TryGetValue(levelVolume.Id.ToString(), out var walls) || (LevelVolumes.Count <= 1 && levelGroupedElements.wallsByLevel.TryGetValue("ungrouped", out walls)))
+                if (levelGroupedElements.wallsByLevel.TryGetValue(levelVolume.Id.ToString(), out var walls) || (levelGroupedElements.wallsByLevel.TryGetValue("ungrouped", out walls)))
                 {
                     var network = Search.Network<Wall>.FromSegmentableItems(walls, (wall) => wall.GetCenterline(), out var allNodeLocations, out var allIntersections);
                     var roomCandidates = network.FindAllClosedRegions(allNodeLocations);
@@ -152,56 +155,62 @@ namespace Elements
             }
             catch
             {
-                // swallow 
+                // swallow
             }
             return (subtractedProfiles, enclosedRooms);
         }
 
-        public bool Match(LevelLayoutIdentity identity)
+        private LevelElements _levelElements = null;
+
+        private LevelElements LevelElements
         {
-            return identity.AddId == this.AddId;
+            get
+            {
+                _levelElements ??= new LevelElements
+                {
+                    Name = LevelVolume.Name,
+                    Elements = new List<Element>(),
+                    Level = LevelVolume.Id
+                };
+                return _levelElements;
+            }
         }
 
-        public IEnumerable<SpaceBoundary> CreateSpaces()
+        public IEnumerable<SpaceBoundary> CreateSpacesFromProfiles()
         {
-            return LevelVolumes.SelectMany((levelVolume) =>
+            var allProfiles = new List<Profile>(Profiles);
+            Profiles.Clear();
+            return allProfiles.Select((p, i) =>
             {
-                // this is weird legacy pre-relationships stuff:
+                return this.CreateSpace(p);
+            });
+        }
 
-                var levelElements = new LevelElements
-                {
-                    Name = levelVolume.Name,
-                    Elements = new List<Element>(),
-                    Level = levelVolume.Id
-                };
-
-
-                random = new Random(11);
-                return Profiles.Select((p) =>
-                {
-                    var programName = "unspecified";
-                    if (p.AdditionalProperties.ContainsKey("Legacy Program Assignment"))
-                    {
-                        programName = p.AdditionalProperties["Legacy Program Assignment"] as string;
-                    }
-                    else if (levelVolume.PrimaryUseCategory != null)
-                    {
-                        programName = levelVolume.PrimaryUseCategory;
-                    }
-                    var projectedProfile = p.Project(XY);
-                    projectedProfile.AdditionalProperties = p.AdditionalProperties;
-                    projectedProfile.Name = p.Name;
-                    var spaceBoundary = SpaceBoundary.Make(p.Project(XY), programName, levelVolume.Transform, levelVolume.Height - Units.FeetToMeters(1));
-                    spaceBoundary.SetLevelProperties(levelVolume);
-                    spaceBoundary.LevelElements = levelElements;
-                    spaceBoundary.LevelAddId = levelVolume.AddId ?? levelVolume.Name;
-                    spaceBoundary.LevelVolume = levelVolume;
-                    spaceBoundary.UnmodifiedProfile = p;
-                    spaceBoundary.ComputeRelativePosition();
-                    spaceBoundary.LevelLayout = this.Id;
-                    return spaceBoundary;
-                });
-            }).ToList();
+        public SpaceBoundary CreateSpace(Profile p)
+        {
+            var programName = "unspecified";
+            if (p.AdditionalProperties.ContainsKey("Legacy Program Assignment"))
+            {
+                programName = p.AdditionalProperties["Legacy Program Assignment"] as string;
+            }
+            else if (LevelVolume.PrimaryUseCategory != null)
+            {
+                programName = LevelVolume.PrimaryUseCategory;
+            }
+            var projectedProfile = p.Project(Plane.XY);
+            Profiles.Add(projectedProfile);
+            projectedProfile.AdditionalProperties = p.AdditionalProperties;
+            projectedProfile.Name = p.Name;
+            var spaceBoundary = SpaceBoundary.Make(projectedProfile, programName, LevelVolume.Transform, LevelVolume.Height);
+            spaceBoundary.Boundary.AdditionalProperties["SpaceBoundary"] = spaceBoundary.Id;
+            spaceBoundary.SetLevelProperties(LevelVolume);
+            spaceBoundary.LevelElements = LevelElements;
+            spaceBoundary.LevelAddId = LevelVolume.AddId ?? LevelVolume.Name;
+            spaceBoundary.LevelVolume = LevelVolume;
+            spaceBoundary.ComputeRelativePosition();
+            spaceBoundary.LevelLayout = this.Id;
+            this.SpaceBoundaries.Add(spaceBoundary);
+            return spaceBoundary;
         }
 
         public void AddExistingSpaces(IEnumerable<SpaceBoundary> group)
@@ -215,19 +224,45 @@ namespace Elements
             });
             var cleaned = ProfileUtils.CleanProfiles(profiles);
             this.Profiles = cleaned;
+            this.SpaceBoundaries.AddRange(group);
         }
 
         public List<ModelLines> CreateModelLines()
         {
             var list = new List<ModelLines>();
             var lines = Profiles.SelectMany(p => p.Segments());
-            foreach (var level in LevelVolumes)
-            {
-                var modelLines = new ModelLines(lines.ToList(), BuiltInMaterials.Black, level.Transform);
-                modelLines.SetSelectable(false);
-                list.Add(modelLines);
-            }
+
+            var modelLines = new ModelLines(lines.ToList(), BuiltInMaterials.Black, LevelVolume.Transform);
+            modelLines.SetSelectable(false);
+            list.Add(modelLines);
+
             return list;
+        }
+
+        internal void UpdateSpace(SpaceBoundary spaceBoundary, Profile boundary, string programType)
+        {
+            var boundaryProjected = boundary?.Project(Plane.XY) ?? spaceBoundary.Boundary;
+            var profileToReplace = Profiles.FindIndex(p => p.Id == spaceBoundary.Boundary.Id);
+            if (profileToReplace != -1)
+            {
+                Profiles[profileToReplace] = boundaryProjected;
+            }
+            else
+            {
+
+            }
+            spaceBoundary.Boundary = boundaryProjected;
+            spaceBoundary.SetProgram(programType);
+        }
+
+        public void RemoveSpace(SpacesOverrideRemoval removal)
+        {
+            var match = this.SpaceBoundaries.FirstOrDefault(sb => sb.Match(removal.Identity));
+            if (match != null)
+            {
+                this.SpaceBoundaries.Remove(match);
+                this.Profiles.RemoveAll(p => p.Id == match.Boundary.Id);
+            }
         }
     }
 }

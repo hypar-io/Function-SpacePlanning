@@ -1,9 +1,9 @@
 {
   "$schema": "https://hypar.io/Schemas/Function.json",
-  "id": "132f6a14-6e9e-4d6c-be76-fe9ffa23ea0b",
+  "id": "adc507cb-6005-41c5-a781-ccdd9dfc0956",
   "name": "Space Planning",
-  "description": "Define program uses for spaces.",
-  "model_output": "Space Planning Zones",
+  "description": "Lay out, sketch, and define program uses for spaces.",
+  "language": "C#",
   "model_dependencies": [
     {
       "name": "Program Requirements",
@@ -34,43 +34,18 @@
       "optional": true
     },
     {
-      "name": "Space Planning Zone Hints",
+      "name": "Floors",
+      "optional": true
+    },
+    {
       "autohide": true,
+      "name": "Space Planning Zone Hints",
       "optional": true
     }
   ],
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "Old Space Boundaries": {
-        "description": "This input is just for migration purposes. If you have an exported model containing space boundaries, you can import it here to pre-load this function with your previous results and continue editing.",
-        "$ref": "https://prod-api.hypar.io/schemas/InputData",
-        "$hyparFileTypes": [
-          "json"
-        ]
-      }
-    }
-  },
+  "model_output": "Space Planning Zones",
   "overrides": {
-    "Level Layout": {
-      "context": "[*discriminator=Elements.LevelLayout]",
-      "identity": {
-        "Add Id": {
-          "type": "string"
-        }
-      },
-      "schema": {
-        "Profiles": {
-          "$hyparRelativeToTransform": true,
-          "type": "array",
-          "items": {
-            "$ref": "https://prod-api.hypar.io/schemas/Profile"
-          }
-        }
-      }
-    },
-    "Program Assignment": {
-      "perProperty": true,
+    "Spaces": {
       "context": "[*discriminator=Elements.SpaceBoundary]",
       "identity": {
         "Level Add Id": {
@@ -78,15 +53,47 @@
         },
         "Relative Position": {
           "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+        },
+        "Original Boundary": {
+          "$ref": "https://schemas.hypar.io/Polygon.json"
+        },
+        "Original Voids": {
+          "type": "array",
+          "items": {
+            "$ref": "https://schemas.hypar.io/Polygon.json"
+          }
         }
       },
+      "paradigm": "edit",
       "schema": {
+        "Level": {
+          "$hyparRelation": {
+            "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+          },
+          "type": "object",
+          "$hyparOrder": 2,
+          "properties": {
+            "Name": {
+              "type": "string"
+            },
+            "Building Name": {
+              "type": "string"
+            },
+            "Add Id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
         "Program Type": {
           "description": "What program should be assigned to this zone?",
           "type": [
             "string",
             "null"
           ],
+          "$hyparOrder": 0,
           "$hyparAutocomplete": [
             "Open Office",
             "Private Office",
@@ -105,36 +112,84 @@
             "query": "[*discriminator=Elements.ProgramRequirement].Qualified Program Name"
           }
         },
-        "Height": {
-          "description": "The height of this space.",
-          "type": [
-            "number",
-            "null"
-          ],
-          "$hyparUnitType": "length",
-          "minimum": 0.01,
-          "multipleOf": 0.1
+        "Boundary": {
+          "$hyparRelativeToTransform": true,
+          "$hyparControlDisplay": {
+            "colorScheme": "Program Colors",
+            "label": "Program Type"
+          },
+          "$hyparOrder": 1,
+          "$ref": "https://prod-api.hypar.io/schemas/Profile"
         }
-      }
-    }
-  },
-  "messages": {
-    "en": {
-      "overrides": {
-        "Program Assignment": {
-          "name": "Space Settings"
-        },
-        "Level Layout": {
+      },
+      "behaviors": {
+        "add": {
           "schema": {
-            "Profiles": {
-              "name": "Spaces"
+            "Level": {
+              "$hyparRelation": {
+                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+              },
+              "type": "object",
+              "$hyparOrder": 2,
+              "properties": {
+                "Name": {
+                  "type": "string"
+                },
+                "Building Name": {
+                  "type": "string"
+                },
+                "Add Id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
+            "Program Type": {
+              "description": "What program should be assigned to this zone?",
+              "type": [
+                "string",
+                "null"
+              ],
+              "$hyparOrder": 0,
+              "$hyparAutocomplete": [
+                "Open Office",
+                "Private Office",
+                "Lounge",
+                "Classroom",
+                "Pantry",
+                "Meeting Room",
+                "Phone Booth",
+                "Support",
+                "Reception",
+                "Open Collaboration",
+                "Data Hall"
+              ],
+              "$hyparAutocompleteQuery": {
+                "dependency": "Program Requirements",
+                "query": "[*discriminator=Elements.ProgramRequirement].Qualified Program Name"
+              }
+            },
+            "Boundary": {
+              "$hyparRelativeToTransform": true,
+              "$hyparControlDisplay": {
+                "colorScheme": "Program Colors",
+                "label": "Program Type"
+              },
+              "$hyparOrder": 1,
+              "$ref": "https://prod-api.hypar.io/schemas/Profile"
             }
           }
-        }
-      }
+        },
+        "remove": true,
+        "revert": false
+      },
+      "perParent": "Level",
+      "perProperty": true
     }
   },
-  "language": "C#",
+  "outputs": [],
   "element_types": [
     "https://prod-api.hypar.io/schemas/SpaceBoundary",
     "https://prod-api.hypar.io/schemas/LevelVolume",
@@ -147,8 +202,8 @@
     "https://prod-api.hypar.io/schemas/LevelLayout",
     "https://prod-api.hypar.io/schemas/ViewScope"
   ],
-  "repository_url": "https://github.com/hypar-io/function",
-  "last_updated": "0001-01-01T00:00:00",
-  "cli_version": "1.2.0-alpha.12",
-  "skip_validation_on_deserialization": true
+  "repository_url": "https://github.com/hypar-io/Function-SpacePlanning",
+  "filters": {},
+  "last_updated": "2023-02-15T19:41:51.966009",
+  "cli_version": "1.5.0-alpha.4"
 }

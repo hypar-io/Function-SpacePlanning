@@ -36,6 +36,12 @@ namespace Elements
         [JsonProperty("Relative Position")]
         public Vector3 RelativePosition { get; set; }
 
+        [JsonProperty("Original Boundary")]
+        public Polygon OriginalBoundary { get; set; }
+
+        [JsonProperty("Original Voids")]
+        public List<Polygon> OriginalVoids { get; set; }
+
         // end identity properties
 
         [JsonIgnore]
@@ -46,11 +52,6 @@ namespace Elements
 
         [Newtonsoft.Json.JsonIgnore]
         public ProgramRequirement FulfilledProgramRequirement = null;
-
-        // We need to maintain a pointer back to the original profile contained
-        // in the level layout, so we can update its color and name.
-        [Newtonsoft.Json.JsonIgnore]
-        public Profile UnmodifiedProfile { get; set; }
         public static void SetRequirements(IEnumerable<ProgramRequirement> reqs)
         {
             Requirements = new Dictionary<string, ProgramRequirement>();
@@ -84,11 +85,17 @@ namespace Elements
             MaterialDict = new Dictionary<string, Material>(materialDefaults);
         }
 
-        public bool Match(ProgramAssignmentIdentity identity)
+        public bool Match(SpacesIdentity identity)
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             var levelMatch = identity.LevelAddId == this.LevelAddId;
-            return levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+            var boundaryMatch = true;
+            if (identity.OriginalBoundary != null && this.OriginalBoundary != null)
+            {
+                boundaryMatch = identity.OriginalBoundary.IsAlmostEqualTo(this.OriginalBoundary, 1.0);
+            }
+            var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+            return returnVal;
         }
 
         public static bool TryGetRequirementsMatch(string nameToFind, out ProgramRequirement fullRequirement)
@@ -118,12 +125,12 @@ namespace Elements
             {"Open Office", new Material("Open Office", new Color(0.435,0.627,0.745,0.5), doubleSided: false)}, //✅  https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/35cb4053-4d39-47ef-9673-2dccdae1433b/SteelcaseOpenOffice-35cb4053-4d39-47ef-9673-2dccdae1433b.json
             {"Private Office", new Material("Private Office", new Color(0.122,0.271,0.361,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/69be76de-aaa1-4097-be0c-a97eb44d62e6/Private+Office-69be76de-aaa1-4097-be0c-a97eb44d62e6.json
             {"Lounge", new Material("Lounge", new Color(1.000,0.584,0.196,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/52df2dc8-3107-43c9-8a9f-e4b745baca1c/Steelcase-Lounge-52df2dc8-3107-43c9-8a9f-e4b745baca1c.json
-            {"Classroom", new Material("Classroom", new Color(0.796,0.914,0.796,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/b23810e9-f565-4845-9b08-d6beb6223bea/Classroom-b23810e9-f565-4845-9b08-d6beb6223bea.json 
+            {"Classroom", new Material("Classroom", new Color(0.796,0.914,0.796,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/b23810e9-f565-4845-9b08-d6beb6223bea/Classroom-b23810e9-f565-4845-9b08-d6beb6223bea.json
             {"Pantry", new Material("Pantry", new Color(0.5,0.714,0.745,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/599d1640-2584-42f7-8de1-e988267c360a/Pantry-599d1640-2584-42f7-8de1-e988267c360a.json
             {"Meeting Room", new Material("Meeting Room", new Color(0.380,0.816,0.608,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/251d637c-c570-43bd-ab33-f59f337506bb/Catalog-251d637c-c570-43bd-ab33-f59f337506bb.json
             {"Phone Booth", new Material("Phone Booth", new Color(0.976,0.788,0.129,0.5), doubleSided: false)},  //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/deacf056-2d7e-4396-8bdf-f30d581f2747/Phone+Booths-deacf056-2d7e-4396-8bdf-f30d581f2747.json
             {"Support", new Material("Support", new Color(0.447,0.498,0.573,0.5), doubleSided: false)},
-            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json 
+            {"Reception", new Material("Reception", new Color(0.576,0.463,0.753,0.5), doubleSided: false)}, //✅ https://hypar-content-catalogs.s3-us-west-2.amazonaws.com/8762e4ec-7ddd-49b1-bcca-3f303f69f453/Reception-8762e4ec-7ddd-49b1-bcca-3f303f69f453.json
             {"Open Collaboration", new Material("Open Collaboration", new Color(209.0/255, 224.0/255, 178.0/255, 0.5), doubleSided: false)},
             {"Data Hall", new Material("Data Hall", new Color(0.46,0.46,0.48,0.5), doubleSided: false)},
             {"Parking", new Material("Parking", new Color(0.447,0.498,0.573,0.5), doubleSided: false)}
@@ -133,6 +140,38 @@ namespace Elements
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             var internalPoint = this.Boundary.Perimeter.PointInternal();
+            // TODO: add this to Elements as Profile.PointInternal().
+            if (this.Boundary.Voids.Any())
+            {
+                var perimeterPoints = this.Boundary.Perimeter.Vertices.ToList();
+                var voidPoints = this.Boundary.Voids.SelectMany(v => v.Vertices).ToList();
+                var currVoidPoint = 0;
+                var currPerimeterPoint = 0;
+                while (true)
+                {
+                    var ptA = perimeterPoints[currPerimeterPoint];
+                    var ptB = voidPoints[currVoidPoint];
+                    var midPt = (ptA + ptB) / 2;
+                    if (this.Boundary.Contains(midPt) && !this.Boundary.Voids.Any(v => v.Contains(midPt)))
+                    {
+                        internalPoint = midPt;
+                        break;
+                    }
+                    currVoidPoint++;
+                    if (currVoidPoint >= voidPoints.Count)
+                    {
+                        currVoidPoint = 0;
+                        currPerimeterPoint++;
+                    }
+                    if (currPerimeterPoint >= perimeterPoints.Count)
+                    {
+                        // we give up. There was no diagonal between any void
+                        // vertex and any perimeter vertex that was inside the
+                        // boundary. This shouldn't be possible, I think?
+                        break;
+                    }
+                }
+            }
             this.RelativePosition = lcs.Inverted().OfPoint(internalPoint);
         }
 
@@ -156,15 +195,15 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var baseExtrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis, false);
-            var newS = new Solid();
-            foreach (var face in baseExtrude.Solid.Faces)
+            var slightlyOffsetBoundaries = Boundary.Offset(-0.001);
+            var extrudes = slightlyOffsetBoundaries.Select(b => new Extrude(b.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
-                newS.AddFace(face.Value.Outer.ToPolygon().Reversed(), face.Value.Inner?.Select(i => i.ToPolygon().Reversed())?.ToList());
-            }
-            // TODO - this bloats our JSON, since it has to serialize the whole solid! We should be able to create an "inside-out" solid.
-            var cs = new ConstructedSolid(newS);
-            Representation = new Representation(new[] { cs });
+                ReverseWinding = true
+            });
+            Representation = new Representation(new List<SolidOperation>(extrudes))
+            {
+                SkipCSGUnion = true
+            };
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
             RoomView = new ViewScope()
@@ -188,7 +227,7 @@ namespace Elements
             {
                 name = "Unassigned Space Type";
             }
-            var sb = new SpaceBoundary()
+            var sb = new SpaceBoundary
             {
                 Boundary = profile,
                 Cells = new List<Polygon> { profile.Perimeter },
@@ -196,7 +235,9 @@ namespace Elements
                 Height = height,
                 Transform = xform,
                 Material = material ?? MaterialDict["unrecognized"],
-                Name = name
+                Name = name,
+                OriginalBoundary = profile.Perimeter,
+                OriginalVoids = profile.Voids.ToList()
             };
             profile.Name = name;
             profile.AdditionalProperties["Color"] = sb.Material.Color;
@@ -230,6 +271,10 @@ namespace Elements
         }
         public void SetProgram(string displayName)
         {
+            if (displayName == null)
+            {
+                return;
+            }
             if (!MaterialDict.TryGetValue(displayName ?? "unrecognized", out var material))
             {
                 var color = random.NextColor();
@@ -237,8 +282,8 @@ namespace Elements
                 MaterialDict[displayName] = new Material(displayName, color, doubleSided: false);
                 material = MaterialDict[displayName];
             }
-            this.UnmodifiedProfile.AdditionalProperties["Color"] = material.Color;
-            this.UnmodifiedProfile.Name = displayName;
+            this.Boundary.AdditionalProperties["Color"] = material.Color;
+            this.Boundary.Name = displayName;
             this.Material = material;
             this.ProgramName = displayName;
             if (this.FulfilledProgramRequirement != null)
@@ -262,12 +307,22 @@ namespace Elements
             this.Level = volume.Id;
         }
 
-        public SpaceBoundary Update(SpacePlanning.ProgramAssignmentOverride edit)
+        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
         {
-            SetProgram(edit.Value.ProgramType ?? ProgramType);
-            Height = edit.Value.Height ?? Height;
+            var matchingLevelLayout =
+                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
+                levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
+            matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
             return this;
         }
 
+        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
+        {
+            var matchingLevelLayout = levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == add.Value.Level?.AddId) ?? levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name);
+            var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
+            sb?.SetProgram(add.Value.ProgramType);
+            return sb;
+        }
     }
 }
