@@ -228,7 +228,7 @@ namespace SpacePlanning
             {
                 var matchingLevelLayout =
                     levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Identity.LevelAddId + "-layout") ?? // IDK where this is coming from
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
                     levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name);
                 if (matchingLevelLayout == null)
                 {
@@ -239,7 +239,7 @@ namespace SpacePlanning
             foreach (var addition in new List<SpacesOverrideAddition>(additions))
             {
                 var matchingLevelLayout =
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == addition.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => addition.Value?.Level?.AddId != null && ll.LevelVolume.AddId == addition.Value?.Level?.AddId) ??
                     levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == addition.Value?.Level?.Name);
                 if (matchingLevelLayout == null)
                 {
