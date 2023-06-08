@@ -47,6 +47,32 @@ namespace SpacePlanning.Tests
             outputs.Model.ToGlTF($"{OUTPUT}/{testName}/SpacePlanning.glb");
         }
 
+        [Fact]
+        private void SampleProjectTest()
+        {
+            var testName = "SampleProject";
+            var circulationModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Circulation.json"));
+            var levelsModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Levels.json"));
+            var programRequirementsModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Program Requirements.json"));
+            var coreModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Core.json"));
+            var floorsModel = Model.FromJson(System.IO.File.ReadAllText($"{INPUT}/{testName}/Floors.json"));
+            var inputs = GetInput(testName);
+            var outputs = SpacePlanning.Execute(
+                new Dictionary<string, Model>
+                {
+                    {"Circulation", circulationModel},
+                    {"Levels", levelsModel},
+                    {"Program Requirements", programRequirementsModel},
+                    {"Core", coreModel},
+                    {"Floors", floorsModel},
+                }, inputs);
+
+            System.IO.File.WriteAllText($"{OUTPUT}/{testName}/SpacePlanning.json", outputs.Model.ToJson());
+            outputs.Model.AddElements(circulationModel.Elements.Values);
+            outputs.Model.AddElements(levelsModel.Elements.Values);
+            outputs.Model.ToGlTF($"{OUTPUT}/{testName}/SpacePlanning.glb");
+        }
+
         private SpacePlanningInputs GetInput(string testName)
         {
             var json = File.ReadAllText($"{INPUT}/{testName}/inputs.json");
