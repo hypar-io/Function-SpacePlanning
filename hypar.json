@@ -2,38 +2,47 @@
   "$schema": "https://hypar.io/Schemas/Function.json",
   "id": "adc507cb-6005-41c5-a781-ccdd9dfc0956",
   "name": "Space Planning",
+  "display_name": "Space Planning",
   "description": "Lay out, sketch, and define program uses for spaces.",
   "language": "C#",
   "model_dependencies": [
     {
+      "autohide": false,
       "name": "Program Requirements",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Conceptual Mass",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Circulation",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Core",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Walls",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Vertical Circulation",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Levels",
       "optional": true
     },
     {
+      "autohide": false,
       "name": "Floors",
       "optional": true
     },
@@ -51,11 +60,11 @@
         "Level Add Id": {
           "type": "string"
         },
-        "Relative Position": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
-        },
         "Original Boundary": {
           "$ref": "https://schemas.hypar.io/Polygon.json"
+        },
+        "Relative Position": {
+          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
         },
         "Original Voids": {
           "type": "array",
@@ -73,17 +82,20 @@
           "type": "object",
           "$hyparOrder": 2,
           "properties": {
-            "Name": {
-              "type": "string"
-            },
-            "Building Name": {
-              "type": "string"
-            },
             "Add Id": {
               "type": [
                 "string",
                 "null"
-              ]
+              ],
+              "$hyparOrder": 2
+            },
+            "Name": {
+              "type": "string",
+              "$hyparOrder": 0
+            },
+            "Building Name": {
+              "type": "string",
+              "$hyparOrder": 1
             }
           }
         },
@@ -122,6 +134,13 @@
           "$ref": "https://prod-api.hypar.io/schemas/Profile"
         }
       },
+      "verbs": {
+        "add": null,
+        "remove": null,
+        "edit": null,
+        "revert": null
+      },
+      "dependency": null,
       "behaviors": {
         "add": {
           "schema": {
@@ -132,17 +151,20 @@
               "type": "object",
               "$hyparOrder": 2,
               "properties": {
-                "Name": {
-                  "type": "string"
-                },
-                "Building Name": {
-                  "type": "string"
-                },
                 "Add Id": {
                   "type": [
                     "string",
                     "null"
-                  ]
+                  ],
+                  "$hyparOrder": 2
+                },
+                "Name": {
+                  "type": "string",
+                  "$hyparOrder": 0
+                },
+                "Building Name": {
+                  "type": "string",
+                  "$hyparOrder": 1
                 }
               }
             },
@@ -203,7 +225,8 @@
     "https://prod-api.hypar.io/schemas/ViewScope"
   ],
   "repository_url": "https://github.com/hypar-io/Function-SpacePlanning",
+  "thumbnail_id": "7353a890-82a6-4ab3-80ff-e8d6862a4878",
   "filters": {},
-  "last_updated": "2023-02-15T19:41:51.966009",
-  "cli_version": "1.5.0-alpha.4"
+  "last_updated": "2023-06-07T12:21:54.870637",
+  "cli_version": "1.6.0"
 }
