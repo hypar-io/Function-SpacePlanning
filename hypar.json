@@ -146,6 +146,27 @@
                 }
               }
             },
+            "Level Layout": {
+              "$hyparRelation": {
+                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+              },
+              "type": "object",
+              "$hyparOrder": 2,
+              "properties": {
+                "Name": {
+                  "type": "string"
+                },
+                "Building Name": {
+                  "type": "string"
+                },
+                "Add Id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            },
             "Program Type": {
               "description": "What program should be assigned to this zone?",
               "type": [
@@ -180,7 +201,10 @@
               "$hyparOrder": 1,
               "$ref": "https://prod-api.hypar.io/schemas/Profile"
             }
-          }
+          },
+          "$hyparHidden": [
+            "Level Layout"
+          ]
         },
         "remove": true,
         "revert": false
