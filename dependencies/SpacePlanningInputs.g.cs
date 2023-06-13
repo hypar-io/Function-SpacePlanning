@@ -328,15 +328,16 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesOverrideAdditionValue(SpacesOverrideAdditionValueLevel @level, string @programType, Profile @boundary)
+        public SpacesOverrideAdditionValue(SpacesOverrideAdditionValueLevel @level, SpacesOverrideAdditionValueLevelLayout @levelLayout, string @programType, Profile @boundary)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @level, @programType, @boundary});
+                validator.PreConstruct(new object[]{ @level, @levelLayout, @programType, @boundary});
             }
         
             this.Level = @level;
+            this.LevelLayout = @levelLayout;
             this.ProgramType = @programType;
             this.Boundary = @boundary;
         
@@ -348,6 +349,9 @@ namespace SpacePlanning
     
         [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public SpacesOverrideAdditionValueLevel Level { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SpacesOverrideAdditionValueLevelLayout LevelLayout { get; set; }
     
         /// <summary>What program should be assigned to this zone?</summary>
         [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -410,6 +414,49 @@ namespace SpacePlanning
         public SpacesOverrideAdditionValueLevel(string @name, string @buildingName, string @addId)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValueLevel>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @name, @buildingName, @addId});
+            }
+        
+            this.Name = @name;
+            this.BuildingName = @buildingName;
+            this.AddId = @addId;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BuildingName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverrideAdditionValueLevelLayout 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverrideAdditionValueLevelLayout(string @name, string @buildingName, string @addId)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValueLevelLayout>();
             if(validator != null)
             {
                 validator.PreConstruct(new object[]{ @name, @buildingName, @addId});
