@@ -310,7 +310,7 @@ namespace Elements
         public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
         {
             var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
                 levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
                 levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
             matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
@@ -319,7 +319,12 @@ namespace Elements
 
         public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
         {
-            var matchingLevelLayout = levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == add.Value.Level?.AddId) ?? levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name);
+            var matchingLevelLayout =
+                levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
+                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
+                // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
+                levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
+                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
             var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
             sb?.SetProgram(add.Value.ProgramType);
             return sb;

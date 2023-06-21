@@ -228,7 +228,7 @@ namespace SpacePlanning
             {
                 var matchingLevelLayout =
                     levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Identity.LevelAddId + "-layout") ?? // IDK where this is coming from
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
                     levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name);
                 if (matchingLevelLayout == null)
                 {
@@ -239,8 +239,11 @@ namespace SpacePlanning
             foreach (var addition in new List<SpacesOverrideAddition>(additions))
             {
                 var matchingLevelLayout =
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.AddId == addition.Value?.Level?.AddId) ??
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == addition.Value?.Level?.Name);
+                    levelLayouts.FirstOrDefault(ll => addition.Value?.Level?.AddId != null && ll.LevelVolume.AddId == addition.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == addition.Value?.Level?.Name) ??
+                    // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
+                    levelLayouts.FirstOrDefault(ll => addition.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == addition.Value?.LevelLayout?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == addition.Value?.LevelLayout?.Name);
                 if (matchingLevelLayout == null)
                 {
                     var levelName = addition.Value.Level?.Name ?? "Unknown Level";
