@@ -1,0 +1,1083 @@
+{
+  "overrides": {
+    "additions": {
+      "Spaces": [
+        {
+          "value": {
+            "Level": {
+              "Name": "B1"
+            },
+            "Id": "4fb0be6f-fa5f-431d-b092-d8562d46b26a",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -225.3089911771712,
+                    "Y": -66.69375713501938,
+                    "Z": 0
+                  },
+                  {
+                    "X": -207.41567,
+                    "Y": -102.35663,
+                    "Z": 0
+                  },
+                  {
+                    "X": -155.73723,
+                    "Y": -98.99274,
+                    "Z": 0
+                  },
+                  {
+                    "X": -164.09640325016315,
+                    "Y": -57.90086028616282,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Red": 0.8,
+                "Alpha": 0.3,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "b5fad414-fe63-4eac-b864-a6c22fb91a41",
+              "Id": "b42b951b-c02e-44e4-b496-b34eb5dd26c8",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Unassigned Space Type"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "c2bc168e-0237-4c53-8517-32e8c5cb00bc"
+        },
+        {
+          "value": {
+            "Level": {
+              "Name": "Ground Level"
+            },
+            "Id": "b3d3d17d-8018-4ce9-8a72-335e98a9bfda",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -169.31861489723534,
+                    "Y": -32.22960232563398,
+                    "Z": 0
+                  },
+                  {
+                    "X": -172.45554,
+                    "Y": -16.80916,
+                    "Z": 0
+                  },
+                  {
+                    "X": -237.96604,
+                    "Y": -28.4033,
+                    "Z": 0
+                  },
+                  {
+                    "X": -243.20246,
+                    "Y": -31.03059,
+                    "Z": 0
+                  },
+                  {
+                    "X": -236.96065823528258,
+                    "Y": -43.47101850287228,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Red": 0.8,
+                "Alpha": 0.3,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "6316e235-1628-4a40-ac72-4dbfc5866c5a",
+              "Id": "26f184df-437c-44ed-8e62-b028de5d89f0",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Unassigned Space Type"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "2336230d-dedb-430b-982c-10c61a74f309"
+        },
+        {
+          "value": {
+            "Level": {
+              "Name": "Ground Level"
+            },
+            "Id": "3ad944be-368d-4493-ae3a-aeab61b37fc5",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -212.94330612799786,
+                    "Y": -91.3395928315079,
+                    "Z": 0
+                  },
+                  {
+                    "X": -207.41567,
+                    "Y": -102.35663,
+                    "Z": 0
+                  },
+                  {
+                    "X": -155.73723,
+                    "Y": -98.99274,
+                    "Z": 0
+                  },
+                  {
+                    "X": -158.3313099395347,
+                    "Y": -86.24080656670776,
+                    "Z": 0
+                  },
+                  {
+                    "X": -181.99404296838273,
+                    "Y": -88.45005044306713,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Red": 0.8,
+                "Alpha": 0.3,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "ae8227db-83fd-4b9c-b656-652348f2b177",
+              "Id": "bd2b573f-67e4-46d2-9081-30004e1c8857",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "22b66b67-0aec-4d82-bc96-2c1895650467"
+        },
+        {
+          "value": {
+            "Level": {
+              "Name": "Ground Level"
+            },
+            "Id": "1c8cd7bd-cc69-4d4d-ac3f-95d5e1d190b0",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -181.99404296838273,
+                    "Y": -88.45005044306713,
+                    "Z": 0
+                  },
+                  {
+                    "X": -158.3313099395347,
+                    "Y": -86.24080656670776,
+                    "Z": 0
+                  },
+                  {
+                    "X": -169.31861489723534,
+                    "Y": -32.22960232563398,
+                    "Z": 0
+                  },
+                  {
+                    "X": -190.74551876530086,
+                    "Y": -35.79053472631322,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Red": 0.8,
+                "Alpha": 0.3,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "ae8227db-83fd-4b9c-b656-652348f2b177",
+              "Id": "ab5861d9-2a75-4821-8f1a-d3829697dcbd",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "cb0e9051-e4d9-42b7-8879-2dccec86bbba"
+        },
+        {
+          "value": {
+            "Level": {
+              "Name": "B1"
+            },
+            "Id": "afa4f625-d8e1-49d3-ac9d-5a893fc0b057",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -214.37652031323714,
+                    "Y": -24.228393782201557,
+                    "Z": 0
+                  },
+                  {
+                    "X": -237.96604,
+                    "Y": -28.4033,
+                    "Z": 0
+                  },
+                  {
+                    "X": -243.20246,
+                    "Y": -31.03059,
+                    "Z": 0
+                  },
+                  {
+                    "X": -225.3089911771712,
+                    "Y": -66.69375713501938,
+                    "Z": 0
+                  },
+                  {
+                    "X": -207.31831065808456,
+                    "Y": -64.10948152436077,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Red": 0.8,
+                "Alpha": 0.3,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "83e718ee-7dc9-4d5f-8c6e-81203647e7f7",
+              "Id": "9fef0422-4460-4e46-95dd-82c48590dded",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "51252334-f4c6-4043-926a-0fe1cff78fe6"
+        },
+        {
+          "value": {
+            "Level": {
+              "Name": "B1"
+            },
+            "Id": "96fa5d9c-fe33-4785-b2c8-50c350d3a6d3",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": -188.02993515067547,
+                    "Y": -61.33879820639851,
+                    "Z": 0
+                  },
+                  {
+                    "X": -164.09640325016315,
+                    "Y": -57.90086028616282,
+                    "Z": 0
+                  },
+                  {
+                    "X": -172.45554,
+                    "Y": -16.80916,
+                    "Z": 0
+                  },
+                  {
+                    "X": -193.88173024308952,
+                    "Y": -20.601197144351115,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Red": 0.8,
+                "Alpha": 0.3,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "83e718ee-7dc9-4d5f-8c6e-81203647e7f7",
+              "Id": "eb995663-1af1-4e46-921a-59a9fdac45e3",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "2918bcc4-8fce-4fb8-acb2-a2bb9af13ffd"
+        }
+      ]
+    },
+    "removals": {
+      "Spaces": [
+        {
+          "identity": {
+            "Level Add Id": "B1",
+            "Original Boundary": {
+              "IsClosedForRendering": true,
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -155.73723,
+                  "Y": -98.99274,
+                  "Z": 0
+                },
+                {
+                  "X": -172.45554,
+                  "Y": -16.80916,
+                  "Z": 0
+                },
+                {
+                  "X": -237.96604,
+                  "Y": -28.4033,
+                  "Z": 0
+                },
+                {
+                  "X": -243.20246,
+                  "Y": -31.03059,
+                  "Z": 0
+                },
+                {
+                  "X": -207.41567,
+                  "Y": -102.35663,
+                  "Z": 0
+                }
+              ]
+            },
+            "Relative Position": {
+              "X": -195.22053390872006,
+              "Y": -59.56838741667292,
+              "Z": 0
+            },
+            "Original Voids": []
+          },
+          "id": "756df49c-9c75-4172-bb55-f7c98d10bbe2"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Ground Level",
+            "Original Boundary": {
+              "IsClosedForRendering": true,
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -155.73723,
+                  "Y": -98.99274,
+                  "Z": 0
+                },
+                {
+                  "X": -172.45554,
+                  "Y": -16.80916,
+                  "Z": 0
+                },
+                {
+                  "X": -237.96604,
+                  "Y": -28.4033,
+                  "Z": 0
+                },
+                {
+                  "X": -243.20246,
+                  "Y": -31.03059,
+                  "Z": 0
+                },
+                {
+                  "X": -207.41567,
+                  "Y": -102.35663,
+                  "Z": 0
+                }
+              ]
+            },
+            "Relative Position": {
+              "X": -195.22053390872006,
+              "Y": -59.56838741667292,
+              "Z": 0
+            },
+            "Original Voids": []
+          },
+          "id": "034082fe-6b7d-4157-ad41-2e85290f5ec6"
+        }
+      ]
+    },
+    "Spaces": [
+      {
+        "value": {
+          "Level": {
+            "Name": "Ground Level"
+          },
+          "Program Type": "unspecified",
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -222.40226316890022,
+                  "Y": -72.48710708864907,
+                  "Z": 0
+                },
+                {
+                  "X": -207.41567,
+                  "Y": -102.35663,
+                  "Z": 0
+                },
+                {
+                  "X": -155.73723,
+                  "Y": -98.99274,
+                  "Z": 0
+                },
+                {
+                  "X": -164.09660302713402,
+                  "Y": -57.89987822597444,
+                  "Z": 0
+                }
+              ]
+            },
+            "Color": {
+              "Red": 0.8,
+              "Alpha": 0.3,
+              "Blue": 0.8,
+              "Green": 0.8
+            },
+            "SpaceBoundary": "d654b708-818e-4432-917d-39da9e1fcc4d",
+            "Id": "f3cf9bf0-0c81-4ebf-9964-fedcdae6f550",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "unspecified"
+          }
+        },
+        "identity": {
+          "Level Add Id": "Ground Level",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -212.94330612799786,
+                "Y": -91.3395928315079,
+                "Z": 0
+              },
+              {
+                "X": -207.41567,
+                "Y": -102.35663,
+                "Z": 0
+              },
+              {
+                "X": -155.73723,
+                "Y": -98.99274,
+                "Z": 0
+              },
+              {
+                "X": -158.3313099395347,
+                "Y": -86.24080656670776,
+                "Z": 0
+              },
+              {
+                "X": -181.99404296838273,
+                "Y": -88.45005044306713,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -183.0840831071604,
+            "Y": -94.6251036109841,
+            "Z": 0
+          },
+          "Original Voids": []
+        },
+        "id": "5ea39183-3134-466a-90ea-c27ca8144f92"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "Ground Level"
+          },
+          "Program Type": "unspecified",
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -236.96065823528258,
+                  "Y": -43.47101850287228,
+                  "Z": 0
+                },
+                {
+                  "X": -222.40226316890022,
+                  "Y": -72.48710708864907,
+                  "Z": 0
+                },
+                {
+                  "X": -164.09660302713402,
+                  "Y": -57.89987822597444,
+                  "Z": 0
+                },
+                {
+                  "X": -169.31861489723534,
+                  "Y": -32.22960232563398,
+                  "Z": 0
+                }
+              ]
+            },
+            "Id": "0ea235d4-5552-404a-82b1-5e8484795fda",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "unspecified",
+            "Color": {
+              "Red": 0.8,
+              "Alpha": 0.3,
+              "Blue": 0.8,
+              "Green": 0.8
+            }
+          }
+        },
+        "identity": {
+          "Level Add Id": "Ground Level",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -181.99404296838273,
+                "Y": -88.45005044306713,
+                "Z": 0
+              },
+              {
+                "X": -158.3313099395347,
+                "Y": -86.24080656670776,
+                "Z": 0
+              },
+              {
+                "X": -169.31861489723534,
+                "Y": -32.22960232563398,
+                "Z": 0
+              },
+              {
+                "X": -190.74551876530086,
+                "Y": -35.79053472631322,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -174.97025029152996,
+            "Y": -61.05295422708427,
+            "Z": 0
+          },
+          "Original Voids": []
+        },
+        "id": "258cbcbf-43a2-48a6-845a-71875192c897"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "Ground Level"
+          },
+          "Program Type": "Reception",
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -169.31861489723534,
+                  "Y": -32.22960232563398,
+                  "Z": 0
+                },
+                {
+                  "X": -172.45554,
+                  "Y": -16.80916,
+                  "Z": 0
+                },
+                {
+                  "X": -237.96604,
+                  "Y": -28.4033,
+                  "Z": 0
+                },
+                {
+                  "X": -243.20246,
+                  "Y": -31.03059,
+                  "Z": 0
+                },
+                {
+                  "X": -236.96065823528258,
+                  "Y": -43.47101850287228,
+                  "Z": 0
+                }
+              ]
+            },
+            "Id": "2f01e279-4695-447d-bd42-7d61cdeea64e",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "Reception",
+            "Color": {
+              "Red": 0.576,
+              "Alpha": 0.5,
+              "Blue": 0.753,
+              "Green": 0.463
+            }
+          }
+        },
+        "identity": {
+          "Level Add Id": "Ground Level",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -169.31861489723534,
+                "Y": -32.22960232563398,
+                "Z": 0
+              },
+              {
+                "X": -172.45554,
+                "Y": -16.80916,
+                "Z": 0
+              },
+              {
+                "X": -237.96604,
+                "Y": -28.4033,
+                "Z": 0
+              },
+              {
+                "X": -243.20246,
+                "Y": -31.03059,
+                "Z": 0
+              },
+              {
+                "X": -236.96065823528258,
+                "Y": -43.47101850287228,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -205.25404876572577,
+            "Y": -30.377369825670677,
+            "Z": 0
+          },
+          "Original Voids": []
+        },
+        "id": "2b8ed817-be20-43d2-b1cc-5614035bb495"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "Ground Level"
+          },
+          "Program Type": "unspecified"
+        },
+        "identity": {
+          "Level Add Id": "Ground Level",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -146.67469,
+                "Y": -105.91871,
+                "Z": 0
+              },
+              {
+                "X": -166.56347,
+                "Y": -8.14982,
+                "Z": 0
+              },
+              {
+                "X": -240.35103,
+                "Y": -21.20885,
+                "Z": 0
+              },
+              {
+                "X": -253.26941,
+                "Y": -27.69045,
+                "Z": 0
+              },
+              {
+                "X": -211.88966,
+                "Y": -110.16373,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -158.97591,
+            "Y": -60.498000000000005,
+            "Z": 0
+          },
+          "Original Voids": [
+            {
+              "IsClosedForRendering": true,
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -245.21585,
+                  "Y": -30.36256,
+                  "Z": 0
+                },
+                {
+                  "X": -238.44303,
+                  "Y": -26.96441,
+                  "Z": 0
+                },
+                {
+                  "X": -171.27713,
+                  "Y": -15.07729,
+                  "Z": 0
+                },
+                {
+                  "X": -153.92472,
+                  "Y": -100.37793,
+                  "Z": 0
+                },
+                {
+                  "X": -208.31047,
+                  "Y": -103.91805,
+                  "Z": 0
+                }
+              ]
+            }
+          ]
+        },
+        "id": "9d6ce785-3c82-4ba3-9ee9-8951168b4ef7"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "B1"
+          },
+          "Program Type": "unspecified",
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -214.37652031323714,
+                  "Y": -24.228393782201557,
+                  "Z": 0
+                },
+                {
+                  "X": -237.96604,
+                  "Y": -28.4033,
+                  "Z": -1.7763568394002505E-15
+                },
+                {
+                  "X": -243.20246,
+                  "Y": -31.03059,
+                  "Z": -1.7763568394002505E-15
+                },
+                {
+                  "X": -225.3089911771712,
+                  "Y": -66.69375713501938,
+                  "Z": -1.7763568394002505E-15
+                },
+                {
+                  "X": -191.15126620323326,
+                  "Y": -61.78716255278099,
+                  "Z": 0
+                }
+              ]
+            },
+            "Color": {
+              "Red": 0.8,
+              "Alpha": 0.3,
+              "Blue": 0.8,
+              "Green": 0.8
+            },
+            "SpaceBoundary": "7c6e9a1e-6505-4945-96db-2a34a843d7eb",
+            "Id": "fbe1af6f-68d8-42c4-9b51-11cb7207a7de",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "unspecified"
+          }
+        },
+        "identity": {
+          "Level Add Id": "B1",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -214.37652031323714,
+                "Y": -24.228393782201557,
+                "Z": 0
+              },
+              {
+                "X": -237.96604,
+                "Y": -28.4033,
+                "Z": 0
+              },
+              {
+                "X": -243.20246,
+                "Y": -31.03059,
+                "Z": 0
+              },
+              {
+                "X": -225.3089911771712,
+                "Y": -66.69375713501938,
+                "Z": 0
+              },
+              {
+                "X": -207.31831065808456,
+                "Y": -64.10948152436077,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -223.14700095550464,
+            "Y": -44.59795425737808,
+            "Z": 0
+          },
+          "Original Voids": []
+        },
+        "id": "c60b491c-cdf6-44ba-8f1e-4825ecb4bcb6"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "B1"
+          },
+          "Program Type": "unspecified",
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -214.37652031323714,
+                  "Y": -24.228393782201557,
+                  "Z": 0
+                },
+                {
+                  "X": -191.15126620323326,
+                  "Y": -61.78716255278099,
+                  "Z": 0
+                },
+                {
+                  "X": -164.09640325016315,
+                  "Y": -57.90086028616282,
+                  "Z": 0
+                },
+                {
+                  "X": -172.45554,
+                  "Y": -16.80916,
+                  "Z": 0
+                }
+              ]
+            },
+            "Id": "b9949be4-1a64-4fcf-b9bb-2db13f8760a9",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "unspecified",
+            "Color": {
+              "Red": 0.8,
+              "Alpha": 0.3,
+              "Blue": 0.8,
+              "Green": 0.8
+            }
+          }
+        },
+        "identity": {
+          "Level Add Id": "B1",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -188.02993515067547,
+                "Y": -61.33879820639851,
+                "Z": 0
+              },
+              {
+                "X": -164.09640325016315,
+                "Y": -57.90086028616282,
+                "Z": 0
+              },
+              {
+                "X": -172.45554,
+                "Y": -16.80916,
+                "Z": 0
+              },
+              {
+                "X": -193.88173024308952,
+                "Y": -20.601197144351115,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -179.51988592785912,
+            "Y": -39.51489362747921,
+            "Z": 0
+          },
+          "Original Voids": []
+        },
+        "id": "29d16d39-ca97-4e69-a27c-6d7b30886e92"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "B1"
+          },
+          "Program Type": "Lounge",
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -225.3089911771712,
+                  "Y": -66.69375713501938,
+                  "Z": -1.7763568394002505E-15
+                },
+                {
+                  "X": -207.41567,
+                  "Y": -102.35663,
+                  "Z": 0
+                },
+                {
+                  "X": -155.73723,
+                  "Y": -98.99274,
+                  "Z": 1.7763568394002505E-15
+                },
+                {
+                  "X": -164.09640325016315,
+                  "Y": -57.90086028616282,
+                  "Z": 0
+                },
+                {
+                  "X": -191.15126620323326,
+                  "Y": -61.78716255278099,
+                  "Z": -1.7763568394002505E-15
+                }
+              ]
+            },
+            "Id": "bf12bafc-75d9-491b-825c-db7c15360236",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "Lounge",
+            "Color": {
+              "Red": 1,
+              "Alpha": 0.5,
+              "Blue": 0.196,
+              "Green": 0.584
+            }
+          }
+        },
+        "identity": {
+          "Level Add Id": "B1",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -225.3089911771712,
+                "Y": -66.69375713501938,
+                "Z": 0
+              },
+              {
+                "X": -207.41567,
+                "Y": -102.35663,
+                "Z": 0
+              },
+              {
+                "X": -155.73723,
+                "Y": -98.99274,
+                "Z": 0
+              },
+              {
+                "X": -164.09640325016315,
+                "Y": -57.90086028616282,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -187.83206836251347,
+            "Y": -80.80748453045096,
+            "Z": 0
+          },
+          "Original Voids": []
+        },
+        "id": "38d70d88-79b5-40cc-bcc2-75ae133a3195"
+      },
+      {
+        "value": {
+          "Level": {
+            "Name": "B1"
+          },
+          "Program Type": "unspecified"
+        },
+        "identity": {
+          "Level Add Id": "B1",
+          "Original Boundary": {
+            "IsClosedForRendering": true,
+            "discriminator": "Elements.Geometry.Polygon",
+            "Vertices": [
+              {
+                "X": -146.67469,
+                "Y": -105.91871,
+                "Z": 0
+              },
+              {
+                "X": -166.56347,
+                "Y": -8.14982,
+                "Z": 0
+              },
+              {
+                "X": -240.35103,
+                "Y": -21.20885,
+                "Z": 0
+              },
+              {
+                "X": -253.26941,
+                "Y": -27.69045,
+                "Z": 0
+              },
+              {
+                "X": -211.88966,
+                "Y": -110.16373,
+                "Z": 0
+              }
+            ]
+          },
+          "Relative Position": {
+            "X": -158.97591,
+            "Y": -60.498000000000005,
+            "Z": 0
+          },
+          "Original Voids": [
+            {
+              "IsClosedForRendering": true,
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": -245.21585,
+                  "Y": -30.36256,
+                  "Z": 0
+                },
+                {
+                  "X": -238.44303,
+                  "Y": -26.96441,
+                  "Z": 0
+                },
+                {
+                  "X": -171.27713,
+                  "Y": -15.07729,
+                  "Z": 0
+                },
+                {
+                  "X": -153.92472,
+                  "Y": -100.37793,
+                  "Z": 0
+                },
+                {
+                  "X": -208.31047,
+                  "Y": -103.91805,
+                  "Z": 0
+                }
+              ]
+            }
+          ]
+        },
+        "id": "d56cde07-10e7-4439-9604-3c68046df894"
+      }
+    ]
+  }
+}

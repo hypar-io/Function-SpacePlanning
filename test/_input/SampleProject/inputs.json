@@ -1,0 +1,4261 @@
+{
+  "overrides": {
+    "additions": {
+      "Spaces": [
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "115a407f-dc8c-47d5-b406-48289545998e",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 45.57675857419614,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 50.48042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 50.48042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37213999999949,
+                    "Y": 45.57675857419614,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a4f24495-6d37-4027-9bac-813269db3702",
+              "Id": "66884265-7344-47ae-9d33-029f6eeedbd2",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "a33b88b2-9fe0-4968-b556-d8f7e933a7da"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "a6243d8d-109b-4ab7-900d-70da799aaf0d",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 19.37213999999949,
+                    "Y": 45.57675857419614,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 43.67345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 43.67345000000023,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 45.57675857419614,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a4f24495-6d37-4027-9bac-813269db3702",
+              "Id": "1ebaf3d5-f766-454e-b487-6587ffaccea1",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "0d423fe0-c46d-4a9c-8ff6-c28fdc957e41"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "451da14f-3912-40c5-a2f5-a0bceb3495c0",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 26.955298089231597,
+                    "Y": 50.48042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 50.48042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 45.57675857419614,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.053837808158455,
+                    "Y": 43.67345000000023,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.955298089231597,
+                    "Y": 43.67344999999841,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.95529808923129,
+                    "Y": 47.07693499999921,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a4f24495-6d37-4027-9bac-813269db3702",
+              "Id": "6c95dc83-c428-467a-9c2f-e14d55b030d6",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "8d0a754f-b235-4592-b0b0-e9e02c248d1c"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "6ac8fffc-c4a6-40b2-b80d-10c9e7d5bf21",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 26.95529808923129,
+                    "Y": 47.07693499999921,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.955298089231597,
+                    "Y": 43.67344999999841,
+                    "Z": 0
+                  },
+                  {
+                    "X": 30.62673,
+                    "Y": 43.67345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 30.62673000000177,
+                    "Y": 47.07693499999921,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a4f24495-6d37-4027-9bac-813269db3702",
+              "Id": "70752afb-d015-4a2f-979d-98206d6f7491",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "59e6c653-8fc6-4b03-a1b5-e4959ee6a833"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "7ea0a199-0f6e-4109-80c4-2a2be8e40663",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 30.62673000000177,
+                    "Y": 47.07693499999921,
+                    "Z": 0
+                  },
+                  {
+                    "X": 30.62673,
+                    "Y": 50.48042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.955298089231597,
+                    "Y": 50.48042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.95529808923129,
+                    "Y": 47.07693499999921,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a4f24495-6d37-4027-9bac-813269db3702",
+              "Id": "5325230d-502a-4180-a7ce-6baaca51723a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "e8821eee-8c42-4cfe-8cbe-5132da0bff3f"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "420ec1c1-3bd1-428d-90a3-518c3c680655",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 24.989186136481678,
+                    "Y": 51.98042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 30.62673,
+                    "Y": 51.98042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 30.62673,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.989186136481678,
+                    "Y": 56.25296999999955,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "395dc3f2-4082-4f92-bc9b-dc6725887023",
+              "Id": "9037b71f-c18c-4843-8a03-91200e5dfc3a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "18263023-a71c-4ff5-9304-3aec5b0f58bb"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "10d2312d-2b61-4cc6-85e3-d18cf2b26107",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 21.39157378708485,
+                    "Y": 51.98041999999987,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.989186136481678,
+                    "Y": 51.98042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.989186136481678,
+                    "Y": 56.25296999999955,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.391573787084962,
+                    "Y": 56.25296999999964,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "395dc3f2-4082-4f92-bc9b-dc6725887023",
+              "Id": "636c8563-9a4c-43f0-b13c-0c26fa52e26b",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "a6c05c85-38fb-4aaa-93b7-afec31182827"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "0bd0794a-c788-43fa-8c69-6d53ee7ea78b",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 17.84814,
+                    "Y": 51.98041999999987,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.39157378708485,
+                    "Y": 51.98041999999987,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.391573787084962,
+                    "Y": 56.25296999999964,
+                    "Z": 0
+                  },
+                  {
+                    "X": 17.848140000000118,
+                    "Y": 56.25297000000137,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "395dc3f2-4082-4f92-bc9b-dc6725887023",
+              "Id": "a9a1a18f-1478-46e2-a76a-141269191e33",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "243736b9-22b8-4a91-b8e3-8d5bf10c66bd"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "fe3585e8-045e-49ec-860a-73bdf1713a0f",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 13.995514757727523,
+                    "Y": 51.98041999999992,
+                    "Z": 0
+                  },
+                  {
+                    "X": 17.84814,
+                    "Y": 51.98041999999987,
+                    "Z": 0
+                  },
+                  {
+                    "X": 17.848140000000118,
+                    "Y": 56.25297000000137,
+                    "Z": 0
+                  },
+                  {
+                    "X": 13.99551475772758,
+                    "Y": 56.25297000000137,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "395dc3f2-4082-4f92-bc9b-dc6725887023",
+              "Id": "7d22f5a0-6ade-439d-8b71-f53af4ee4b8d",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "f45892d0-10e6-4d0c-b114-a7d25ab0f4e0"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "5b517ddf-843e-451c-b9f2-cdd7ee546236",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 13.99551475772758,
+                    "Y": 56.25297000000137,
+                    "Z": 0
+                  },
+                  {
+                    "X": 8.01717,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 8.01717,
+                    "Y": 51.98042,
+                    "Z": 0
+                  },
+                  {
+                    "X": 13.995514757727523,
+                    "Y": 51.98041999999992,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "395dc3f2-4082-4f92-bc9b-dc6725887023",
+              "Id": "054de741-cde4-4296-9e85-2a9d84cc5ca7",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "3aa0694c-ee49-4660-a123-fe33c93c4001"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "3814e157-1fd9-4952-aee3-62ed82f50d55",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 50.73247316631692,
+                    "Y": 51.68030767068647,
+                    "Z": 0
+                  },
+                  {
+                    "X": 54.464324782482265,
+                    "Y": 51.680307670686396,
+                    "Z": 0
+                  },
+                  {
+                    "X": 54.464324782482265,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 50.732473166317,
+                    "Y": 56.25297000000137,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "acd78976-90e0-492d-ba81-f6191ff91dfb",
+              "Id": "84a3acfc-c08e-4c84-b737-1f7d340d4048",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "7c7713e1-0208-4b3e-9942-455a9fcc1c8c"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "a049854f-59fb-4749-8ca4-0f70a3455db1",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 50.732473166317,
+                    "Y": 56.25297000000137,
+                    "Z": 0
+                  },
+                  {
+                    "X": 47.00698,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 47.00698,
+                    "Y": 51.68030767068653,
+                    "Z": 0
+                  },
+                  {
+                    "X": 50.73247316631692,
+                    "Y": 51.68030767068647,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "acd78976-90e0-492d-ba81-f6191ff91dfb",
+              "Id": "92471d37-d0d6-47c9-a2f5-aab137489938",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "592562e5-703e-4a9e-824e-c426b4fdcb4e"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "80fe8ece-5094-43a9-8ed5-e0450dd11411",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 60.23661325352933,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 54.464324782482265,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 54.464324782482265,
+                    "Y": 51.680307670686396,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.23661325352933,
+                    "Y": 51.680307670686396,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "acd78976-90e0-492d-ba81-f6191ff91dfb",
+              "Id": "2bf498ce-c490-4770-8c36-83c016509f6e",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "4d757935-a5ff-4ec4-aa55-57b7cfab3d3f"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "87c29da0-7e9a-4984-88c8-71e2d999fab0",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 60.23661325352933,
+                    "Y": 51.680307670686396,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.29167,
+                    "Y": 51.68030767068653,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.29167,
+                    "Y": 56.25297,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.23661325352933,
+                    "Y": 56.25297,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "acd78976-90e0-492d-ba81-f6191ff91dfb",
+              "Id": "890e7e25-2809-4629-8ba6-1fe0983c1ef8",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Open Office"
+            },
+            "Program Type": "Open Office"
+          },
+          "id": "1b4c9efd-45bd-482c-b240-32723b9c41c2"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "02aa2577-f595-4a3d-a18b-9927b55dd6d3",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 74.22363491524399,
+                    "Y": 42.17344999999841,
+                    "Z": 0
+                  },
+                  {
+                    "X": 70.48233,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 70.48233,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 74.22363,
+                    "Y": 40.76061,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "cec5c147-fcd7-43cc-8858-73664c287afc",
+              "Id": "aa84bac6-cc44-4f78-85e7-309f3b473ae6",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "7346fc98-7749-405e-8b84-9eb161b132d3"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "b4a83206-6fa7-40d8-847c-671063ebad62",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 74.22363491524399,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 80.51673,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 80.51673,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 74.22363491524399,
+                    "Y": 42.17344999999841,
+                    "Z": 0
+                  },
+                  {
+                    "X": 74.22363,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 74.22363,
+                    "Y": 33.82092,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "cec5c147-fcd7-43cc-8858-73664c287afc",
+              "Id": "3492a7fc-58bd-4d8a-b6e8-34e71364f642",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Open Office"
+            },
+            "Program Type": "Open Office"
+          },
+          "id": "cee8e959-0cb9-4deb-9152-6d846e72b89b"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "9c9e2bcc-6358-4f65-8413-a8d52ec35f43",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 74.22363,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 70.48233,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 70.48233,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 74.22363491524399,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "cec5c147-fcd7-43cc-8858-73664c287afc",
+              "Id": "78ca032e-48fc-4b3c-880b-23a9e09a3ca3",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "34cdb10c-8af2-45e5-be98-ede6c60372f8"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "291a5f00-4af1-4255-aec8-ac9ec9aab049",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 62.643194378482946,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.26162,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.66426710492474,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.66426710492474,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 62.643194378482946,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "54b7b25d-ac2c-45f3-8fe2-6059ff0ac59a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "e1b31e4f-1746-483c-a0c9-044cb82e76ac"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "a1802e5f-1b86-4d04-a9b2-6a59065d884e",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 65.62212165204116,
+                    "Y": 32.4760299999999,
+                    "Z": 0
+                  },
+                  {
+                    "X": 68.65353,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 68.65353,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 65.62212165204113,
+                    "Y": 33.820920000000115,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "6b96f8ed-a33a-4897-908f-86bec3072343",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "ea840137-4556-407b-b4f4-b7cb12ceb7c1"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "0ae93711-21e8-42da-b68b-3c06069ecbfd",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 65.62212165204113,
+                    "Y": 33.820920000000115,
+                    "Z": 0
+                  },
+                  {
+                    "X": 62.643194378482946,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 62.643194378482946,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 65.62212165204116,
+                    "Y": 32.4760299999999,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "31b6109a-0b3b-4461-a807-073fcbb93fcf",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "d7ab0ada-36c2-410d-a6d7-aa7d446b31a3"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "bbdcac22-865a-4661-b4c8-180867adfd14",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 65.62212165204114,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 68.65353,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 68.65353,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 65.62212165204114,
+                    "Y": 42.17345000000023,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "4ad7cd3f-2fc4-49e2-8cfa-bfa280627a50",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "648d81b3-fd8d-4a7c-981e-9519f8225aa3"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "e01cd649-2275-4c4b-96e4-aff338e1cdc3",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 62.74417496402727,
+                    "Y": 42.17345000000012,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.61377681215257,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.61377681215257,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.26162,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 62.74417496402732,
+                    "Y": 40.76060999999936,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "16e44d79-0483-4809-a687-05924fff9c03",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "91099f42-0f93-4709-88a3-74341dcf8128"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "7d2706f0-fb1d-4ea4-848b-dc2af733d405",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 62.74417496402732,
+                    "Y": 40.76060999999936,
+                    "Z": 0
+                  },
+                  {
+                    "X": 65.62212165204114,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 65.62212165204114,
+                    "Y": 42.17345000000023,
+                    "Z": 0
+                  },
+                  {
+                    "X": 62.74417496402727,
+                    "Y": 42.17345000000012,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "73c46f8a-0120-4efd-a405-1d3cf40592fc",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "22cc967c-4aa4-4005-8c48-7085d6e6933d"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "499cf36d-68f4-4a9b-96a9-7c7a8759d6e5",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 60.26162,
+                    "Y": 38.268205299649296,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.26162,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.61377681215257,
+                    "Y": 40.76061,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.61377681215257,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.72045,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.72045000000253,
+                    "Y": 38.268205299649296,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "45e1ac95-68b1-4a2a-8c0e-ed7ed4ba9a0f",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "3d10185a-20b1-4549-b2c7-c8eb29356719"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "d008f882-d932-41cf-8948-058e87b5a440",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 56.72045000000253,
+                    "Y": 38.268205299649296,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.72045,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.66426710492474,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.66426710492474,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.26162,
+                    "Y": 33.82092,
+                    "Z": 0
+                  },
+                  {
+                    "X": 60.26162,
+                    "Y": 38.268205299649296,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "8efd0daa-a1e2-414a-8a7d-dabd79d8b2f3",
+              "Id": "06e6ff68-5db2-4f43-afe6-902e19ef024c",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "a46ef8fe-90b5-4abc-a571-8a1a9b990f74"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "df733332-8419-4445-b5ff-52978f2a1b65",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 21.96145641587446,
+                    "Y": 40.79688999999962,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.97564,
+                    "Y": 40.79689,
+                    "Z": 0
+                  },
+                  {
+                    "X": 24.97564,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.96145641587446,
+                    "Y": 42.17345,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "eb9e2f99-6c58-40e0-89cf-2c91e8486a76",
+              "Id": "8d022af2-3f3f-4cc5-a25b-0f4023655da2",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "a4211c08-652e-4f8c-94ce-02f7e4a9f013"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "9b52415c-9c52-4e2b-9158-10c81f9f280a",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 20.75866,
+                    "Y": 40.79689,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.96145641587446,
+                    "Y": 40.79688999999962,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.96145641587446,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37213999999949,
+                    "Y": 40.79689028987393,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "eb9e2f99-6c58-40e0-89cf-2c91e8486a76",
+              "Id": "79131572-7c3a-4ef7-a56e-fe6ca917bd7d",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "cbb86591-f553-437e-83aa-b1d0d8451525"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "16f2cada-3041-445d-879e-32543cf698ca",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 20.75866,
+                    "Y": 33.78671,
+                    "Z": 0
+                  },
+                  {
+                    "X": 20.75866,
+                    "Y": 40.79689,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37213999999949,
+                    "Y": 40.79689028987393,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37213999999949,
+                    "Y": 33.786707550359715,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "eb9e2f99-6c58-40e0-89cf-2c91e8486a76",
+              "Id": "f43cbd5d-7867-40a0-b641-504369697f48",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "d3749490-fd37-46d2-be18-826bb88f0e01"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "4f41828d-26db-433f-a9ef-b6d430d71ded",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 21.9057839087163,
+                    "Y": 33.78671,
+                    "Z": 0
+                  },
+                  {
+                    "X": 20.75866,
+                    "Y": 33.78671,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37213999999949,
+                    "Y": 33.786707550359715,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.9057839087163,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "eb9e2f99-6c58-40e0-89cf-2c91e8486a76",
+              "Id": "d9e504b6-f53f-40ce-9a65-71309420697a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "88257063-32b5-4888-8b26-a33f32963328"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "80802d07-fe86-48ad-838e-3039946329b9",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 25.042001811959285,
+                    "Y": 33.78671,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.9057839087163,
+                    "Y": 33.78671,
+                    "Z": 0
+                  },
+                  {
+                    "X": 21.9057839087163,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.042001811959285,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "eb9e2f99-6c58-40e0-89cf-2c91e8486a76",
+              "Id": "50e641d6-e97e-43fd-a514-3dfc44cc9de6",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "43504077-f384-44a0-b57b-ddfbece0a071"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "747891a7-c94e-48df-a18f-94c7544b65aa",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 25.042001811959285,
+                    "Y": 32.47602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 27.99919,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 27.99919,
+                    "Y": 33.78671,
+                    "Z": 0
+                  },
+                  {
+                    "X": 25.042001811959285,
+                    "Y": 33.78671,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "eb9e2f99-6c58-40e0-89cf-2c91e8486a76",
+              "Id": "c6a327e9-a281-46b6-b9f7-997c5a745cb1",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "7fcea028-780c-4c76-ae6d-3c4a088eebab"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "8973dc6a-5753-4f3c-a6c1-fe79966ef614",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 19.37214,
+                    "Y": 28.886827376872855,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 24.29654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.06851484413282,
+                    "Y": 24.29654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.06851484413346,
+                    "Y": 28.886827376872855,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "d0174af9-13c3-4e5e-99ce-75ed8ff35110",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "cb7da6df-d472-40b8-bf72-1e7e0c96f992"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "f021e042-ce1f-4b27-aeeb-989b90935d50",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 23.06851484413346,
+                    "Y": 28.886827376872855,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.06851484413282,
+                    "Y": 30.97602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 30.97603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 28.886827376872855,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "40fe4ca0-9313-4fc4-83e1-05f05bde19ad",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Phone Booth"
+            },
+            "Program Type": "Phone Booth"
+          },
+          "id": "c57935eb-4380-4ec8-9a13-07cf20af4378"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "92428ec0-1be3-47a4-a0f9-13b08be402db",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 31.044171853156378,
+                    "Y": 30.97602999999799,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.06851484413282,
+                    "Y": 30.97602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.06851484413346,
+                    "Y": 28.886827376872855,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.06851484413282,
+                    "Y": 24.29654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.044171853156378,
+                    "Y": 24.29654,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "e2e19965-5bd2-4772-a8ad-22881d7191d1",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "a7bf02c3-7356-41a8-aedb-8f8ff4a452d5"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "a0e624b7-5966-46cf-a2f9-c0553223a1cf",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 32.57199225162626,
+                    "Y": 30.97602999999807,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.044171853156378,
+                    "Y": 30.97602999999799,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.044171853156378,
+                    "Y": 24.29654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 32.57199225162664,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "4b6d97b9-7893-4a4b-bbdf-ab3312915fcd",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "c352ee70-d97c-470b-b6e4-4b20fe2c465d"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "5e8aa9b3-e757-4446-bd33-b2591c268883",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 38.13396358686638,
+                    "Y": 30.976029999998346,
+                    "Z": 0
+                  },
+                  {
+                    "X": 32.57199225162626,
+                    "Y": 30.97602999999807,
+                    "Z": 0
+                  },
+                  {
+                    "X": 32.57199225162664,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 38.13396358686673,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "129dbd4d-e13d-4915-a3a9-de24bcafb588",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Lounge"
+            },
+            "Program Type": "Lounge"
+          },
+          "id": "86533a44-5970-4b3b-a638-c90a2faadeab"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "644c8173-dc73-4e90-b73e-2adcfc367448",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 42.62551779721122,
+                    "Y": 30.97602999999857,
+                    "Z": 0
+                  },
+                  {
+                    "X": 38.13396358686638,
+                    "Y": 30.976029999998346,
+                    "Z": 0
+                  },
+                  {
+                    "X": 38.13396358686673,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 42.625517797211565,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "f19845a1-2f50-4406-adb3-69a249763357",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "d08a51f9-6153-49f1-8275-1162aeaa2f17"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "7a282001-c7ce-4e8e-aef5-c5f7c04d3af9",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 48.94414351707577,
+                    "Y": 30.976029999998886,
+                    "Z": 0
+                  },
+                  {
+                    "X": 42.62551779721122,
+                    "Y": 30.97602999999857,
+                    "Z": 0
+                  },
+                  {
+                    "X": 42.625517797211565,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 48.94414351707612,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "cd9dbf11-b268-4406-8eae-b487037ef63a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Reception"
+            },
+            "Program Type": "Reception"
+          },
+          "id": "464c8cdf-9cb1-4180-9e26-90ca8e3207b0"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "675c2140-17c3-4d3f-9140-29869241a562",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 53.12086916127495,
+                    "Y": 30.976029999999096,
+                    "Z": 0
+                  },
+                  {
+                    "X": 48.94414351707577,
+                    "Y": 30.976029999998886,
+                    "Z": 0
+                  },
+                  {
+                    "X": 48.94414351707612,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 53.12086916127529,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 53.12086916127555,
+                    "Y": 27.63628500000004,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "3ef84c48-a976-4c1a-9787-13a6f1bba2ad",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "3cc04d67-d300-4e5b-9770-5b43a868f5b1"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "fbe91eab-6cd7-4ccb-aa29-1f59e3103f12",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 56.9198005260987,
+                    "Y": 27.636285000000235,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.91980052609934,
+                    "Y": 30.976029999999284,
+                    "Z": 0
+                  },
+                  {
+                    "X": 53.12086916127495,
+                    "Y": 30.976029999999096,
+                    "Z": 0
+                  },
+                  {
+                    "X": 53.12086916127555,
+                    "Y": 27.63628500000004,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "b550ae5d-e256-4b3e-bcb0-a381bf341354",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "7e2e3da1-395b-4c8a-92f7-8f47e78c9a98"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "6997827d-295e-4154-8d78-5ec5ea0f85e9",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 53.12086916127555,
+                    "Y": 27.63628500000004,
+                    "Z": 0
+                  },
+                  {
+                    "X": 53.12086916127529,
+                    "Y": 24.296539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.91980052609968,
+                    "Y": 24.296540000001187,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.9198005260987,
+                    "Y": 27.636285000000235,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "8f93abe4-596c-4519-8494-a0142c1fec72",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "614ead4c-cd21-46a4-abcc-c8a04af8c2e7"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "c3562836-7e81-4525-a200-a468982bef3a",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 59.69348938580672,
+                    "Y": 30.97602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.91980052609934,
+                    "Y": 30.976029999999284,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.9198005260987,
+                    "Y": 27.636285000000235,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.91980052609968,
+                    "Y": 24.296540000001187,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.69348938580619,
+                    "Y": 24.296540000000956,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "a4f3a020-6479-4aca-8e2a-257d96d797c9",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "2aaf4b81-79f6-405f-bbd4-82c5b43d1a16"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "a7ce85dc-b451-4179-a7b8-845f53c2c5c0",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 63.723295032471185,
+                    "Y": 30.97602999999799,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.69348938580672,
+                    "Y": 30.97602999999981,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.69348938580619,
+                    "Y": 24.296540000000956,
+                    "Z": 0
+                  },
+                  {
+                    "X": 63.72329503247063,
+                    "Y": 24.296540000000622,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "66b48e07-2276-4093-ba66-3bf7da1967bf",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "433a18eb-f317-4ed0-b415-51fa42546cc3"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "c6d9cbd9-45d0-49e7-a438-1b9828bbe877",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 67.75310067913571,
+                    "Y": 30.97603000000163,
+                    "Z": 0
+                  },
+                  {
+                    "X": 63.723295032471185,
+                    "Y": 30.97602999999799,
+                    "Z": 0
+                  },
+                  {
+                    "X": 63.72329503247063,
+                    "Y": 24.296540000000622,
+                    "Z": 0
+                  },
+                  {
+                    "X": 67.75310067913514,
+                    "Y": 24.296540000000288,
+                    "Z": 0
+                  },
+                  {
+                    "X": 67.75310067913415,
+                    "Y": 28.82623927521094,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "39a844eb-6c32-452e-90ae-3bb90aa41d3a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "5a09147c-3fc5-4cd0-8644-f26626ca38b9"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "779ef157-2753-4257-9a1a-3466b48ab5bb",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 71.24037,
+                    "Y": 28.82623927521094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24037,
+                    "Y": 30.97603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 67.75310067913571,
+                    "Y": 30.97603000000163,
+                    "Z": 0
+                  },
+                  {
+                    "X": 67.75310067913415,
+                    "Y": 28.82623927521094,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "a1715e7e-8ea8-4941-8d96-e17428baa51a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Phone Booth"
+            },
+            "Program Type": "Phone Booth"
+          },
+          "id": "e3d7a655-bd9f-48fd-99e0-ed6087ed6543"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "f0ce5fde-1725-48fe-8cce-dc571e632ee8",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 67.75310067913415,
+                    "Y": 28.82623927521094,
+                    "Z": 0
+                  },
+                  {
+                    "X": 67.75310067913514,
+                    "Y": 24.296540000000288,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24037,
+                    "Y": 24.29654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24037,
+                    "Y": 28.82623927521094,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "a80d5487-1fdf-4e64-af2d-1cf3ed43ffbc",
+              "Id": "464fafd1-26aa-4678-9d5b-1d35fcbd3df1",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "dbd32c80-cb04-4d36-8fbd-44a41be300bf"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "36d1fd1c-e8b7-43bc-82ff-e000905d621f",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 23.151158175888526,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 22.79654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 19.37214,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.151158175888526,
+                    "Y": 18.69909,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "79c30ed6-c6ab-450a-9341-5a9f791cf5d2",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "5ed3efa1-9802-49e1-9e0f-143e491eacd0"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "2e2831fb-a8e3-4a38-bdd6-ef13219dcc5a",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 26.97714490603328,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.015686454519418,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.015686454519418,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.97714490603328,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "131c18d5-af96-49d8-b60e-e157b80a61f6",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "81c1bb15-9f71-469e-acc0-b043526a6ac7"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "3977f05f-4213-42d1-bfe9-923e43904c3d",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 26.97714490603328,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.151158175888526,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 23.151158175888526,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 26.97714490603328,
+                    "Y": 18.69909,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "f3ffd957-d79b-4961-b9a0-664b868adb50",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Private Office"
+            },
+            "Program Type": "Private Office"
+          },
+          "id": "f68068fa-ae54-48ef-8ad5-20e1bc920a9c"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "3d3de4ec-35e5-4214-adb0-14c383c4fc6c",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 52.74478025431482,
+                    "Y": 22.796540000001187,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.015686454519418,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 31.015686454519418,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 52.74478025431482,
+                    "Y": 18.69909,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "ba1731c4-b681-4552-8ffe-6dd646ae5fc1",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Open Office"
+            },
+            "Program Type": "Open Office"
+          },
+          "id": "8b0066de-950d-46da-b8a0-ff7e572253cd"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "ade98a75-ce3d-41e6-94e3-2fbec4d90898",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 56.42615000351825,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 52.74478025431482,
+                    "Y": 22.796540000001187,
+                    "Z": 0
+                  },
+                  {
+                    "X": 52.74478025431482,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.42615000351825,
+                    "Y": 18.69909,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "f4562ec0-f8ef-451f-bb62-650142852cd1",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "b3768f2c-11a3-4aec-9ad6-af5cd1a40b06"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "203250b6-bd06-474a-936c-204bf0d4d0b2",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 59.43041262525221,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.42615000351825,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 56.42615000351825,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.43041,
+                    "Y": 18.69909,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "277dfec5-23c6-45fb-82cf-f7f083898e8a",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "6c7d8813-2a4d-4de7-a486-72151c98133a"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "aa50f4fd-cd97-4d1e-9976-0ab937f4d3c8",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 59.43041,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.43041,
+                    "Y": 11.13821,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24037,
+                    "Y": 11.13821,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24036999999953,
+                    "Y": 18.699080972124317,
+                    "Z": 0
+                  },
+                  {
+                    "X": 63.07743950107085,
+                    "Y": 18.699087212104956,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "ee96526b-d3c3-4ffb-9a1d-edfa1b9c2619",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Pantry"
+            },
+            "Program Type": "Pantry"
+          },
+          "id": "0e0fe819-edff-478a-bbef-e6f756624290"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "c5dc67f8-0e46-4e8c-ae2e-c38b3c8b6efd",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 63.07743950107085,
+                    "Y": 18.699087212104956,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24036999999953,
+                    "Y": 18.699080972124317,
+                    "Z": 0
+                  },
+                  {
+                    "X": 71.24037,
+                    "Y": 22.79654,
+                    "Z": 0
+                  },
+                  {
+                    "X": 63.07744263328251,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "33e3e4cb-a87d-469e-ad23-ce790a6d75e8",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Open Office"
+            },
+            "Program Type": "Open Office"
+          },
+          "id": "7c0d781a-b9ec-42e7-94af-c373e050eab4"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "04d064df-2978-4795-8b07-7d2f1c6d1842",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 63.07744263328251,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.43041262525221,
+                    "Y": 22.796539999999368,
+                    "Z": 0
+                  },
+                  {
+                    "X": 59.43041,
+                    "Y": 18.69909,
+                    "Z": 0
+                  },
+                  {
+                    "X": 63.07743950107085,
+                    "Y": 18.699087212104956,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.3,
+                "Red": 0.8,
+                "Blue": 0.8,
+                "Green": 0.8
+              },
+              "SpaceBoundary": "e0cf2735-0e8e-4fd0-9784-eed93e2338fc",
+              "Id": "649952ad-492e-4936-a994-31d6b8f291bc",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "unspecified"
+            },
+            "Program Type": "unspecified"
+          },
+          "id": "3bfd85e6-977d-4aa2-8ae6-222b035583f8"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "aa57d91b-3029-499d-8c7e-cff043f0115d",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 86.67621999999938,
+                    "Y": 40.86957014633645,
+                    "Z": 0
+                  },
+                  {
+                    "X": 86.67622,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 81.73593,
+                    "Y": 42.17345,
+                    "Z": 0
+                  },
+                  {
+                    "X": 81.73593,
+                    "Y": 40.86957014633645,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.5,
+                "Red": 0.43529411764705883,
+                "Blue": 0.7450980392156863,
+                "Green": 0.6274509803921569
+              },
+              "SpaceBoundary": "ce30d262-bc32-4d2e-ba5c-cde0267e86bf",
+              "Id": "69fceb9e-98bb-439e-99d7-a47e79e1368b",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Open Office"
+            },
+            "Program Type": "Open Office"
+          },
+          "id": "a520662f-5aaa-49ff-ad13-4697757309ab"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "9965e3fa-dcd5-4fdc-8e90-05637c161a0b",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 81.73593,
+                    "Y": 37.24859380829531,
+                    "Z": 0
+                  },
+                  {
+                    "X": 81.73593,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 82.50044,
+                    "Y": 32.47603,
+                    "Z": 0
+                  },
+                  {
+                    "X": 82.50044,
+                    "Y": 32.50104,
+                    "Z": 0
+                  },
+                  {
+                    "X": 86.67622,
+                    "Y": 32.50104,
+                    "Z": 0
+                  },
+                  {
+                    "X": 86.67621999999938,
+                    "Y": 37.24859380829531,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.5,
+                "Red": 0.43529411764705883,
+                "Blue": 0.7450980392156863,
+                "Green": 0.6274509803921569
+              },
+              "SpaceBoundary": "ce30d262-bc32-4d2e-ba5c-cde0267e86bf",
+              "Id": "1b3a53e8-feaa-4c3b-b9f1-393a842e7f2b",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "e65889b4-66d4-4e26-bc17-3269bce9d569"
+        },
+        {
+          "value": {
+            "Level Layout": {
+              "Add Id": "Level 1-layout",
+              "Name": "Level 1 Layout"
+            },
+            "Id": "9f6a3961-a815-4e70-8e8a-b8c006e0a2ec",
+            "Boundary": {
+              "Voids": [],
+              "Perimeter": {
+                "discriminator": "Elements.Geometry.Polygon",
+                "Vertices": [
+                  {
+                    "X": 86.67621999999938,
+                    "Y": 37.24859380829531,
+                    "Z": 0
+                  },
+                  {
+                    "X": 86.67621999999938,
+                    "Y": 40.86957014633645,
+                    "Z": 0
+                  },
+                  {
+                    "X": 81.73593,
+                    "Y": 40.86957014633645,
+                    "Z": 0
+                  },
+                  {
+                    "X": 81.73593,
+                    "Y": 37.24859380829531,
+                    "Z": 0
+                  }
+                ]
+              },
+              "Color": {
+                "Alpha": 0.5,
+                "Red": 0.43529411764705883,
+                "Blue": 0.7450980392156863,
+                "Green": 0.6274509803921569
+              },
+              "SpaceBoundary": "ce30d262-bc32-4d2e-ba5c-cde0267e86bf",
+              "Id": "6c1f1255-5fe2-4e5f-9b9d-faff75eb04aa",
+              "discriminator": "Elements.Geometry.Profile",
+              "Name": "Meeting Room"
+            },
+            "Program Type": "Meeting Room"
+          },
+          "id": "95607026-7cab-4cd4-838a-6304cd0f7437"
+        }
+      ]
+    },
+    "removals": {
+      "Spaces": [
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 19.32195,
+              "Y": 54.116695,
+              "Z": 0
+            }
+          },
+          "id": "ad5a43b7-f791-4cbb-bdb9-e1053ebec596"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 59.149325000000005,
+              "Y": 54.116695,
+              "Z": 0
+            }
+          },
+          "id": "5a9e8b8c-248e-439b-aa4e-4b9c6518cab1"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 24.999435,
+              "Y": 47.076935000000006,
+              "Z": 0
+            }
+          },
+          "id": "cedc3f43-a1f3-441a-bf76-a507f65ecbef"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 22.86715,
+              "Y": 41.48517,
+              "Z": 0
+            }
+          },
+          "id": "4379ed2d-121f-4516-9087-4ad4188f1a96"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 45.306255,
+              "Y": 27.636285,
+              "Z": 0
+            }
+          },
+          "id": "98947179-f9d0-4c07-aa7b-cd3858e1ccc7"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 75.49953,
+              "Y": 41.46703,
+              "Z": 0
+            }
+          },
+          "id": "6d6e6484-e4ae-484d-90c2-99757c3d5075"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 64.457575,
+              "Y": 41.46703,
+              "Z": 0
+            }
+          },
+          "id": "34cc506e-0108-4268-a9ff-8e52453bfc34"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 82.118185,
+              "Y": 21.05712,
+              "Z": 0
+            }
+          },
+          "id": "7cfaed00-d1f0-4902-9e41-22561a55809b"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 45.306255,
+              "Y": 20.747815000000003,
+              "Z": 0
+            }
+          },
+          "id": "cea6098a-ebe0-4c99-ae40-f46b6783d5be"
+        },
+        {
+          "identity": {
+            "Level Add Id": "Level 1",
+            "Relative Position": {
+              "X": 83.63752999999998,
+              "Y": 35.716840000000005,
+              "Z": 0
+            }
+          },
+          "id": "94590262-2825-4acd-9224-636df625c3e0"
+        }
+      ]
+    },
+    "Spaces": [
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Collaboration"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 67.15890553358821,
+            "Y": 20.747812046057163,
+            "Z": 0
+          }
+        },
+        "id": "771817c8-5c08-4f50-a709-c81408794d15"
+      },
+      {
+        "value": {
+          "Program Type": "Open Collaboration"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 84.20607499999984,
+            "Y": 41.52151007316823,
+            "Z": 0
+          }
+        },
+        "id": "d8a10549-3d7f-4636-ae27-a0c11072fdfc"
+      },
+      {
+        "value": {
+          "Program Type": "Resource / Copy"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 83.6375299999999,
+            "Y": 34.07522126943177,
+            "Z": 0
+          }
+        },
+        "id": "0a6319bf-8da3-4c2f-b607-213848e5cb10"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 25.004567948694973,
+            "Y": 46.826905595699,
+            "Z": 0
+          }
+        },
+        "id": "29b3a3ce-1828-45b7-af5f-1d6a2951c68a"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 28.791014044616166,
+            "Y": 45.3751924999992,
+            "Z": 0
+          }
+        },
+        "id": "126d473c-a911-447d-a05c-b151fc4d1947"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 28.791014044616162,
+            "Y": 48.7786774999996,
+            "Z": 0
+          }
+        },
+        "id": "fee09737-8a79-43a0-937a-8f623c5ae0f4"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 27.807958068240836,
+            "Y": 54.116694999999886,
+            "Z": 0
+          }
+        },
+        "id": "1b5bbd4f-5c09-4948-a116-65cb3e764916"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 23.190379961783293,
+            "Y": 54.116694999999766,
+            "Z": 0
+          }
+        },
+        "id": "a5e8cb4e-6bc9-49b3-8f07-17c1d8d5a4fb"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 19.619856893542483,
+            "Y": 54.116695000000185,
+            "Z": 0
+          }
+        },
+        "id": "4f1a3474-6982-4816-8477-0667a21181d8"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 15.921827378863807,
+            "Y": 54.11669500000063,
+            "Z": 0
+          }
+        },
+        "id": "41970fb1-ce20-41a3-9863-b7658651017f"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 11.006342378863776,
+            "Y": 54.11669500000033,
+            "Z": 0
+          }
+        },
+        "id": "1865e8b2-e601-44ca-adaf-cf47885146a8"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 52.598398974399615,
+            "Y": 53.96663883534356,
+            "Z": 0
+          }
+        },
+        "id": "0749cc09-1b28-4051-b73f-5235544f16c3"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 48.86972658315848,
+            "Y": 53.966638835343595,
+            "Z": 0
+          }
+        },
+        "id": "4b8db936-c505-4e54-9bca-80a1c9bcf586"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 57.350469018005796,
+            "Y": 53.9666388353432,
+            "Z": 0
+          }
+        },
+        "id": "2b555ca1-f45e-44c3-8685-045eee4a3377"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 65.76414162676465,
+            "Y": 53.96663883534323,
+            "Z": 0
+          }
+        },
+        "id": "6d2865b4-b002-4494-84d9-2c727cd2dfa1"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 76.32133163841466,
+            "Y": 37.31341499999971,
+            "Z": 0
+          }
+        },
+        "id": "54f2133d-22c7-4079-a683-117ff14825f2"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 21.22032742206657,
+            "Y": 26.59168368843643,
+            "Z": 0
+          }
+        },
+        "id": "07efe67c-04a0-40b5-a997-19427643cb8f"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Phone Booth"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 21.22032742206657,
+            "Y": 29.93142868843638,
+            "Z": 0
+          }
+        },
+        "id": "898d796e-13ad-4a9e-abc1-195ffb9c928d"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 26.258777647742374,
+            "Y": 27.88639347537413,
+            "Z": 0
+          }
+        },
+        "id": "9604e18e-3779-49d1-9184-a2428f2d3c80"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Circulation"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 31.808082052391416,
+            "Y": 27.636284999998857,
+            "Z": 0
+          }
+        },
+        "id": "41be92f4-9558-4ae4-b8d2-2d0c0ba39188"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Lounge"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 35.3529779192465,
+            "Y": 27.636284999998786,
+            "Z": 0
+          }
+        },
+        "id": "477bae0d-e292-469c-8527-178e28b8aa40"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 40.37974069203897,
+            "Y": 27.636284999998914,
+            "Z": 0
+          }
+        },
+        "id": "404736d0-3b35-4679-b330-f2f52833fb53"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Reception"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 45.78483065714367,
+            "Y": 27.63628499999905,
+            "Z": 0
+          }
+        },
+        "id": "d14053b8-6a3a-4e19-850c-e017d4904e32"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 51.45017890359554,
+            "Y": 27.63628499999935,
+            "Z": 0
+          }
+        },
+        "id": "fe00ffa1-13a9-4efb-b230-5b83fb2a577b"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 55.02033484368714,
+            "Y": 29.306157499999664,
+            "Z": 0
+          }
+        },
+        "id": "6a24f9b7-ba3b-478d-af54-0c6c033f8cfd"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 55.02033484368731,
+            "Y": 25.96641250000021,
+            "Z": 0
+          }
+        },
+        "id": "671a0aef-15a9-4282-89cb-76d490bb309e"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 61.70839220913868,
+            "Y": 27.636284999999845,
+            "Z": 0
+          }
+        },
+        "id": "35779220-4b43-4f04-8db4-bdadc4ba871d"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 66.14117842046937,
+            "Y": 27.874275855042292,
+            "Z": 0
+          }
+        },
+        "id": "21a8b284-7db2-4a8a-882f-86ca474cac59"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Phone Booth"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 69.49673533956746,
+            "Y": 29.901134637605878,
+            "Z": 0
+          }
+        },
+        "id": "1ef383b6-4dfa-41f4-bb3c-c9204b459459"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 21.261649087944264,
+            "Y": 20.747814999999843,
+            "Z": 0
+          }
+        },
+        "id": "a61b4bfd-afe0-49d6-804b-3465ebf3b284"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 28.99641568027635,
+            "Y": 20.747814999999683,
+            "Z": 0
+          }
+        },
+        "id": "6c89f2fb-3ad7-4151-93b8-4cc03c0bc07b"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Private Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 25.064151540960907,
+            "Y": 20.747814999999683,
+            "Z": 0
+          }
+        },
+        "id": "80a10a0b-46b7-4386-89de-7900f3e1a885"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 41.880233354417115,
+            "Y": 20.747815000000138,
+            "Z": 0
+          }
+        },
+        "id": "f096667f-8420-432e-8cb6-83a9f5a269be"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Meeting Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 57.928280658072175,
+            "Y": 20.747814999999683,
+            "Z": 0
+          }
+        },
+        "id": "d4187419-a14a-4dbf-a8bb-292e8464fe33"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Pantry"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 64.88379990021407,
+            "Y": 15.674735636845856,
+            "Z": 0
+          }
+        },
+        "id": "18e1e249-21ae-4ad9-9b43-cb1fcba0a622"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Display Board"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 20.065399999999745,
+            "Y": 37.29179946005841,
+            "Z": 0
+          }
+        },
+        "id": "71427a55-df68-48b6-abb5-19e4fcdc7590"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 26.52059590597964,
+            "Y": 33.131369999999954,
+            "Z": 0
+          }
+        },
+        "id": "14f64e51-14f5-497a-8684-4768cea1faa6"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 60.97530859336307,
+            "Y": 33.282963999999964,
+            "Z": 0
+          }
+        },
+        "id": "1338bd30-0d60-473a-b559-80a40901ab74"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 67.13782582602057,
+            "Y": 33.148475000000005,
+            "Z": 0
+          }
+        },
+        "id": "28c205a5-5e68-4abd-b2dc-41d179f6df9f"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 64.13265801526205,
+            "Y": 33.148474999999955,
+            "Z": 0
+          }
+        },
+        "id": "98b3c87d-ff42-44bb-a8ae-8c21b31e3f9a"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 67.13782582602057,
+            "Y": 41.46703000000006,
+            "Z": 0
+          }
+        },
+        "id": "2639e109-3e23-43f0-bf13-23e9be36a9b1"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 60.99550471047195,
+            "Y": 41.325745999999896,
+            "Z": 0
+          }
+        },
+        "id": "b7deff6f-d595-4d9c-bb8d-efcf55371b39"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 64.18314830803422,
+            "Y": 41.46702999999993,
+            "Z": 0
+          }
+        },
+        "id": "7448d141-ac78-4f17-bba7-9724d6834325"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Electrical Room"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 58.88211236830867,
+            "Y": 34.855051766549764,
+            "Z": 0
+          }
+        },
+        "id": "b61efe64-12eb-4167-a836-a157b431600c"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Servers / IT"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 58.86528227071795,
+            "Y": 40.4007550998831,
+            "Z": 0
+          }
+        },
+        "id": "31313fe3-e34d-400e-bb21-80c70e5dd26c"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Resource / Copy"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 21.2129889040791,
+            "Y": 48.02858928709807,
+            "Z": 0
+          }
+        },
+        "id": "1d2ff7e9-651b-45d8-bf9a-968bdb385e49"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 21.2129889040791,
+            "Y": 44.625104287098125,
+            "Z": 0
+          }
+        },
+        "id": "f4c75673-cb63-44f8-844a-5c6b69d768d8"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coffee Point"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 72.352981228811,
+            "Y": 41.4670299999996,
+            "Z": 0
+          }
+        },
+        "id": "fd833c38-f593-4dbb-82fe-25401f6b70bc"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coffee Point"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 72.35298122881099,
+            "Y": 33.148474999999955,
+            "Z": 0
+          }
+        },
+        "id": "cb2fd4ba-9ee4-4d80-8e53-4d77bdabb395"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coat Closet"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 23.468548207937232,
+            "Y": 41.485169999999904,
+            "Z": 0
+          }
+        },
+        "id": "6838c2f4-a0c6-42fa-8ded-32b07b8de94b"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coffee Point"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 20.685170566349683,
+            "Y": 41.347514057974706,
+            "Z": 0
+          }
+        },
+        "id": "05954abd-e017-4f85-a1df-5eb0727263d0"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coffee Point"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 20.662901563486418,
+            "Y": 33.262437510071905,
+            "Z": 0
+          }
+        },
+        "id": "eaa7f009-9da2-471c-91d1-9fb4640cdd58"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coat Closet"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 23.47389286033779,
+            "Y": 33.131369999999905,
+            "Z": 0
+          }
+        },
+        "id": "92469bf9-692a-458e-887c-bbd268c929a1"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Coffee"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 58.02927606998212,
+            "Y": 27.636285000000292,
+            "Z": 0
+          }
+        },
+        "id": "cce5b03a-6895-442a-b9e7-46f37ccdf461"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Resource / Copy"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 69.49673533956732,
+            "Y": 26.56138963760554,
+            "Z": 0
+          }
+        },
+        "id": "50069c13-0c9b-4ae8-aeb8-999ea65ddd04"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Mother's Lounge"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 54.58546512891653,
+            "Y": 20.747815000000138,
+            "Z": 0
+          }
+        },
+        "id": "55d5642d-fc64-40db-a895-81dcff29b90e"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Storage"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 61.25392618990139,
+            "Y": 20.747814303025923,
+            "Z": 0
+          }
+        },
+        "id": "7a886e93-386b-427c-b78e-930c360a09c7"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Boundary": {
+            "Voids": [],
+            "Perimeter": {
+              "discriminator": "Elements.Geometry.Polygon",
+              "Vertices": [
+                {
+                  "X": 45.78778,
+                  "Y": 56.25297,
+                  "Z": 0
+                },
+                {
+                  "X": 31.84593,
+                  "Y": 56.25297,
+                  "Z": 0
+                },
+                {
+                  "X": 31.84593,
+                  "Y": 51.68030767068653,
+                  "Z": 0
+                },
+                {
+                  "X": 45.78778,
+                  "Y": 51.68030767068653,
+                  "Z": 0
+                }
+              ]
+            },
+            "Color": {
+              "Alpha": 0.3,
+              "Red": 0.8,
+              "Blue": 0.8,
+              "Green": 0.8
+            },
+            "SpaceBoundary": "12c006c4-1808-46ba-8d8b-6aeab3cee1c0",
+            "Id": "a2fe6816-7359-409a-8fd4-28abdfb48f4d",
+            "discriminator": "Elements.Geometry.Profile",
+            "Name": "Open Office"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 38.816855,
+            "Y": 54.116695,
+            "Z": 0
+          }
+        },
+        "id": "730468df-8968-4e25-b866-1c3b635fedd0"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 59.149325000000005,
+            "Y": 47.076935000000006,
+            "Z": 0
+          }
+        },
+        "id": "ae2ebd2a-6b54-4481-928a-0f0c36d5a2c7"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 76.6542,
+            "Y": 49.963210000000004,
+            "Z": 0
+          }
+        },
+        "id": "94229b38-53a0-492e-9700-98170d2114d0"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 38.816855,
+            "Y": 47.076935000000006,
+            "Z": 0
+          }
+        },
+        "id": "04d5b3e2-4113-466d-b7f1-e27d72783c65"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 84.206075,
+            "Y": 49.963210000000004,
+            "Z": 0
+          }
+        },
+        "id": "e01dca1e-fb4e-4818-8bfa-25e13bcaf116"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 12.932655,
+            "Y": 47.076935000000006,
+            "Z": 0
+          }
+        },
+        "id": "cf28cb39-5d15-4ae8-b1b3-659f7079dfac"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 10.889256666666666,
+            "Y": 30.409250000000004,
+            "Z": 0
+          }
+        },
+        "id": "79ab1271-a464-4ac7-9b84-3cc6f54cda0c"
+      },
+      {
+        "value": {
+          "Level Layout": {
+            "Add Id": "Level 1-layout",
+            "Name": "Level 1 Layout"
+          },
+          "Program Type": "Open Office"
+        },
+        "identity": {
+          "Level Add Id": "Level 1",
+          "Relative Position": {
+            "X": 76.62854999999999,
+            "Y": 21.05712,
+            "Z": 0
+          }
+        },
+        "id": "9f9cbc8c-f50a-4dcc-b296-7b2b7a3d10cd"
+      }
+    ]
+  }
+}
