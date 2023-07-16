@@ -134,28 +134,30 @@ namespace Elements
                 }
             }
             var enclosedRooms = new List<Profile>();
-            try
+            if (levelGroupedElements.wallsByLevel.TryGetValue(levelVolume.Id.ToString(), out var walls) || (levelGroupedElements.wallsByLevel.TryGetValue("ungrouped", out walls)))
             {
-                if (levelGroupedElements.wallsByLevel.TryGetValue(levelVolume.Id.ToString(), out var walls) || (levelGroupedElements.wallsByLevel.TryGetValue("ungrouped", out walls)))
-                {
-                    var network = Search.Network<Wall>.FromSegmentableItems(walls, (wall) => wall.GetCenterline(), out var allNodeLocations, out var allIntersections);
-                    var roomCandidates = network.FindAllClosedRegions(allNodeLocations);
+                var network = Search.Network<Wall>.FromSegmentableItems(walls, (wall) => wall.GetCenterline(), out var allNodeLocations, out var allIntersections);
+                var roomCandidates = network.FindAllClosedRegions(allNodeLocations);
 
-                    foreach (var roomCandidate in roomCandidates)
+                foreach (var roomCandidate in roomCandidates)
+                {
+                    try
                     {
                         var roomBoundary = new Polygon(roomCandidate.Select(i => allNodeLocations[i]).ToList());
+
                         if (roomBoundary.IsClockWise())
                         {
                             continue;
                         }
-                        enclosedRooms.Add(new Profile(roomBoundary));
-                    }
 
+                        enclosedRooms.Add(new Profile(roomBoundary));
+                    } 
+                    catch
+                    {
+                        continue;
+                    }
                 }
-            }
-            catch
-            {
-                // swallow
+
             }
             return (subtractedProfiles, enclosedRooms);
         }
