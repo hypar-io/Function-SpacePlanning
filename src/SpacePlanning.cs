@@ -334,11 +334,24 @@ namespace SpacePlanning
             }
             wallsByLevel.Add("ungrouped", new List<Wall>());
 
-            ILevelsToObjectsMapper levelsToObjectsMapper = new HyparLevelsToObjectsMapper(levelVolumes);
+            var levelToObjectsMappers = new List<ILevelsToObjectsMapper>()
+            {
+                new HyparLevelsToObjectsMapper(levelVolumes),
+                new RevitLevelsToObjectsMapper(levelVolumes)
+            };
 
             foreach (var wall in walls)
             {
-                var foundLevelMatch = levelsToObjectsMapper.TryMapWallToLevels(wall, wallsByLevel);
+                var foundLevelMatch = false;
+
+                foreach (var mapper in levelToObjectsMappers)
+                {
+                    if (mapper.TryMapWallToLevels(wall, wallsByLevel))
+                    {
+                        foundLevelMatch = true;
+                        break;
+                    }
+                }
 
                 if (!foundLevelMatch)
                 {
