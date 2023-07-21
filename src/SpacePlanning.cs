@@ -334,34 +334,12 @@ namespace SpacePlanning
             }
             wallsByLevel.Add("ungrouped", new List<Wall>());
 
+            ILevelsToObjectsMapper levelsToObjectsMapper = new HyparLevelsToObjectsMapper(levelVolumes);
+
             foreach (var wall in walls)
             {
-                // figure out which levels the wall belongs to. Sometimes
-                // walls will have levels attached, otherwise we might have
-                // to infer by geometry.
-                WallLevelInfo levelInfo = null;
-                if (wall.AdditionalProperties.TryGetValue("Levels", out var levels))
-                {
-                    levelInfo = WallLevelInfo.FromJObject(levels as JObject);
-                }
-                var bottomLevel = levelVolumes.FirstOrDefault(lv => lv.Level == levelInfo?.BottomLevel.Id);
-                var topLevel = levelVolumes.FirstOrDefault(lv => lv.Level == levelInfo?.TopLevel.Id);
-                var bottomElevation = bottomLevel?.Transform.Origin.Z ?? 0;
-                var topElevation = topLevel?.Transform.Origin.Z ?? bottomElevation + wall.GetHeight();
-                if (topElevation == bottomElevation)
-                {
-                    // in a levels from floors scenario w/ a single level, we'll find the same level for the top and bottom.
-                    topElevation += 3;
-                }
-                var foundLevelMatch = false;
-                foreach (var lvl in levelVolumes)
-                {
-                    if (lvl.Transform.Origin.Z >= bottomElevation && lvl.Transform.Origin.Z < topElevation - 0.01)
-                    {
-                        wallsByLevel[lvl.Id.ToString()].Add(wall);
-                        foundLevelMatch = true;
-                    }
-                }
+                var foundLevelMatch = levelsToObjectsMapper.TryMapWallToLevels(wall, wallsByLevel);
+
                 if (!foundLevelMatch)
                 {
                     wallsByLevel["ungrouped"].Add(wall);
