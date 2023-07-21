@@ -72,10 +72,12 @@ namespace SpacePlanning
 
             var levelGroupedElements = MapElementsToLevels(inputModels, levelVolumes);
 
+            var defaultTransformZ = 0.0;
             var defaultLevelHeight = Units.FeetToMeters(14);
             if (levelGroupedElements.wallsByLevel.TryGetValue("ungrouped", out var ungroupedWalls) && ungroupedWalls.Count > 0)
             {
                 defaultLevelHeight = ungroupedWalls.Max(w => w.GetHeight());
+                defaultTransformZ = ungroupedWalls.Select(w => w.GetCenterline()).Select(l => Math.Min(l.Start.Z, l.End.Z)).Min();
             }
 
             // Get program requirements
@@ -112,7 +114,8 @@ namespace SpacePlanning
                 var dummyLevelVolume = new LevelVolume()
                 {
                     Height = defaultLevelHeight,
-                    AddId = "dummy-level-volume"
+                    AddId = "dummy-level-volume",
+                    Transform = new Transform(0, 0, defaultTransformZ)
                 };
                 var levelLayout = new LevelLayout(dummyLevelVolume, levelGroupedElements);
                 levelLayouts.Add(levelLayout);
