@@ -253,17 +253,17 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesIdentity(string @levelAddId, Vector3 @relativePosition, Polygon @originalBoundary, IList<Polygon> @originalVoids)
+        public SpacesIdentity(string @levelAddId, Polygon @originalBoundary, Vector3 @relativePosition, IList<Polygon> @originalVoids)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesIdentity>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @levelAddId, @relativePosition, @originalBoundary, @originalVoids});
+                validator.PreConstruct(new object[]{ @levelAddId, @originalBoundary, @relativePosition, @originalVoids});
             }
         
             this.LevelAddId = @levelAddId;
-            this.RelativePosition = @relativePosition;
             this.OriginalBoundary = @originalBoundary;
+            this.RelativePosition = @relativePosition;
             this.OriginalVoids = @originalVoids;
         
             if(validator != null)
@@ -275,11 +275,11 @@ namespace SpacePlanning
         [Newtonsoft.Json.JsonProperty("Level Add Id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LevelAddId { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("Original Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Polygon OriginalBoundary { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Relative Position", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Vector3 RelativePosition { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Original Boundary", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Polygon OriginalBoundary { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Original Voids", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public IList<Polygon> OriginalVoids { get; set; }
@@ -368,17 +368,17 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesValueLevel(string @name, string @buildingName, string @addId)
+        public SpacesValueLevel(string @addId, string @name, string @buildingName)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesValueLevel>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @name, @buildingName, @addId});
+                validator.PreConstruct(new object[]{ @addId, @name, @buildingName});
             }
         
+            this.AddId = @addId;
             this.Name = @name;
             this.BuildingName = @buildingName;
-            this.AddId = @addId;
         
             if(validator != null)
             {
@@ -386,14 +386,14 @@ namespace SpacePlanning
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BuildingName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AddId { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
@@ -411,17 +411,17 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesOverrideAdditionValueLevel(string @name, string @buildingName, string @addId)
+        public SpacesOverrideAdditionValueLevel(string @addId, string @name, string @buildingName)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValueLevel>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @name, @buildingName, @addId});
+                validator.PreConstruct(new object[]{ @addId, @name, @buildingName});
             }
         
+            this.AddId = @addId;
             this.Name = @name;
             this.BuildingName = @buildingName;
-            this.AddId = @addId;
         
             if(validator != null)
             {
@@ -429,14 +429,14 @@ namespace SpacePlanning
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BuildingName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AddId { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     
