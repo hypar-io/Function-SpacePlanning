@@ -64,7 +64,7 @@
           "$ref": "https://schemas.hypar.io/Polygon.json"
         },
         "Relative Position": {
-          "$ref": "https://hypar.io/Schemas/Geometry/Vector3.json"
+          "$ref": "https://schemas.hypar.io/Vector3.json"
         },
         "Original Voids": {
           "type": "array",
@@ -77,7 +77,7 @@
       "schema": {
         "Level": {
           "$hyparRelation": {
-            "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+            "$ref": "https://schemas.hypar.io/LevelVolume.json"
           },
           "type": "object",
           "$hyparOrder": 2,
@@ -131,7 +131,7 @@
             "label": "Program Type"
           },
           "$hyparOrder": 1,
-          "$ref": "https://prod-api.hypar.io/schemas/Profile"
+          "$ref": "https://schemas.hypar.io/Profile.json"
         }
       },
       "verbs": {
@@ -146,7 +146,7 @@
           "schema": {
             "Level": {
               "$hyparRelation": {
-                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+                "$ref": "https://schemas.hypar.io/LevelVolume.json"
               },
               "type": "object",
               "$hyparOrder": 2,
@@ -170,7 +170,7 @@
             },
             "Level Layout": {
               "$hyparRelation": {
-                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+                "$ref": "https://schemas.hypar.io/LevelVolume.json"
               },
               "type": "object",
               "$hyparOrder": 2,
@@ -191,7 +191,7 @@
             },
             "Level Layout": {
               "$hyparRelation": {
-                "$ref": "https://prod-api.hypar.io/schemas/LevelVolume"
+                "$ref": "https://schemas.hypar.io/LevelVolume.json"
               },
               "type": "object",
               "$hyparOrder": 2,
@@ -242,7 +242,7 @@
                 "label": "Program Type"
               },
               "$hyparOrder": 1,
-              "$ref": "https://prod-api.hypar.io/schemas/Profile"
+              "$ref": "https://schemas.hypar.io/Profile.json"
             }
           },
           "$hyparHidden": [
@@ -258,16 +258,16 @@
   },
   "outputs": [],
   "element_types": [
-    "https://prod-api.hypar.io/schemas/SpaceBoundary",
-    "https://prod-api.hypar.io/schemas/LevelVolume",
-    "https://prod-api.hypar.io/schemas/Level",
-    "https://prod-api.hypar.io/schemas/CirculationSegment",
-    "https://prod-api.hypar.io/schemas/ServiceCore",
-    "https://prod-api.hypar.io/schemas/ProgramRequirement",
-    "https://prod-api.hypar.io/schemas/LevelElements",
-    "https://prod-api.hypar.io/schemas/ConceptualMass",
-    "https://prod-api.hypar.io/schemas/LevelLayout",
-    "https://prod-api.hypar.io/schemas/ViewScope"
+    "https://schemas.hypar.io/SpaceBoundary.json",
+    "https://schemas.hypar.io/LevelVolume.json",
+    "https://schemas.hypar.io/Level.json",
+    "https://schemas.hypar.io/CirculationSegment.json",
+    "https://schemas.hypar.io/ServiceCore.json",
+    "https://schemas.hypar.io/ProgramRequirement.json",
+    "https://schemas.hypar.io/LevelElements.json",
+    "https://schemas.hypar.io/ConceptualMass.json",
+    "https://schemas.hypar.io/LevelLayout.json",
+    "https://schemas.hypar.io/ViewScope.json"
   ],
   "repository_url": "https://github.com/hypar-io/Function-SpacePlanning",
   "thumbnail_id": "7353a890-82a6-4ab3-80ff-e8d6862a4878",
