@@ -69,7 +69,7 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color;
+                var color = kvp.Value.Color.Value;
                 color.Alpha = 0.5;
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }
@@ -195,7 +195,8 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var slightlyOffsetBoundaries = Boundary.Offset(-0.001);
+            var innerProfile = Boundary.ThickenedInteriorProfile();
+            var slightlyOffsetBoundaries = innerProfile.Offset(-0.001);
             var extrudes = slightlyOffsetBoundaries.Select(b => new Extrude(b.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
                 ReverseWinding = true
@@ -226,6 +227,17 @@ namespace Elements
             if (name == "unspecified")
             {
                 name = "Unassigned Space Type";
+            }
+            if (profile.GetEdgeThickness() == null)
+            {
+                if (fullReq != null && fullReq.Enclosed == true)
+                {
+                    profile.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
+                }
+                else
+                {
+                    profile.SetEdgeThickness(0, 0);
+                }
             }
             var sb = new SpaceBoundary
             {

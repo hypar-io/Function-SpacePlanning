@@ -126,6 +126,12 @@
         },
         "Boundary": {
           "$hyparRelativeToTransform": true,
+          "$hyparThickenEdges": {
+            "default": {
+              "leftWidth": 0.0762,
+              "rightWidth": 0.0762
+            }
+          },
           "$hyparControlDisplay": {
             "colorScheme": "Program Colors",
             "label": "Program Type"
@@ -237,6 +243,12 @@
             },
             "Boundary": {
               "$hyparRelativeToTransform": true,
+              "$hyparThickenEdges": {
+                "default": {
+                  "leftWidth": 0.0762,
+                  "rightWidth": 0.0762
+                }
+              },
               "$hyparControlDisplay": {
                 "colorScheme": "Program Colors",
                 "label": "Program Type"

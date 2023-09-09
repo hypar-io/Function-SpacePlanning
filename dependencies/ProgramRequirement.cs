@@ -5,6 +5,7 @@ namespace Elements
 {
     public partial class ProgramRequirement
     {
+        public bool? Enclosed { get; set; }
         public int CountPlaced { get; set; }
         public int RemainingToPlace
         {
