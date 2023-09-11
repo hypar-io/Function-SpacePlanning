@@ -159,7 +159,27 @@ namespace Elements
                 }
 
             }
+
+            ExcludeInnerPolygons(enclosedRooms);
             return (subtractedProfiles, enclosedRooms);
+        }
+
+        private static void ExcludeInnerPolygons(List<Profile> profiles)
+        {
+            var orderedByAreaProfiles = profiles.OrderByDescending(p => p.Area()).ToList();
+
+            for (int i = 0; i < orderedByAreaProfiles.Count; i++)
+            {
+                var outerCandidate = orderedByAreaProfiles[i];
+                for (int j = i + 1; j < orderedByAreaProfiles.Count; j++)
+                {
+                    var innerCandidate = orderedByAreaProfiles[j];
+                    if (outerCandidate.Perimeter.Covers(innerCandidate.Perimeter))
+                    {
+                        outerCandidate.Voids.Add(innerCandidate.Perimeter.Reversed());
+                    }
+                }
+            }
         }
 
         private LevelElements _levelElements = null;
