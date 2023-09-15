@@ -195,12 +195,11 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var slightlyOffsetBoundaries = Boundary.Offset(-0.001);
-            var extrudes = slightlyOffsetBoundaries.Select(b => new Extrude(b.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
+            var extrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
                 ReverseWinding = true
-            });
-            Representation = new Representation(new List<SolidOperation>(extrudes))
+            };
+            Representation = new Representation(extrude)
             {
                 SkipCSGUnion = true
             };
