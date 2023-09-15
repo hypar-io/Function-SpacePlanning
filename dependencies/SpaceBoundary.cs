@@ -69,7 +69,7 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color;
+                var color = kvp.Value.Color ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
                 color.Alpha = 0.5;
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }

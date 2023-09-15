@@ -33,6 +33,7 @@ namespace Elements
             this.Levels = @levels;
             }
         
+        
         // Empty constructor
         public LevelLayout()
             : base()
