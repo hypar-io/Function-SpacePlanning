@@ -239,6 +239,7 @@ namespace Elements
                 OriginalVoids = profile.Voids.ToList()
             };
             profile.Name = name;
+            sb.HyparSpaceType = name;
             profile.AdditionalProperties["Color"] = sb.Material.Color;
             if (hasReqMatch)
             {
@@ -291,6 +292,7 @@ namespace Elements
             }
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            this.HyparSpaceType = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
