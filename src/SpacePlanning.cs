@@ -25,9 +25,11 @@ namespace SpacePlanning
             var levelVolumes = conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>();
             inputModels.TryGetValue("Levels", out var levelsModel);
             levelVolumes.AddRange(levelsModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
+
+            var levels = levelsModel?.AllElementsOfType<Level>().ToList();
+
             if (levelVolumes.Count == 0)
             {
-                var levels = levelsModel?.AllElementsOfType<Level>();
                 if (levels != null && levels.Any())
                 {
                     // TODO: handle separate level groups
@@ -48,6 +50,7 @@ namespace SpacePlanning
                     }
                 }
             }
+
             foreach (var lv in levelVolumes)
             {
                 if (lv.Mass.HasValue && conceptualMassModel?.Elements.TryGetValue(lv.Mass.Value, out var massElem) == true && massElem is ConceptualMass mass)
@@ -99,24 +102,35 @@ namespace SpacePlanning
                     continue;
                 }
                 var proxy = levelVolume.Proxy("Unit Layout");
-                var levelLayout = new LevelLayout(levelVolume, levelGroupedElements);
+                var levelLayout = new LevelLayout(levelVolume, levels, levelGroupedElements);
                 proxy.AdditionalProperties["Unit Layout"] = levelLayout.Id;
                 levelLayouts.Add(levelLayout);
                 output.Model.AddElement(proxy);
             }
 
-            if (levelVolumes.Count == 0)
-            {
-                // If there was no conceptual mass dependency, we might have no levels.
-                // Create a new Level Layout.
-                var dummyLevelVolume = new LevelVolume()
-                {
-                    Height = defaultLevelHeight,
-                    AddId = "dummy-level-volume"
-                };
-                var levelLayout = new LevelLayout(dummyLevelVolume, levelGroupedElements);
-                levelLayouts.Add(levelLayout);
-            }
+            // foreach (var level in levels)
+            // {
+            //     var startingSpaces = input.Overrides.Additions.Spaces.Where(s => s.Value.Level.Id == level.Id).Select(X => X.Value.Boundary).ToList();
+
+            //     if (startingSpaces.Count > 0)
+            //     {
+            //         var levelLayout = new LevelLayout(level, startingSpaces, levelGroupedElements);
+            //         levelLayouts.Add(levelLayout);
+            //     }
+            // }
+
+            // if (levelVolumes.Count == 0)
+            // {
+            //     // If there was no conceptual mass dependency, we might have no levels.
+            //     // Create a new Level Layout.
+            //     var dummyLevelVolume = new LevelVolume()
+            //     {
+            //         Height = defaultLevelHeight,
+            //         AddId = "dummy-level-volume"
+            //     };
+            //     var levelLayout = new LevelLayout(dummyLevelVolume, levelGroupedElements);
+            //     levelLayouts.Add(levelLayout);
+            // }
 
             if (inputModels.TryGetValue("Space Planning Zone Hints", out var hintModel))
             {
@@ -147,8 +161,9 @@ namespace SpacePlanning
                 }
             }
 
+            var spaces = new List<SpaceBoundary>();
+            spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
 
-            var spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
             var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
             RemoveUnmatchedOverrides(input.Overrides.Spaces, input.Overrides.Additions.Spaces, levelLayouts);
             spaces = input.Overrides.Spaces.CreateElements(
@@ -181,7 +196,7 @@ namespace SpacePlanning
             }
             output.Model.AddElements(levelLayouts);
             output.Model.AddElements(levelLayouts.SelectMany(lul => lul.CreateModelLines()));
-            output.Model.AddElements(levelElements);
+            // output.Model.AddElements(levelElements);
             output.Model.AddElements(spaces);
 
             return output;
@@ -195,8 +210,8 @@ namespace SpacePlanning
             for (int i = 0; i < allUnmodifiedSpaces.Count; i++)
             {
                 var space = allUnmodifiedSpaces[i];
-                var spaceLevel = space.LevelAddId;
-                if (removedAreasByLevel.TryGetValue(spaceLevel, out var removedAreas))
+                var spaceLevel = space.Level;
+                if (removedAreasByLevel.TryGetValue(spaceLevel.ToString(), out var removedAreas))
                 {
                     var nonNullRemovedAreas = removedAreas.Where(a => a != null && a.Perimeter != null);
                     if (!nonNullRemovedAreas.Any())
@@ -226,6 +241,9 @@ namespace SpacePlanning
             }
             foreach (var edit in new List<SpacesOverride>(edits))
             {
+
+                // var matchingLevelLayout =
+                //     levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.Id != null && ll.Level.Id == edit.Value?.Level?.Id);
                 var matchingLevelLayout =
                     levelLayouts.FirstOrDefault(ll => ll.AddId == edit.Identity.LevelAddId + "-layout") ?? // IDK where this is coming from
                     levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
@@ -240,10 +258,13 @@ namespace SpacePlanning
             {
                 var matchingLevelLayout =
                     levelLayouts.FirstOrDefault(ll => addition.Value?.Level?.AddId != null && ll.LevelVolume.AddId == addition.Value?.Level?.AddId) ??
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == addition.Value?.Level?.Name) ??
-                    // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
-                    levelLayouts.FirstOrDefault(ll => addition.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == addition.Value?.LevelLayout?.AddId) ??
-                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == addition.Value?.LevelLayout?.Name);
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == addition.Value?.Level?.Name);
+                // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
+                // levelLayouts.FirstOrDefault(ll => addition.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == addition.Value?.LevelLayout?.AddId) ??
+                // levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == addition.Value?.LevelLayout?.Name);
+
+                // var matchingLevelLayout =
+                //     levelLayouts.FirstOrDefault(ll => addition.Value?.Level?.Id != null && ll.Level.Id == addition.Value?.Level?.Id);
                 if (matchingLevelLayout == null)
                 {
                     var levelName = addition.Value.Level?.Name ?? "Unknown Level";

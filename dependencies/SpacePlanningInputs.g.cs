@@ -292,7 +292,7 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesValue(Level @level, string @programType, Profile @boundary)
+        public SpacesValue(SpacesValueLevel @level, string @programType, Profile @boundary)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesValue>();
             if(validator != null)
@@ -311,7 +311,7 @@ namespace SpacePlanning
         }
     
         [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Level Level { get; set; }
+        public SpacesValueLevel Level { get; set; }
     
         /// <summary>What program should be assigned to this zone?</summary>
         [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -328,16 +328,15 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesOverrideAdditionValue(Level @level, SpacesOverrideAdditionValueLevelLayout @levelLayout, string @programType, Profile @boundary)
+        public SpacesOverrideAdditionValue(SpacesOverrideAdditionValueLevel @level, string @programType, Profile @boundary)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValue>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @level, @levelLayout, @programType, @boundary});
+                validator.PreConstruct(new object[]{ @level, @programType, @boundary});
             }
         
             this.Level = @level;
-            this.LevelLayout = @levelLayout;
             this.ProgramType = @programType;
             this.Boundary = @boundary;
         
@@ -348,10 +347,7 @@ namespace SpacePlanning
         }
     
         [Newtonsoft.Json.JsonProperty("Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Level Level { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Level Layout", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SpacesOverrideAdditionValueLevelLayout LevelLayout { get; set; }
+        public SpacesOverrideAdditionValueLevel Level { get; set; }
     
         /// <summary>What program should be assigned to this zone?</summary>
         [Newtonsoft.Json.JsonProperty("Program Type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -364,21 +360,23 @@ namespace SpacePlanning
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
     
-    public partial class SpacesOverrideAdditionValueLevelLayout 
+    public partial class SpacesValueLevel 
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesOverrideAdditionValueLevelLayout(string @name, string @buildingName, string @addId)
+        public SpacesValueLevel(string @addId, string @name, System.Guid? @id, string @buildingName, double @elevation)
         {
-            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValueLevelLayout>();
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesValueLevel>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @name, @buildingName, @addId});
+                validator.PreConstruct(new object[]{ @addId, @name, @id, @buildingName, @elevation});
             }
         
-            this.Name = @name;
-            this.BuildingName = @buildingName;
             this.AddId = @addId;
+            this.Name = @name;
+            this.Id = @id;
+            this.BuildingName = @buildingName;
+            this.Elevation = @elevation;
         
             if(validator != null)
             {
@@ -386,14 +384,67 @@ namespace SpacePlanning
             }
         }
     
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BuildingName { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Elevation", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Elevation { get; set; }
+    
+        private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
+    
+        [Newtonsoft.Json.JsonExtensionData]
+        public System.Collections.Generic.IDictionary<string, object> AdditionalProperties
+        {
+            get { return _additionalProperties; }
+            set { _additionalProperties = value; }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.21.0 (Newtonsoft.Json v13.0.0.0)")]
+    
+    public partial class SpacesOverrideAdditionValueLevel 
+    
+    {
+        [Newtonsoft.Json.JsonConstructor]
+        public SpacesOverrideAdditionValueLevel(string @addId, System.Guid? @id, string @name, string @buildingName)
+        {
+            var validator = Validator.Instance.GetFirstValidatorForType<SpacesOverrideAdditionValueLevel>();
+            if(validator != null)
+            {
+                validator.PreConstruct(new object[]{ @addId, @id, @name, @buildingName});
+            }
+        
+            this.AddId = @addId;
+            this.Id = @id;
+            this.Name = @name;
+            this.BuildingName = @buildingName;
+        
+            if(validator != null)
+            {
+                validator.PostConstruct(this);
+            }
+        }
+    
+        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string AddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+    
         [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Building Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BuildingName { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Add Id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string AddId { get; set; }
     
         private System.Collections.Generic.IDictionary<string, object> _additionalProperties = new System.Collections.Generic.Dictionary<string, object>();
     

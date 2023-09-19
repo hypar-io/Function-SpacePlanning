@@ -79,6 +79,12 @@
           "$hyparRelation": {
             "$ref": "https://prod-api.hypar.io/schemas/Level"
           },
+          "$hyparRelationship": {
+            "discriminators": [
+              "Elements.Level",
+              "Elements.LevelVolume"
+            ]
+          },
           "type": "object",
           "$hyparOrder": 2,
           "properties": {
@@ -87,15 +93,27 @@
                 "string",
                 "null"
               ],
-              "$hyparOrder": 2
+              "$hyparOrder": 4
             },
             "Name": {
               "type": "string",
               "$hyparOrder": 0
             },
+            "Id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uuid",
+              "$hyparOrder": 1
+            },
             "Building Name": {
               "type": "string",
-              "$hyparOrder": 1
+              "$hyparOrder": 2
+            },
+            "Elevation": {
+              "type": "number",
+              "$hyparOrder": 3
             }
           }
         },
@@ -148,6 +166,12 @@
               "$hyparRelation": {
                 "$ref": "https://prod-api.hypar.io/schemas/Level"
               },
+              "$hyparRelationship": {
+                "discriminators": [
+                  "Elements.Level",
+                  "Elements.LevelVolume"
+                ]
+              },
               "type": "object",
               "$hyparOrder": 2,
               "properties": {
@@ -156,7 +180,15 @@
                     "string",
                     "null"
                   ],
-                  "$hyparOrder": 2
+                  "$hyparOrder": 3
+                },
+                "Id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "uuid",
+                  "$hyparOrder": 1
                 },
                 "Name": {
                   "type": "string",
@@ -164,28 +196,7 @@
                 },
                 "Building Name": {
                   "type": "string",
-                  "$hyparOrder": 1
-                }
-              }
-            },
-            "Level Layout": {
-              "$hyparRelation": {
-                "$ref": "https://prod-api.hypar.io/schemas/Level"
-              },
-              "type": "object",
-              "$hyparOrder": 2,
-              "properties": {
-                "Name": {
-                  "type": "string"
-                },
-                "Building Name": {
-                  "type": "string"
-                },
-                "Add Id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "$hyparOrder": 2
                 }
               }
             },
@@ -223,10 +234,7 @@
               "$hyparOrder": 1,
               "$ref": "https://prod-api.hypar.io/schemas/Profile"
             }
-          },
-          "$hyparHidden": [
-            "Level Layout"
-          ]
+          }
         },
         "remove": true,
         "revert": false
