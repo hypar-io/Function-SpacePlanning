@@ -69,7 +69,7 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color.Value;
+                var color = kvp.Value.Color ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
                 color.Alpha = 0.5;
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }
@@ -252,6 +252,7 @@ namespace Elements
                 OriginalVoids = profile.Voids.ToList()
             };
             profile.Name = name;
+            sb.HyparSpaceType = name;
             profile.AdditionalProperties["Color"] = sb.Material.Color;
             if (hasReqMatch)
             {
@@ -304,6 +305,7 @@ namespace Elements
             }
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            this.HyparSpaceType = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
