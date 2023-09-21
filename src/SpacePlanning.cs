@@ -70,6 +70,10 @@ namespace SpacePlanning
                 {
                     // if we have floors, we assume we have `levels from floors` which already handles subtracting the thickness. ugh, TODO: clean up everything in the world.
                 }
+                if (levels != null)
+                {
+                    lv.Level = levels.OrderBy(x => Math.Abs(x.Elevation - lv.Transform.Origin.Z)).First().Id;
+                }
             }
 
 
