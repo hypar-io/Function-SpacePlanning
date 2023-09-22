@@ -25,9 +25,11 @@ namespace SpacePlanning
             var levelVolumes = conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>();
             inputModels.TryGetValue("Levels", out var levelsModel);
             levelVolumes.AddRange(levelsModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
+
+            var levels = levelsModel?.AllElementsOfType<Level>();
+
             if (levelVolumes.Count == 0)
             {
-                var levels = levelsModel?.AllElementsOfType<Level>();
                 if (levels != null && levels.Any())
                 {
                     // TODO: handle separate level groups
@@ -146,6 +148,48 @@ namespace SpacePlanning
                     levelLayout?.AddExistingSpaces(group.ToList());
                 }
             }
+
+
+
+            var defaultLevelLayout = levelLayouts.Count > 0 ? levelLayouts[0] : null;
+            // var defaultLevel = defaultLevelLayout?.Levels.Count > 0 ? levels.SingleOrDefault(x => x.Id == defaultLevelLayout.Levels[0]) : null;
+            var defaultLevelVolume = defaultLevelLayout?.LevelVolume;
+
+            var defaultLevelLayoutSubtractions = new List<Profile>();
+
+            foreach (var space in input.Overrides.Additions.Spaces)
+            {
+                if (space.Value.LevelLayout == null)
+                {
+                    if (defaultLevelLayout != null)
+                    {
+                        space.Value.LevelLayout = new SpacesOverrideAdditionValueLevelLayout(defaultLevelLayout.Name, defaultLevelVolume?.BuildingName, defaultLevelVolume.AddId);
+                    }
+
+                    if (space.Value.Level == null)
+                    {
+                        space.Value.Level = new SpacesOverrideAdditionValueLevel(defaultLevelVolume.AddId, defaultLevelVolume.Name, defaultLevelVolume.BuildingName);
+                    }
+                }
+            }
+
+            foreach (var space in input.Overrides.Spaces)
+            {
+                if (space.Value.Level == null)
+                {
+                    var autoLevel = new SpacesValueLevel(defaultLevelVolume.AddId, defaultLevelVolume.Name, defaultLevelVolume.BuildingName);
+                    space.Value.Level = autoLevel;
+                    space.Identity.LevelAddId = autoLevel.AddId;
+                }
+            }
+
+            var tempSpaces = input.Overrides.Spaces.CreateElements(
+                input.Overrides.Additions.Spaces,
+                input.Overrides.Removals.Spaces,
+                (add) => SpaceBoundary.Create(add, levelLayouts),
+                (sb, identity) => sb.Match(identity),
+                (sb, edit) => sb.Update(edit, levelLayouts),
+                null);
 
 
             var spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();

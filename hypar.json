@@ -189,27 +189,6 @@
                 }
               }
             },
-            "Level Layout": {
-              "$hyparRelation": {
-                "$ref": "https://schemas.hypar.io/LevelVolume.json"
-              },
-              "type": "object",
-              "$hyparOrder": 2,
-              "properties": {
-                "Name": {
-                  "type": "string"
-                },
-                "Building Name": {
-                  "type": "string"
-                },
-                "Add Id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
             "Program Type": {
               "description": "What program should be assigned to this zone?",
               "type": [
