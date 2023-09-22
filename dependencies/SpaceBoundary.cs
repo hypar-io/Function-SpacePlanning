@@ -94,7 +94,7 @@ namespace Elements
             {
                 boundaryMatch = identity.OriginalBoundary.IsAlmostEqualTo(this.OriginalBoundary, 1.0);
             }
-            var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+            var returnVal = boundaryMatch && levelMatch; // && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
             return returnVal;
         }
 
@@ -308,24 +308,67 @@ namespace Elements
             this.Level = volume.Id;
         }
 
-        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
+        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts, List<LevelVolume> levelVolumes)
         {
-            var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
-                levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
+            var matchingLevelLayout = new LevelLayout();
+
+            if (levelLayouts.Count == 0)
+            {
+                LevelLayout dummyLevelLayout = CreateDummyLevelLayout(levelVolumes);
+
+                matchingLevelLayout = dummyLevelLayout;
+            }
+            else
+            {
+                matchingLevelLayout =
+                   levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                   levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
+                   levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
+            }
             matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
             return this;
         }
 
-        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
+        private static LevelLayout CreateDummyLevelLayout(List<LevelVolume> levelVolumes)
         {
-            var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
-                // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
-                levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
+            var dummyLevelVolume = new LevelVolume()
+            {
+                Height = 3,
+                AddId = "dummy-level-volume"
+            };
+
+            if (levelVolumes.Count > 0)
+            {
+                dummyLevelVolume = levelVolumes[0];
+            }
+
+            var dummyLevelLayout = new LevelLayout()
+            {
+                LevelVolume = dummyLevelVolume,
+                Profiles = new List<Profile>()
+            };
+            return dummyLevelLayout;
+        }
+
+        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts, List<LevelVolume> levelVolumes)
+        {
+            var matchingLevelLayout = new LevelLayout();
+
+            if (levelLayouts.Count == 0)
+            {
+                matchingLevelLayout = CreateDummyLevelLayout(levelVolumes);
+            }
+            else
+            {
+                matchingLevelLayout =
+                    levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
+                    // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
+                    levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
+
+            }
+
             var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
             sb?.SetProgram(add.Value.ProgramType);
             return sb;
