@@ -27,14 +27,13 @@ namespace Elements
     public partial class Level : Element
     {
         [JsonConstructor]
-        public Level(double @elevation, double? @height, IList<System.Guid?> @planView, System.Guid @id = default, string @name = null)
+        public Level(double @elevation, double? @height, System.Guid? @planView, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.Elevation = @elevation;
             this.Height = @height;
             this.PlanView = @planView;
             }
-        
         
         // Empty constructor
         public Level()
@@ -50,8 +49,8 @@ namespace Elements
         public double? Height { get; set; }
     
         /// <summary>The default plan view for this level</summary>
-        [JsonProperty("Plan View", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IList<System.Guid?> PlanView { get; set; }
+        [JsonProperty("Plan View", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? PlanView { get; set; }
     
     
     }

@@ -36,7 +36,6 @@ namespace Elements
             this.RightWidth = @rightWidth;
             }
         
-        
         // Empty constructor
         public ThickenedPolyline()
         {

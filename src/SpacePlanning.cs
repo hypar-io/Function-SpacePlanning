@@ -489,22 +489,22 @@ namespace SpacePlanning
         /// </summary>
         /// <param name="floorsModel">The floors model, which may or may not exist</param>
         /// <param name="lvl">The level volume</param>
-        private static void AdjustLevelVolumesToFloors(Model floorsModel, LevelVolume lvl)
-        {
-            if (floorsModel != null)
-            {
-                var floorAtLevel = floorsModel.AllElementsOfType<Floor>().FirstOrDefault(f => Math.Abs(lvl.Transform.Origin.Z - f.Transform.Origin.Z) < (f.Thickness * 1.1));
-                if (floorAtLevel != null)
-                {
-                    lvl.Height -= floorAtLevel.Thickness;
-                    var floorFaceOffset = (floorAtLevel.Transform.Origin.Z + floorAtLevel.Thickness) - lvl.Transform.Origin.Z;
-                    if (floorFaceOffset > 0.001)
-                    {
-                        lvl.Transform.Concatenate(new Transform(0, 0, floorFaceOffset));
-                        lvl.Height -= floorFaceOffset;
-                    }
-                }
-            }
-        }
+        // private static void AdjustLevelVolumesToFloors(Model floorsModel, LevelVolume lvl)
+        // {
+        //     if (floorsModel != null)
+        //     {
+        //         var floorAtLevel = floorsModel.AllElementsOfType<Floor>().FirstOrDefault(f => Math.Abs(lvl.Transform.Origin.Z - f.Transform.Origin.Z) < (f.Thickness * 1.1));
+        //         if (floorAtLevel != null)
+        //         {
+        //             lvl.Height -= floorAtLevel.Thickness;
+        //             var floorFaceOffset = (floorAtLevel.Transform.Origin.Z + floorAtLevel.Thickness) - lvl.Transform.Origin.Z;
+        //             if (floorFaceOffset > 0.001)
+        //             {
+        //                 lvl.Transform.Concatenate(new Transform(0, 0, floorFaceOffset));
+        //                 lvl.Height -= floorFaceOffset;
+        //             }
+        //         }
+        //     }
+        // }
     }
 }

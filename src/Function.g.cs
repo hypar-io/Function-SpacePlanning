@@ -35,7 +35,7 @@ namespace SpacePlanning
             // deserialization.
             var asmName = Path.GetFileNameWithoutExtension(asmLocation);
             var depPath = Path.Combine(asmDir, $"{asmName}.Dependencies.dll");
-            if (File.Exists(depPath))
+            if(File.Exists(depPath))
             {
                 Console.WriteLine($"Loading dependencies assembly from: {depPath}...");
                 Assembly.LoadFrom(depPath);
@@ -60,8 +60,8 @@ namespace SpacePlanning
             sw.Stop();
             Console.WriteLine($"Time to load assemblies: {sw.Elapsed.TotalSeconds})");
 
-            if (this.store == null)
-            {
+            if(this.store == null)
+            { 
                 if (args.SignedResourceUrls == null)
                 {
                     this.store = new S3ModelStore<SpacePlanningInputs>(RegionEndpoint.GetBySystemName("us-west-1"));
@@ -72,9 +72,9 @@ namespace SpacePlanning
                 }
             }
 
-            var l = new InvocationWrapper<SpacePlanningInputs, SpacePlanningOutputs>(store, SpacePlanning.Execute);
+            var l = new InvocationWrapper<SpacePlanningInputs,SpacePlanningOutputs> (store, SpacePlanning.Execute);
             var output = await l.InvokeAsync(args);
             return output;
         }
-    }
+      }
 }
