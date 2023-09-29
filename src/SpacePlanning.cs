@@ -1,10 +1,8 @@
 using Elements;
 using Elements.Geometry;
-using Namotion.Reflection;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace SpacePlanning
@@ -122,7 +120,6 @@ namespace SpacePlanning
                 {
                     Height = defaultLevelHeight,
                     AddId = "dummy-level-volume"
-                    // Name = "dummy-level-volume"
                 };
                 var levelLayout = new LevelLayout(dummyLevelVolume, levelGroupedElements, tempSpaces);
                 levelLayouts.Add(levelLayout);
@@ -254,6 +251,7 @@ namespace SpacePlanning
                         var autoLevel = new SpacesValueLevel(defaultLevelVolume.AddId, defaultLevelVolume.Name, defaultLevelVolume.BuildingName);
                         space.Value.Level = autoLevel;
                         space.Identity.LevelAddId = autoLevel.AddId;
+                        space.Identity.TemporaryReferenceLevel = true;
                     }
                 }
             }
@@ -301,11 +299,6 @@ namespace SpacePlanning
 
         private static void RemoveUnmatchedOverrides(IList<SpacesOverride> edits, IList<SpacesOverrideAddition> additions, List<LevelLayout> levelLayouts)
         {
-            // If we created a single dummy level layout, just assume all spaces belong to that and don't bother filtering.
-            if (levelLayouts.Any(l => l.Name.Contains("dummy")))
-            {
-                return;
-            }
             foreach (var edit in new List<SpacesOverride>(edits))
             {
                 var matchingLevelLayout =
@@ -345,13 +338,19 @@ namespace SpacePlanning
             }
             foreach (var edit in new List<SpacesOverride>(edits))
             {
+
                 // Ignore additions that were never assigned a level because we will assign them to the default level later.
                 if (edit.Value?.Level == null)
                 {
                     continue;
                 }
 
-                if (levelVolumes.SingleOrDefault(x => x.AddId == edit.Value?.Level?.AddId) == null)
+
+                var matchingLevelVolume =
+                    levelVolumes.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.AddId == edit.Value?.Level?.AddId) ??
+                    levelVolumes.FirstOrDefault(ll => ll.Name == edit.Value?.Level?.Name);
+
+                if (matchingLevelVolume == null)
                 {
                     edits.Remove(edit);
                 }
@@ -365,7 +364,11 @@ namespace SpacePlanning
                     continue;
                 }
 
-                if (levelVolumes.SingleOrDefault(x => x.AddId == addition.Value?.Level?.AddId) == null)
+                var matchingLevelVolume =
+                    levelVolumes.FirstOrDefault(ll => addition.Value?.Level?.AddId != null && ll.AddId == addition.Value?.Level?.AddId) ??
+                    levelVolumes.FirstOrDefault(ll => ll.Name == addition.Value?.Level?.Name);
+
+                if (matchingLevelVolume == null)
                 {
                     var levelName = addition.Value.Level?.Name ?? "Unknown Level";
                     MessageManager.AddWarning($"Some spaces assigned to {levelName} were not created because the level was not found.");
@@ -483,28 +486,5 @@ namespace SpacePlanning
 
             return (circulationSegmentsByLevel, verticalCirculationByLevel, coresByLevel, wallsByLevel);
         }
-
-        /// <summary>
-        /// If we have floors, we shrink our internal level volumes so they sit on top of / don't intersect with the floors.
-        /// </summary>
-        /// <param name="floorsModel">The floors model, which may or may not exist</param>
-        /// <param name="lvl">The level volume</param>
-        // private static void AdjustLevelVolumesToFloors(Model floorsModel, LevelVolume lvl)
-        // {
-        //     if (floorsModel != null)
-        //     {
-        //         var floorAtLevel = floorsModel.AllElementsOfType<Floor>().FirstOrDefault(f => Math.Abs(lvl.Transform.Origin.Z - f.Transform.Origin.Z) < (f.Thickness * 1.1));
-        //         if (floorAtLevel != null)
-        //         {
-        //             lvl.Height -= floorAtLevel.Thickness;
-        //             var floorFaceOffset = (floorAtLevel.Transform.Origin.Z + floorAtLevel.Thickness) - lvl.Transform.Origin.Z;
-        //             if (floorFaceOffset > 0.001)
-        //             {
-        //                 lvl.Transform.Concatenate(new Transform(0, 0, floorFaceOffset));
-        //                 lvl.Height -= floorFaceOffset;
-        //             }
-        //         }
-        //     }
-        // }
     }
 }

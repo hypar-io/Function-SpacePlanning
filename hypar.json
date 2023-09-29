@@ -60,6 +60,10 @@
         "Level Add Id": {
           "type": "string"
         },
+        "Temporary Reference Level": {
+          "type": "boolean",
+          "default": false
+        },
         "Original Boundary": {
           "$ref": "https://schemas.hypar.io/Polygon.json"
         },

@@ -98,7 +98,8 @@ namespace Elements
 
             var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
 
-            if (this.LevelAddId == "dummy-level-volume")
+            // Preserve edits if levels are added later
+            if (this.LevelAddId == "dummy-level-volume" || identity.TemporaryReferenceLevel)
             {
                 returnVal = boundaryMatch && levelMatch;
             }
@@ -320,7 +321,7 @@ namespace Elements
         {
             var matchingLevelLayout = new LevelLayout();
 
-            if (levelLayouts.Count == 0 || levelLayouts[0].Name.Contains("dummy"))
+            if (levelLayouts.Count == 0)
             {
                 LevelLayout dummyLevelLayout = CreateDummyLevelLayout(edit.Value?.Level?.Name, levelVolumes);
 
@@ -364,7 +365,7 @@ namespace Elements
         {
             var matchingLevelLayout = new LevelLayout();
 
-            if (levelLayouts.Count == 0 || levelLayouts[0].Name.Contains("dummy"))
+            if (levelLayouts.Count == 0)
             {
                 matchingLevelLayout = CreateDummyLevelLayout(add.Value?.Level?.Name, levelVolumes);
             }
