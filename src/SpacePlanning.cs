@@ -351,7 +351,7 @@ namespace SpacePlanning
                     continue;
                 }
 
-                if (levelVolumes.SingleOrDefault(x => x.Name == edit.Value?.Level?.Name) == null)
+                if (levelVolumes.SingleOrDefault(x => x.AddId == edit.Value?.Level?.AddId) == null)
                 {
                     edits.Remove(edit);
                 }
@@ -365,7 +365,7 @@ namespace SpacePlanning
                     continue;
                 }
 
-                if (levelVolumes.SingleOrDefault(x => x.Name == addition.Value?.Level?.Name) == null)
+                if (levelVolumes.SingleOrDefault(x => x.AddId == addition.Value?.Level?.AddId) == null)
                 {
                     var levelName = addition.Value.Level?.Name ?? "Unknown Level";
                     MessageManager.AddWarning($"Some spaces assigned to {levelName} were not created because the level was not found.");
