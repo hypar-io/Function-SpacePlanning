@@ -200,10 +200,9 @@ namespace Elements
             {
                 ReverseWinding = true
             };
-            Representation = new Representation(extrude)
-            {
-                SkipCSGUnion = true
-            };
+            var repInstance = new RepresentationInstance(new SolidRepresentation(extrude), this.Material);
+            var linesInstance = new RepresentationInstance(new CurveRepresentation(extrude.Profile.Perimeter, false), BuiltInMaterials.Black);
+            this.RepresentationInstances = new List<RepresentationInstance> { repInstance, linesInstance };
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
             RoomView = new ViewScope()
@@ -212,7 +211,6 @@ namespace Elements
                 Camera = new Camera((0, 0, -1), null, null),
                 ClipWithBoundingBox = true
             };
-            base.UpdateRepresentations();
         }
         public static SpaceBoundary Make(Profile profile, string fullyQualifiedName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
         {
@@ -303,12 +301,14 @@ namespace Elements
                 this.FulfilledProgramRequirement.CountPlaced--;
             }
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
+            // TODO: make the name use the fully qualified name once all functions use `HyparSpaceType`.
             this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             this.HyparSpaceType = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
                 this.FulfilledProgramRequirement = fullReq;
+                this.ProgramRequirement = fullReq.Id;
             }
             this.ProgramType = displayName;
         }

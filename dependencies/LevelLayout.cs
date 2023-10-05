@@ -249,18 +249,6 @@ namespace Elements
             this.SpaceBoundaries.AddRange(group);
         }
 
-        public List<ModelLines> CreateModelLines()
-        {
-            var list = new List<ModelLines>();
-            var lines = Profiles.SelectMany(p => p.Segments());
-
-            var modelLines = new ModelLines(lines.ToList(), BuiltInMaterials.Black, LevelVolume.Transform);
-            modelLines.SetSelectable(false);
-            list.Add(modelLines);
-
-            return list;
-        }
-
         internal void UpdateSpace(SpaceBoundary spaceBoundary, Profile boundary, string programType)
         {
             var boundaryProjected = boundary?.Project(Plane.XY) ?? spaceBoundary.Boundary;

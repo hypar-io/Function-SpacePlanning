@@ -181,7 +181,6 @@ namespace SpacePlanning
                 output.Model.AddElement(space);
             }
             output.Model.AddElements(levelLayouts);
-            // output.Model.AddElements(levelLayouts.SelectMany(lul => lul.CreateModelLines()));
             output.Model.AddElements(levelElements);
             output.Model.AddElements(spaces);
 
