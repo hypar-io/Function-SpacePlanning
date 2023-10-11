@@ -40,7 +40,6 @@ namespace Elements
             this.Actions = @actions;
             }
         
-        
         // Empty constructor
         public ViewScope()
             : base()

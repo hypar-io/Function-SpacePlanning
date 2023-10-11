@@ -37,7 +37,8 @@ namespace Elements
             Dictionary<string, List<CirculationSegment>> circulationSegmentsByLevel,
             Dictionary<string, List<VerticalCirculationElement>> verticalCirculationByLevel,
             Dictionary<string, List<ServiceCore>> coresByLevel,
-            Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements)
+            Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements,
+            List<SpaceBoundary> manualSpaces)
         {
             this.Levels = new List<Guid> { levelVolume.Id };
             this.LevelVolume = levelVolume;
@@ -47,7 +48,7 @@ namespace Elements
             this.Name = levelVolume.Name + " Layout";
 
             var levelBoundary = levelVolume.Profile;
-            var (subtractedProfiles, enclosedRooms) = GetSubtractionProfiles(levelVolume, levelGroupedElements);
+            var (subtractedProfiles, enclosedRooms) = GetSubtractionProfiles(levelVolume, levelGroupedElements, manualSpaces);
             if (levelBoundary != null)
             {
                 this.Profiles.Add(levelBoundary);
@@ -101,9 +102,17 @@ namespace Elements
             this.Profiles = this.Profiles.Cleaned();
         }
 
-        private (List<Profile> subtractedProfiles, List<Profile> enclosedRooms) GetSubtractionProfiles(LevelVolume levelVolume, (Dictionary<string, List<CirculationSegment>> circulationSegmentsByLevel, Dictionary<string, List<VerticalCirculationElement>> verticalCirculationByLevel, Dictionary<string, List<ServiceCore>> coresByLevel, Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements)
+        private (List<Profile> subtractedProfiles, List<Profile> enclosedRooms) GetSubtractionProfiles(LevelVolume levelVolume, (Dictionary<string, List<CirculationSegment>> circulationSegmentsByLevel, Dictionary<string, List<VerticalCirculationElement>> verticalCirculationByLevel, Dictionary<string, List<ServiceCore>> coresByLevel, Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements, List<SpaceBoundary> manualSpaces)
         {
             var subtractedProfiles = new List<Profile>();
+
+            foreach (var manualSpace in manualSpaces)
+            {
+                if (manualSpace.LevelVolume.Id == levelVolume.Id)
+                {
+                    subtractedProfiles.Add(manualSpace.Boundary);
+                }
+            }
             if (levelGroupedElements.circulationSegmentsByLevel.TryGetValue(levelVolume.Id.ToString(), out var circulationSegments))
             {
                 foreach (var circulationSegment in circulationSegments)
@@ -151,7 +160,7 @@ namespace Elements
                         }
 
                         enclosedRooms.Add(new Profile(roomBoundary));
-                    } 
+                    }
                     catch
                     {
                         continue;

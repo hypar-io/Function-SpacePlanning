@@ -37,7 +37,6 @@ namespace Elements
             this.LocalCoordinateSystem = @localCoordinateSystem;
             }
         
-        
         // Empty constructor
         public ConceptualMass()
             : base()
