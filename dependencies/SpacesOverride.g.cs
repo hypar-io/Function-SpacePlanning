@@ -137,11 +137,6 @@ namespace SpacePlanning
             {
                 foreach (var editedElement in edits)
                 {
-                    if (editedElement.Value.ProgramType == "cafe")
-                    {
-                        double tt = 0;
-                    }
-
                     var elementToEdit = resultElements.FirstOrDefault(e => identityMatch(e, editedElement.Identity));
                     if (elementToEdit != null)
                     {
