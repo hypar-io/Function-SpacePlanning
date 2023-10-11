@@ -25,6 +25,9 @@ namespace SpacePlanning
             inputModels.TryGetValue("Levels", out var levelsModel);
             levelVolumes.AddRange(levelsModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
 
+            var levelsFromFloors = floorsModel?.AllElementsOfType<LevelVolume>().ToList();
+            if (levelsFromFloors != null) levelVolumes.AddRange(levelsFromFloors);
+
             var levels = levelsModel?.AllElementsOfType<Level>();
 
             if (levelVolumes.Count == 0)

@@ -5,32 +5,34 @@ using System.Linq;
 
 namespace SpacePlanning
 {
-	/// <summary>
-	/// Override metadata for SpacesOverride
-	/// </summary>
-	public partial class SpacesOverride : IOverride
-	{
+    /// <summary>
+    /// Override metadata for SpacesOverride
+    /// </summary>
+    public partial class SpacesOverride : IOverride
+    {
         public static string Name = "Spaces";
         public static string Dependency = null;
         public static string Context = "[*discriminator=Elements.SpaceBoundary]";
-		public static string Paradigm = "Edit";
+        public static string Paradigm = "Edit";
 
         /// <summary>
         /// Get the override name for this override.
         /// </summary>
-        public string GetName() {
-			return Name;
-		}
+        public string GetName()
+        {
+            return Name;
+        }
 
-		public object GetIdentity() {
+        public object GetIdentity()
+        {
 
-			return Identity;
-		}
+            return Identity;
+        }
 
-	}
-	public static class SpacesOverrideExtensions
+    }
+    public static class SpacesOverrideExtensions
     {
-		/// <summary>
+        /// <summary>
         /// Apply Spaces edit overrides to a collection of existing elements
         /// </summary>
         /// <param name="overrideData">The Spaces Overrides to apply</param>
@@ -57,7 +59,7 @@ namespace SpacePlanning
                     {
                         // remove the old matching element
                         resultElements.Remove(matchingElement);
-                        // apply the modification function to it 
+                        // apply the modification function to it
                         var modifiedElement = modifyElement(matchingElement, overrideValue);
                         // set the identity
                         Identity.AddOverrideIdentity(modifiedElement, overrideValue);
@@ -69,7 +71,7 @@ namespace SpacePlanning
             return resultElements;
         }
 
-		/// <summary>
+        /// <summary>
         /// Apply Spaces edit overrides to a collection of existing elements
         /// </summary>
         /// <param name="existingElements">A collection of existing elements to which to apply the overrides.</param>
@@ -90,8 +92,8 @@ namespace SpacePlanning
             existingElements.AddRange(updatedElements);
         }
 
-		/// <summary>
-        /// Create elements from add/removeoverrides, and apply any edits. 
+        /// <summary>
+        /// Create elements from add/removeoverrides, and apply any edits.
         /// </summary>
         /// <param name="edits">The collection of edit overrides (Overrides.Spaces)</param>
         /// <param name="additions">The collection of add overrides (Overrides.Additions.Spaces)</param>
@@ -104,14 +106,14 @@ namespace SpacePlanning
         public static List<T> CreateElements<T>(
             this IList<SpacesOverride> edits,
             IList<SpacesOverrideAddition> additions,
-            IList<SpacesOverrideRemoval> removals,            Func<SpacesOverrideAddition, T> createElement,
+            IList<SpacesOverrideRemoval> removals, Func<SpacesOverrideAddition, T> createElement,
             Func<T, SpacesIdentity, bool> identityMatch,
             Func<T, SpacesOverride, T> modifyElement,
             IEnumerable<T> existingElements = null
             ) where T : Element
         {
             List<T> resultElements = existingElements == null ? new List<T>() : new List<T>(existingElements);
-			            if (removals != null)
+            if (removals != null)
             {
                 foreach (var removedElement in removals)
                 {
@@ -121,7 +123,8 @@ namespace SpacePlanning
                         resultElements.Remove(elementToRemove);
                     }
                 }
-            }            if (additions != null)
+            }
+            if (additions != null)
             {
                 foreach (var addedElement in additions)
                 {
@@ -146,8 +149,8 @@ namespace SpacePlanning
             }
             return resultElements;
         }
-		
-	}
+
+    }
 
 
 }

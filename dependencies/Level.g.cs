@@ -35,6 +35,7 @@ namespace Elements
             this.PlanView = @planView;
             }
         
+        
         // Empty constructor
         public Level()
             : base()
