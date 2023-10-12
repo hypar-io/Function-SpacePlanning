@@ -34,7 +34,6 @@ namespace Elements
             this.Projection = @projection;
             }
         
-        
         // Empty constructor
         public Camera()
         {
