@@ -231,10 +231,6 @@ namespace Elements
                 {
                     profile.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
                 }
-                else
-                {
-                    profile.SetEdgeThickness(0, 0);
-                }
             }
             var sb = new SpaceBoundary
             {
