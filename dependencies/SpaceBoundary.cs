@@ -196,20 +196,26 @@ namespace Elements
         public override void UpdateRepresentations()
         {
             var innerProfile = Boundary;
+            // offset the inner profile ever so slightly so that we don't get z
+            // fighting. This used to be a bad thing because snaps were
+            // generated from representation, but now we don't even serialize
+            // it, so it's safe.
             try
             {
-                innerProfile = Boundary.ThickenedInteriorProfile();
+                innerProfile = innerProfile.ThickenedInteriorProfile();
+                var offset = innerProfile.Offset(-0.001);
+                innerProfile = offset.FirstOrDefault();
             }
             catch
             {
-                Console.WriteLine($"Failed to thicken profile for {Name}");
+                // just swallow an offset failure.
             }
-            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
+            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height, Vector3.ZAxis)
             {
                 ReverseWinding = true
             };
             var repInstance = new RepresentationInstance(new SolidRepresentation(extrude), this.Material);
-            var linesInstance = new RepresentationInstance(new CurveRepresentation(extrude.Profile.Perimeter, false), BuiltInMaterials.Black);
+            var linesInstance = new RepresentationInstance(new CurveRepresentation(innerProfile.Perimeter, false), BuiltInMaterials.Black);
             this.RepresentationInstances = new List<RepresentationInstance> { repInstance, linesInstance };
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
