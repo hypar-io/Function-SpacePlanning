@@ -69,7 +69,7 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color; // ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
+                var color = kvp.Value.Color ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
                 color.Alpha = 0.5;
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }
@@ -195,7 +195,15 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var innerProfile = Boundary.ThickenedInteriorProfile();
+            var innerProfile = Boundary;
+            try
+            {
+                innerProfile = Boundary.ThickenedInteriorProfile();
+            }
+            catch
+            {
+                Console.WriteLine($"Failed to thicken profile for {Name}");
+            }
             var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
             {
                 ReverseWinding = true
