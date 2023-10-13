@@ -90,6 +90,7 @@ namespace Elements
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
             // If the level add id is "dummy-level-volume", then Level definitions have likely been removed from the model
             var levelMatch = this.LevelAddId == "dummy-level-volume" ? true : identity.LevelAddId == this.LevelAddId;
+
             var boundaryMatch = true;
             if (identity.OriginalBoundary != null && this.OriginalBoundary != null)
             {
@@ -99,10 +100,10 @@ namespace Elements
             var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
 
             // Preserve edits if levels are added later
-            if (this.LevelAddId == "dummy-level-volume" || identity.TemporaryReferenceLevel)
-            {
-                returnVal = boundaryMatch && levelMatch;
-            }
+            // if (this.LevelAddId == "dummy-level-volume" || identity.TemporaryReferenceLevel)
+            // {
+            //     returnVal = boundaryMatch && levelMatch;
+            // }
 
             return returnVal;
         }
