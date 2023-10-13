@@ -205,13 +205,14 @@ namespace Elements
 
         public override void UpdateRepresentations()
         {
-            var innerProfile = Boundary.ThickenedInteriorProfile();
+            var innerProfile = Boundary;
             // offset the inner profile ever so slightly so that we don't get z
             // fighting. This used to be a bad thing because snaps were
             // generated from representation, but now we don't even serialize
             // it, so it's safe.
             try
             {
+                innerProfile = innerProfile.ThickenedInteriorProfile();
                 var offset = innerProfile.Offset(-0.001);
                 innerProfile = offset.FirstOrDefault();
             }
@@ -253,10 +254,6 @@ namespace Elements
                 if (fullReq != null && fullReq.Enclosed == true)
                 {
                     profile.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
-                }
-                else
-                {
-                    profile.SetEdgeThickness(0, 0);
                 }
             }
             var sb = new SpaceBoundary
