@@ -220,7 +220,8 @@ namespace Elements
             {
                 // just swallow an offset failure.
             }
-            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height, Vector3.ZAxis)
+            // Representation height should be dropped a bit to account for view scope overlap. TODO: In the future, our SpaceBoundaries should be reactive to the floor depth of the level above... or perhaps ceiling height (tbd)
+            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height - 0.001, Vector3.ZAxis)
             {
                 ReverseWinding = true
             };
