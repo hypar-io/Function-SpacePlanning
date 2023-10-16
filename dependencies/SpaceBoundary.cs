@@ -319,6 +319,10 @@ namespace Elements
                 fullReq.CountPlaced++;
                 this.FulfilledProgramRequirement = fullReq;
                 this.ProgramRequirement = fullReq.Id;
+                if(fullReq.Enclosed == true && this.Boundary.GetEdgeThickness() == null)
+                {
+                    this.Boundary.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
+                } 
             }
             this.ProgramType = displayName;
         }
@@ -337,6 +341,7 @@ namespace Elements
                 levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
                 levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
             matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
+
             return this;
         }
 
