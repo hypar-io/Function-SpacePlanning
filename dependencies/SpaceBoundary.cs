@@ -69,7 +69,7 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
+                var color = kvp.Value.Color ?? Colors.Aqua;
                 color.Alpha = 0.5;
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }
@@ -88,13 +88,23 @@ namespace Elements
         public bool Match(SpacesIdentity identity)
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
-            var levelMatch = identity.LevelAddId == this.LevelAddId;
+            // If the level add id is "dummy-level-volume", then Level definitions have likely been removed from the model
+            var levelMatch = this.LevelAddId == "dummy-level-volume" ? true : identity.LevelAddId == this.LevelAddId;
+
             var boundaryMatch = true;
             if (identity.OriginalBoundary != null && this.OriginalBoundary != null)
             {
                 boundaryMatch = identity.OriginalBoundary.IsAlmostEqualTo(this.OriginalBoundary, 1.0);
             }
+
             var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+
+            // Preserve edits if levels are added later
+            // if (this.LevelAddId == "dummy-level-volume" || identity.TemporaryReferenceLevel)
+            // {
+            //     returnVal = boundaryMatch && levelMatch;
+            // }
+
             return returnVal;
         }
 
@@ -334,25 +344,69 @@ namespace Elements
             this.Level = volume.Id;
         }
 
-        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
+        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts, List<LevelVolume> levelVolumes)
         {
-            var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
-                levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
+            var matchingLevelLayout = new LevelLayout();
+
+            if (levelLayouts.Count == 0)
+            {
+                LevelLayout dummyLevelLayout = CreateDummyLevelLayout(edit.Value?.Level?.Name, levelVolumes);
+
+                matchingLevelLayout = dummyLevelLayout;
+            }
+            else
+            {
+                matchingLevelLayout =
+                   levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                   levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
+                   levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout) ??
+                   levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Level.ToString() == edit.Value.Level.ToString());
+            }
             matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
 
             return this;
         }
 
-        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
+        private static LevelLayout CreateDummyLevelLayout(string levelName, List<LevelVolume> levelVolumes)
         {
-            var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
-                // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
-                levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
+            var dummyLevelVolume = new LevelVolume()
+            {
+                Height = 3,
+                AddId = "dummy-level-volume",
+                Name = "dummy-level-volume"
+            };
+
+            if (levelVolumes.Count > 0)
+            {
+                dummyLevelVolume = levelVolumes.FirstOrDefault(x => x.Name == levelName) ?? levelVolumes[0];
+            }
+
+            var dummyLevelLayout = new LevelLayout()
+            {
+                LevelVolume = dummyLevelVolume,
+                Profiles = new List<Profile>()
+            };
+            return dummyLevelLayout;
+        }
+
+        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts, List<LevelVolume> levelVolumes)
+        {
+            var matchingLevelLayout = new LevelLayout();
+
+            if (levelLayouts.Count == 0)
+            {
+                matchingLevelLayout = CreateDummyLevelLayout(add.Value?.Level?.Name, levelVolumes);
+            }
+            else
+            {
+                matchingLevelLayout =
+                    levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
+                    // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
+                    levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
+            }
+
             var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
             sb?.SetProgram(add.Value.ProgramType);
             return sb;

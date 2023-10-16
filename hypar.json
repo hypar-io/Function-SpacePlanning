@@ -60,6 +60,10 @@
         "Level Add Id": {
           "type": "string"
         },
+        "Temporary Reference Level": {
+          "type": "boolean",
+          "default": false
+        },
         "Original Boundary": {
           "$ref": "https://schemas.hypar.io/Polygon.json"
         },
@@ -171,27 +175,6 @@
                 "Building Name": {
                   "type": "string",
                   "$hyparOrder": 1
-                }
-              }
-            },
-            "Level Layout": {
-              "$hyparRelation": {
-                "$ref": "https://schemas.hypar.io/LevelVolume.json"
-              },
-              "type": "object",
-              "$hyparOrder": 2,
-              "properties": {
-                "Name": {
-                  "type": "string"
-                },
-                "Building Name": {
-                  "type": "string"
-                },
-                "Add Id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
                 }
               }
             },

@@ -253,15 +253,16 @@ namespace SpacePlanning
     
     {
         [Newtonsoft.Json.JsonConstructor]
-        public SpacesIdentity(string @levelAddId, Polygon @originalBoundary, Vector3 @relativePosition, IList<Polygon> @originalVoids)
+        public SpacesIdentity(string @levelAddId, bool @temporaryReferenceLevel, Polygon @originalBoundary, Vector3 @relativePosition, IList<Polygon> @originalVoids)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacesIdentity>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @levelAddId, @originalBoundary, @relativePosition, @originalVoids});
+                validator.PreConstruct(new object[]{ @levelAddId, @temporaryReferenceLevel, @originalBoundary, @relativePosition, @originalVoids});
             }
         
             this.LevelAddId = @levelAddId;
+            this.TemporaryReferenceLevel = @temporaryReferenceLevel;
             this.OriginalBoundary = @originalBoundary;
             this.RelativePosition = @relativePosition;
             this.OriginalVoids = @originalVoids;
@@ -274,6 +275,9 @@ namespace SpacePlanning
     
         [Newtonsoft.Json.JsonProperty("Level Add Id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LevelAddId { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Temporary Reference Level", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool TemporaryReferenceLevel { get; set; } = false;
     
         [Newtonsoft.Json.JsonProperty("Original Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Polygon OriginalBoundary { get; set; }
