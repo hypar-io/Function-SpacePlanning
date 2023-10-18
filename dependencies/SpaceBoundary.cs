@@ -264,7 +264,7 @@ namespace Elements
                 Height = height,
                 Transform = xform,
                 Material = material ?? MaterialDict["unrecognized"],
-                Name = name,
+                Name = fullyQualifiedName,
                 OriginalBoundary = profile.Perimeter,
                 OriginalVoids = profile.Voids.ToList()
             };
@@ -322,7 +322,7 @@ namespace Elements
             }
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             // TODO: make the name use the fully qualified name once all functions use `HyparSpaceType`.
-            this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            this.Name = displayName;
             this.HyparSpaceType = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             if (hasReqMatch)
             {
