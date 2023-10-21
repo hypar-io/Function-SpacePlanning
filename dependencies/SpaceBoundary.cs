@@ -70,10 +70,20 @@ namespace Elements
             foreach (var kvp in Requirements)
             {
                 var color = kvp.Value.Color ?? Colors.Aqua;
-                color.Alpha = 0.5;
+                if (FullOpacityPrograms.Contains(kvp.Key))
+                {
+                    color.Alpha = 1.0;
+                }
+                else
+                {
+                    color.Alpha = 0.5;
+                }
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }
         }
+
+        [JsonIgnore]
+        private static readonly List<string> FullOpacityPrograms = new List<string> { "Core", "Circulation" };
 
         /// <summary>
         /// Static properties can persist across executions! need to reset to defaults w/ every execution.
@@ -203,8 +213,20 @@ namespace Elements
         [JsonProperty("Room View")]
         public ViewScope RoomView { get; set; }
 
+        [JsonIgnore]
+        public static readonly List<string> NonExtrudedTypes = new List<string> { "Circulation" };
+
+
         public override void UpdateRepresentations()
         {
+            // Special types like circulation render differently. This is to
+            // match the appearance of circulation generated in the circulation
+            // function.
+            if (NonExtrudedTypes.Contains(this.ProgramName))
+            {
+                this.Representation = new Extrude(this.Boundary, 0.005, Vector3.ZAxis, false);
+                return;
+            }
             var innerProfile = Boundary;
             // offset the inner profile ever so slightly so that we don't get z
             // fighting. This used to be a bad thing because snaps were
@@ -222,11 +244,16 @@ namespace Elements
             }
             var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height, Vector3.ZAxis)
             {
-                ReverseWinding = true
+                // Unless we're a special full opacity type like core, make this
+                // volume "inside out" so that it's easy to click things inside
+                // it and only see the backside in display.
+                ReverseWinding = !FullOpacityPrograms.Contains(this.ProgramName)
             };
             var repInstance = new RepresentationInstance(new SolidRepresentation(extrude), this.Material);
             var linesInstance = new RepresentationInstance(new CurveRepresentation(innerProfile.Perimeter, false), BuiltInMaterials.Black);
             this.RepresentationInstances = new List<RepresentationInstance> { repInstance, linesInstance };
+            // we include an old representation for snapping purposes.
+            // this.Representation = new Lamina(Boundary, true);
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
             RoomView = new ViewScope()
@@ -236,7 +263,7 @@ namespace Elements
                 ClipWithBoundingBox = true
             };
         }
-        public static SpaceBoundary Make(Profile profile, string fullyQualifiedName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
+        public static SpaceBoundary Make(Profile profile, string fullyQualifiedName, Transform xform, double height)
         {
             if (profile.Perimeter.IsClockWise())
             {
@@ -278,13 +305,8 @@ namespace Elements
                 sb.ProgramGroup = fullReq.ProgramGroup;
             }
             sb.ProgramName = fullyQualifiedName;
-            sb.ParentCentroid = parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
-            sb.IndividualCentroid = individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
-
-            if (corridorSegments != null)
-            {
-                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.RoomEdges(), corridorSegments, out var otherSegments).Select(re => re.Line).ToList();
-            }
+            sb.ParentCentroid = xform.OfPoint(profile.Perimeter.Centroid());
+            sb.IndividualCentroid = xform.OfPoint(profile.Perimeter.Centroid());
             return sb;
         }
 
@@ -329,10 +351,10 @@ namespace Elements
                 fullReq.CountPlaced++;
                 this.FulfilledProgramRequirement = fullReq;
                 this.ProgramRequirement = fullReq.Id;
-                if(fullReq.Enclosed == true && this.Boundary.GetEdgeThickness() == null)
+                if (fullReq.Enclosed == true && this.Boundary.GetEdgeThickness() == null)
                 {
                     this.Boundary.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
-                } 
+                }
             }
             this.ProgramType = displayName;
         }
