@@ -21,14 +21,21 @@ namespace SpacePlanning
             var output = new SpacePlanningOutputs();
             MessageManager.Initialize(output);
             inputModels.TryGetValue("Floors", out var floorsModel);
-            inputModels.TryGetValue("Conceptual Mass", out var conceptualMassModel);
-            var levelVolumes = conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>();
             inputModels.TryGetValue("Levels", out var levelsModel);
+            inputModels.TryGetValue("Conceptual Mass", out var conceptualMassModel);
+            var levelVolumes = new List<LevelVolume>();
             levelVolumes.AddRange(levelsModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
 
-            // The newer `Floors By Sketch` function produces LevelVolumes
+            // The newer `Floors By Sketch` function produces LevelVolumes. Prefer these over the ones produced by conceptual mass.
             var levelsFromFloors = floorsModel?.AllElementsOfType<LevelVolume>().ToList();
-            if (levelsFromFloors != null) levelVolumes.AddRange(levelsFromFloors);
+            if (levelsFromFloors != null && levelsFromFloors.Any())
+            {
+                levelVolumes.AddRange(levelsFromFloors);
+            }
+            else
+            {
+                levelVolumes.AddRange(conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
+            }
 
             var levels = levelsModel?.AllElementsOfType<Level>();
 
