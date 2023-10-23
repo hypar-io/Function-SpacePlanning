@@ -98,27 +98,6 @@ namespace SpacePlanning
 
             var levelLayouts = new List<LevelLayout>();
 
-            // Workaround for when user assigns a Primary Use Category of 'Residential' to a Level Volume
-            // This is necessary because we added a 'defaultLevelVolume' to address issues where users start Space Planning
-            // before levels are defined, and then update them once levels are defined.
-            bool containsResidentialUse = false;
-            var residentialLevelVolumeNames = new List<string>();
-
-            foreach (var levelVolume in levelVolumes)
-            {
-                if (levelVolume.PrimaryUseCategory == "Residential")
-                {
-                    containsResidentialUse = true;
-                    levelVolume.PrimaryUseCategory = null;
-                    residentialLevelVolumeNames.Add(levelVolume.Name);
-                }
-            }
-
-            if (containsResidentialUse) output.Warnings.Add(
-                @$"Level Volumes with a Primary Use Category of 'Residential' are not supported by this function.
-            Please update the following Level Volumes to use a different Primary Use Category:
-             {string.Join(", ", residentialLevelVolumeNames)}");
-
             LevelVolume defaultLevelVolume = levelVolumes.Count > 0 ? levelVolumes[0] : null;
 
             // This code is for backwards compatibility with workflows that did not have a LevelVolume with an "AddId"
@@ -127,7 +106,7 @@ namespace SpacePlanning
                 defaultLevelVolume.AddId = levelVolumes[0].Name;
             }
 
-            // // Remove overrides that were drawn at levels that have now been removed
+            // Remove overrides that were drawn at levels that have now been removed
             RemoveOverridesAtRemovedLevels(input.Overrides.Spaces, input.Overrides.Additions.Spaces, levelVolumes);
 
             List<SpaceBoundary> tempSpaces = GetTemporarySpaceBoundaries(input, levelVolumes, levelLayouts, defaultLevelVolume);
@@ -185,7 +164,8 @@ namespace SpacePlanning
 
             AssignLevelLayoutToSpaceBoundaries(input, levelLayouts, defaultLevelVolume);
 
-            var spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
+            // Generated spaces for all except "Residential"
+            var spaces = levelLayouts.Where(x => x.LevelVolume.PrimaryUseCategory != "Residential").SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
             var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
 
             RemoveUnmatchedOverrides(input.Overrides.Spaces, input.Overrides.Additions.Spaces, levelLayouts);
