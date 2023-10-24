@@ -251,6 +251,19 @@
       "perProperty": true
     }
   },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Autocreate Spaces": {
+        "$hyparDeprecated": true,
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "default": false
+      }
+    }
+  },
   "outputs": [],
   "element_types": [
     "https://schemas.hypar.io/SpaceBoundary.json",

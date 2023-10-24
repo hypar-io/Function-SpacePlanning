@@ -29,15 +29,16 @@ namespace SpacePlanning
     {
         [Newtonsoft.Json.JsonConstructor]
         
-        public SpacePlanningInputs(Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
+        public SpacePlanningInputs(bool? @autocreateSpaces, Overrides @overrides, string bucketName, string uploadsBucket, Dictionary<string, string> modelInputKeys, string gltfKey, string elementsKey, string ifcKey):
         base(bucketName, uploadsBucket, modelInputKeys, gltfKey, elementsKey, ifcKey)
         {
             var validator = Validator.Instance.GetFirstValidatorForType<SpacePlanningInputs>();
             if(validator != null)
             {
-                validator.PreConstruct(new object[]{ @overrides});
+                validator.PreConstruct(new object[]{ @autocreateSpaces, @overrides});
             }
         
+            this.AutocreateSpaces = @autocreateSpaces;
             this.Overrides = @overrides ?? this.Overrides;
         
             if(validator != null)
@@ -45,6 +46,9 @@ namespace SpacePlanning
                 validator.PostConstruct(this);
             }
         }
+    
+        [Newtonsoft.Json.JsonProperty("Autocreate Spaces", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? AutocreateSpaces { get; set; } = false;
     
         [Newtonsoft.Json.JsonProperty("overrides", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Overrides Overrides { get; set; } = new Overrides();

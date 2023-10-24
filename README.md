@@ -6,6 +6,10 @@ Lay out, sketch, and define program uses for spaces.
 
 |Input Name|Type|Description|
 |---|---|---|
+|Autocreate Spaces|[
+  "boolean",
+  "null"
+]||
 
 
 <br>

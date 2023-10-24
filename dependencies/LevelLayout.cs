@@ -38,7 +38,8 @@ namespace Elements
             Dictionary<string, List<VerticalCirculationElement>> verticalCirculationByLevel,
             Dictionary<string, List<ServiceCore>> coresByLevel,
             Dictionary<string, List<Wall>> wallsByLevel) levelGroupedElements,
-            List<SpaceBoundary> manualSpaces)
+            List<SpaceBoundary> manualSpaces,
+            bool autocreateSpaces)
         {
             this.Levels = new List<Guid> { levelVolume.Id };
             this.LevelVolume = levelVolume;
@@ -49,12 +50,12 @@ namespace Elements
 
             var levelBoundary = levelVolume.Profile;
             var (subtractedProfiles, enclosedRooms) = GetSubtractionProfiles(levelVolume, levelGroupedElements, manualSpaces);
-            if (levelBoundary != null)
+            if (levelBoundary != null && autocreateSpaces)
             {
                 this.Profiles.Add(levelBoundary);
             }
             // if there are any rooms, subtract them from the level boundary and add them in as additional profiles
-            if (enclosedRooms.Count > 0)
+            if (enclosedRooms.Count > 0 && autocreateSpaces)
             {
                 if (this.Profiles.Count > 0)
                 {
