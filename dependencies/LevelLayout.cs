@@ -233,7 +233,11 @@ namespace Elements
             Profiles.Add(projectedProfile);
             projectedProfile.AdditionalProperties = p.AdditionalProperties;
             projectedProfile.Name = p.Name;
-            var spaceBoundary = SpaceBoundary.Make(projectedProfile, programName, LevelVolume.Transform, LevelVolume.Height);
+
+            // TODO: This is a temporary default. We eventually need to bring in logic to find the floor above and subtract it's thickness from the LevelVolume height
+            var spaceHeight = LevelVolume.Height - 0.1;
+
+            var spaceBoundary = SpaceBoundary.Make(projectedProfile, programName, LevelVolume.Transform, spaceHeight);
             spaceBoundary.Boundary.AdditionalProperties["SpaceBoundary"] = spaceBoundary.Id;
             spaceBoundary.SetLevelProperties(LevelVolume);
             spaceBoundary.LevelElements = LevelElements;
