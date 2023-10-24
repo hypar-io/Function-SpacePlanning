@@ -242,7 +242,7 @@ namespace Elements
             {
                 // just swallow an offset failure.
             }
-            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height, Vector3.ZAxis)
+            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height - 0.15, Vector3.ZAxis)
             {
                 // Unless we're a special full opacity type like core, make this
                 // volume "inside out" so that it's easy to click things inside
