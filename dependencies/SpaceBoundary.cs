@@ -69,7 +69,7 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
+                var color = kvp.Value.Color ?? Colors.Aqua;
                 if (FullOpacityPrograms.Contains(kvp.Key))
                 {
                     color.Alpha = 1.0;
@@ -343,6 +343,11 @@ namespace Elements
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
             this.Name = displayName;
             this.HyparSpaceType = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            // Prefer the display name over an unspecified type
+            if (this.HyparSpaceType == "unspecified" && displayName != null)
+            {
+                this.HyparSpaceType = displayName;
+            }
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
