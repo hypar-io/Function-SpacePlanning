@@ -69,11 +69,21 @@ namespace Elements
             }
             foreach (var kvp in Requirements)
             {
-                var color = kvp.Value.Color; // this shouldn't ever actually be null, but just in case...
-                color.Alpha = 0.5;
+                var color = kvp.Value.Color ?? Colors.Aqua; // this shouldn't ever actually be null, but just in case...
+                if (FullOpacityPrograms.Contains(kvp.Key))
+                {
+                    color.Alpha = 1.0;
+                }
+                else
+                {
+                    color.Alpha = 0.5;
+                }
                 MaterialDict[kvp.Key] = new Material(kvp.Value.ProgramName, color, doubleSided: false);
             }
         }
+
+        [JsonIgnore]
+        private static readonly List<string> FullOpacityPrograms = new List<string> { "Core", "Circulation" };
 
         /// <summary>
         /// Static properties can persist across executions! need to reset to defaults w/ every execution.
@@ -88,13 +98,23 @@ namespace Elements
         public bool Match(SpacesIdentity identity)
         {
             var lcs = this.LevelVolume?.LocalCoordinateSystem ?? new Transform();
-            var levelMatch = identity.LevelAddId == this.LevelAddId;
+            // If the level add id is "dummy-level-volume", then Level definitions have likely been removed from the model
+            var levelMatch = this.LevelAddId == "dummy-level-volume" ? true : identity.LevelAddId == this.LevelAddId;
+
             var boundaryMatch = true;
             if (identity.OriginalBoundary != null && this.OriginalBoundary != null)
             {
                 boundaryMatch = identity.OriginalBoundary.IsAlmostEqualTo(this.OriginalBoundary, 1.0);
             }
+
             var returnVal = boundaryMatch && levelMatch && this.Boundary.Contains(lcs.OfPoint(identity.RelativePosition));
+
+            // Preserve edits if levels are added later
+            // if (this.LevelAddId == "dummy-level-volume" || identity.TemporaryReferenceLevel)
+            // {
+            //     returnVal = boundaryMatch && levelMatch;
+            // }
+
             return returnVal;
         }
 
@@ -193,16 +213,45 @@ namespace Elements
         [JsonProperty("Room View")]
         public ViewScope RoomView { get; set; }
 
+        [JsonIgnore]
+        public static readonly List<string> NonExtrudedTypes = new List<string> { "Circulation" };
+
+
         public override void UpdateRepresentations()
         {
-            var extrude = new Extrude(Boundary.Transformed(new Transform(0, 0, 0.01)), Height, Vector3.ZAxis)
+            // Special types like circulation render differently. This is to
+            // match the appearance of circulation generated in the circulation
+            // function.
+            if (NonExtrudedTypes.Contains(this.ProgramName))
             {
-                ReverseWinding = true
-            };
-            Representation = new Representation(extrude)
+                this.Representation = new Extrude(this.Boundary, 0.005, Vector3.ZAxis, false);
+                return;
+            }
+            var innerProfile = Boundary;
+            // offset the inner profile ever so slightly so that we don't get z
+            // fighting. This used to be a bad thing because snaps were
+            // generated from representation, but now we don't even serialize
+            // it, so it's safe.
+            try
             {
-                SkipCSGUnion = true
+                innerProfile = innerProfile.ThickenedInteriorProfile();
+                var offset = innerProfile.Offset(-0.001);
+                innerProfile = offset.FirstOrDefault();
+            }
+            catch
+            {
+                // just swallow an offset failure.
+            }
+            var extrude = new Extrude(innerProfile.Transformed(new Transform(0, 0, 0.001)), Height - 0.15, Vector3.ZAxis)
+            {
+                // Unless we're a special full opacity type like core, make this
+                // volume "inside out" so that it's easy to click things inside
+                // it and only see the backside in display.
+                ReverseWinding = !FullOpacityPrograms.Contains(this.ProgramName)
             };
+            var repInstance = new RepresentationInstance(new SolidRepresentation(extrude), this.Material);
+            var linesInstance = new RepresentationInstance(new CurveRepresentation(innerProfile.Perimeter, false), BuiltInMaterials.Black);
+            this.RepresentationInstances = new List<RepresentationInstance> { repInstance, linesInstance };
             var bbox = new BBox3(this);
             bbox = new BBox3(bbox.Min, bbox.Max - (0, 0, 0.1));
             RoomView = new ViewScope()
@@ -211,9 +260,8 @@ namespace Elements
                 Camera = new Camera((0, 0, -1), null, null),
                 ClipWithBoundingBox = true
             };
-            base.UpdateRepresentations();
         }
-        public static SpaceBoundary Make(Profile profile, string fullyQualifiedName, Transform xform, double height, Vector3? parentCentroid = null, Vector3? individualCentroid = null, IEnumerable<Line> corridorSegments = null)
+        public static SpaceBoundary Make(Profile profile, string fullyQualifiedName, Transform xform, double height)
         {
             if (profile.Perimeter.IsClockWise())
             {
@@ -226,6 +274,13 @@ namespace Elements
             {
                 name = "Unassigned Space Type";
             }
+            if (profile.GetEdgeThickness() == null)
+            {
+                if (fullReq != null && fullReq.Enclosed == true)
+                {
+                    profile.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
+                }
+            }
             var sb = new SpaceBoundary
             {
                 Boundary = profile,
@@ -234,7 +289,7 @@ namespace Elements
                 Height = height,
                 Transform = xform,
                 Material = material ?? MaterialDict["unrecognized"],
-                Name = name,
+                Name = fullyQualifiedName,
                 OriginalBoundary = profile.Perimeter,
                 OriginalVoids = profile.Voids.ToList()
             };
@@ -248,13 +303,8 @@ namespace Elements
                 sb.ProgramGroup = fullReq.ProgramGroup;
             }
             sb.ProgramName = fullyQualifiedName;
-            sb.ParentCentroid = parentCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
-            sb.IndividualCentroid = individualCentroid ?? xform.OfPoint(profile.Perimeter.Centroid());
-
-            if (corridorSegments != null)
-            {
-                sb.AdjacentCorridorEdges = WallGeneration.FindAllEdgesAdjacentToSegments(profile.Perimeter.Segments(), corridorSegments, out var otherSegments);
-            }
+            sb.ParentCentroid = xform.OfPoint(profile.Perimeter.Centroid());
+            sb.IndividualCentroid = xform.OfPoint(profile.Perimeter.Centroid());
             return sb;
         }
 
@@ -291,12 +341,17 @@ namespace Elements
                 this.FulfilledProgramRequirement.CountPlaced--;
             }
             var hasReqMatch = TryGetRequirementsMatch(displayName, out var fullReq);
-            this.Name = hasReqMatch ? fullReq.HyparSpaceType : displayName;
+            this.Name = displayName;
             this.HyparSpaceType = hasReqMatch ? fullReq.HyparSpaceType : displayName;
             if (hasReqMatch)
             {
                 fullReq.CountPlaced++;
                 this.FulfilledProgramRequirement = fullReq;
+                this.ProgramRequirement = fullReq.Id;
+                if (fullReq.Enclosed == true && this.Boundary.GetEdgeThickness() == null)
+                {
+                    this.Boundary.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
+                }
             }
             this.ProgramType = displayName;
         }
@@ -308,24 +363,69 @@ namespace Elements
             this.Level = volume.Id;
         }
 
-        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts)
+        public SpaceBoundary Update(SpacesOverride edit, List<LevelLayout> levelLayouts, List<LevelVolume> levelVolumes)
         {
-            var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
-                levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout);
+            var matchingLevelLayout = new LevelLayout();
+
+            if (levelLayouts.Count == 0)
+            {
+                LevelLayout dummyLevelLayout = CreateDummyLevelLayout(edit.Value?.Level?.Name, levelVolumes);
+
+                matchingLevelLayout = dummyLevelLayout;
+            }
+            else
+            {
+                matchingLevelLayout =
+                   levelLayouts.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.LevelVolume.AddId == edit.Value?.Level?.AddId) ??
+                   levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == edit.Value?.Level?.Name) ??
+                   levelLayouts.FirstOrDefault(ll => ll.Id == LevelLayout) ??
+                   levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Level.ToString() == edit.Value.Level.ToString());
+            }
             matchingLevelLayout.UpdateSpace(this, edit.Value.Boundary, edit.Value.ProgramType);
+
             return this;
         }
 
-        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts)
+        private static LevelLayout CreateDummyLevelLayout(string levelName, List<LevelVolume> levelVolumes)
         {
-            var matchingLevelLayout =
-                levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
-                // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
-                levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
-                levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
+            var dummyLevelVolume = new LevelVolume()
+            {
+                Height = 3,
+                AddId = "dummy-level-volume",
+                Name = "dummy-level-volume"
+            };
+
+            if (levelVolumes.Count > 0)
+            {
+                dummyLevelVolume = levelVolumes.FirstOrDefault(x => x.Name == levelName) ?? levelVolumes[0];
+            }
+
+            var dummyLevelLayout = new LevelLayout()
+            {
+                LevelVolume = dummyLevelVolume,
+                Profiles = new List<Profile>()
+            };
+            return dummyLevelLayout;
+        }
+
+        public static SpaceBoundary Create(SpacesOverrideAddition add, List<LevelLayout> levelLayouts, List<LevelVolume> levelVolumes)
+        {
+            var matchingLevelLayout = new LevelLayout();
+
+            if (levelLayouts.Count == 0)
+            {
+                matchingLevelLayout = CreateDummyLevelLayout(add.Value?.Level?.Name, levelVolumes);
+            }
+            else
+            {
+                matchingLevelLayout =
+                    levelLayouts.FirstOrDefault(ll => add.Value?.Level?.AddId != null && ll.LevelVolume.AddId == add.Value?.Level?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name == add.Value.Level?.Name) ??
+                    // TODO: Remove LevelLayout property when the SampleProject template data is updated and the "Level Layout" property is completely replaced by "Level"
+                    levelLayouts.FirstOrDefault(ll => add.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == add.Value?.LevelLayout?.AddId) ??
+                    levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == add.Value.LevelLayout?.Name);
+            }
+
             var sb = matchingLevelLayout.CreateSpace(add.Value.Boundary);
             sb?.SetProgram(add.Value.ProgramType);
             return sb;

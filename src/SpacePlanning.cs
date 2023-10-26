@@ -2,8 +2,8 @@ using Elements;
 using Elements.Geometry;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace SpacePlanning
@@ -19,15 +19,35 @@ namespace SpacePlanning
         public static SpacePlanningOutputs Execute(Dictionary<string, Model> inputModels, SpacePlanningInputs input)
         {
             var output = new SpacePlanningOutputs();
+            // this is a really nasty hack to introduce new behavior for new
+            // instances of the function, but keep old instances the same. We
+            // created a new input as `boolean?`, and set the default to false,
+            // so that new instances of the function would get "false" but old
+            // instances of the function would be "null."
+            var shouldAutoCreateSpaces = input.AutocreateSpaces == null;
+
             MessageManager.Initialize(output);
             inputModels.TryGetValue("Floors", out var floorsModel);
-            inputModels.TryGetValue("Conceptual Mass", out var conceptualMassModel);
-            var levelVolumes = conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>();
             inputModels.TryGetValue("Levels", out var levelsModel);
+            inputModels.TryGetValue("Conceptual Mass", out var conceptualMassModel);
+            var levelVolumes = new List<LevelVolume>();
             levelVolumes.AddRange(levelsModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
+
+            // The newer `Floors By Sketch` function produces LevelVolumes. Prefer these over the ones produced by conceptual mass.
+            var levelsFromFloors = floorsModel?.AllElementsOfType<LevelVolume>().ToList();
+            if (levelsFromFloors != null && levelsFromFloors.Any())
+            {
+                levelVolumes.AddRange(levelsFromFloors);
+            }
+            else
+            {
+                levelVolumes.AddRange(conceptualMassModel?.AllElementsOfType<LevelVolume>().ToList() ?? new List<LevelVolume>());
+            }
+
+            var levels = levelsModel?.AllElementsOfType<Level>();
+
             if (levelVolumes.Count == 0)
             {
-                var levels = levelsModel?.AllElementsOfType<Level>();
                 if (levels != null && levels.Any())
                 {
                     // TODO: handle separate level groups
@@ -69,7 +89,6 @@ namespace SpacePlanning
                 }
             }
 
-
             var levelGroupedElements = MapElementsToLevels(inputModels, levelVolumes);
 
             var defaultLevelHeight = Units.FeetToMeters(14);
@@ -92,6 +111,19 @@ namespace SpacePlanning
             }
 
             var levelLayouts = new List<LevelLayout>();
+            LevelVolume defaultLevelVolume = levelVolumes.Count > 0 ? levelVolumes[0] : null;
+
+            // This code is for backwards compatibility with workflows that did not have a LevelVolume with an "AddId"
+            if (defaultLevelVolume != null && defaultLevelVolume.AddId == null)
+            {
+                defaultLevelVolume.AddId = levelVolumes[0].Name;
+            }
+
+            // // Remove overrides that were drawn at levels that have now been removed
+            RemoveOverridesAtRemovedLevels(input.Overrides.Spaces, input.Overrides.Additions.Spaces, levelVolumes);
+
+            List<SpaceBoundary> tempSpaces = GetTemporarySpaceBoundaries(input, levelVolumes, levelLayouts, defaultLevelVolume);
+
             foreach (var levelVolume in levelVolumes)
             {
                 if (levelVolume.PrimaryUseCategory == "Residential")
@@ -99,7 +131,7 @@ namespace SpacePlanning
                     continue;
                 }
                 var proxy = levelVolume.Proxy("Unit Layout");
-                var levelLayout = new LevelLayout(levelVolume, levelGroupedElements);
+                var levelLayout = new LevelLayout(levelVolume, levelGroupedElements, tempSpaces, shouldAutoCreateSpaces);
                 proxy.AdditionalProperties["Unit Layout"] = levelLayout.Id;
                 levelLayouts.Add(levelLayout);
                 output.Model.AddElement(proxy);
@@ -114,7 +146,7 @@ namespace SpacePlanning
                     Height = defaultLevelHeight,
                     AddId = "dummy-level-volume"
                 };
-                var levelLayout = new LevelLayout(dummyLevelVolume, levelGroupedElements);
+                var levelLayout = new LevelLayout(dummyLevelVolume, levelGroupedElements, tempSpaces, shouldAutoCreateSpaces);
                 levelLayouts.Add(levelLayout);
             }
 
@@ -147,18 +179,28 @@ namespace SpacePlanning
                 }
             }
 
+            AssignLevelLayoutToSpaceBoundaries(input, levelLayouts, defaultLevelVolume);
 
             var spaces = levelLayouts.SelectMany(lul => lul.CreateSpacesFromProfiles()).ToList();
-            var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
+
             RemoveUnmatchedOverrides(input.Overrides.Spaces, input.Overrides.Additions.Spaces, levelLayouts);
+
             spaces = input.Overrides.Spaces.CreateElements(
                 input.Overrides.Additions.Spaces,
                 input.Overrides.Removals.Spaces,
-                (add) => SpaceBoundary.Create(add, levelLayouts),
+                (add) => SpaceBoundary.Create(add, levelLayouts, levelVolumes),
                 (sb, identity) => sb.Match(identity),
-                (sb, edit) => sb.Update(edit, levelLayouts),
+                (sb, edit) => sb.Update(edit, levelLayouts, levelVolumes),
                 spaces);
+
+            var levelElements = spaces.Select(s => s.LevelElements).Distinct().ToList();
+
+            // This is just for the case where we delete a space that was removed after Circulation splits the generated space.
             RemoveAutoGeneratedSpacesContainedByRemovals(spaces, input.Overrides.Removals.Spaces);
+
+            // Anthonie: I don't think we need this anymore, because we first resolve overrides and subtract them from
+            // the generated space in the code in `GetTemporarySpaceBoundaries`
+            // RemoveAutoGeneratedSpacesContainedByAdditions(spaces, input.Overrides.Additions.Spaces);
 
             foreach (var removal in input.Overrides.Removals.Spaces)
             {
@@ -180,11 +222,79 @@ namespace SpacePlanning
                 output.Model.AddElement(space);
             }
             output.Model.AddElements(levelLayouts);
-            output.Model.AddElements(levelLayouts.SelectMany(lul => lul.CreateModelLines()));
             output.Model.AddElements(levelElements);
             output.Model.AddElements(spaces);
 
             return output;
+        }
+
+        private static void AssignLevelLayoutToSpaceBoundaries(SpacePlanningInputs input, List<LevelLayout> levelLayouts, LevelVolume defaultLevelVolume)
+        {
+            var defaultLevelLayout = levelLayouts.SingleOrDefault(x => x.LevelVolume == defaultLevelVolume);
+
+            foreach (var space in input.Overrides.Additions.Spaces)
+            {
+                if (space.Value.LevelLayout == null)
+                {
+                    if (defaultLevelLayout != null)
+                    {
+                        space.Value.LevelLayout = new SpacesOverrideAdditionValueLevelLayout(defaultLevelLayout.Name, defaultLevelVolume?.BuildingName, defaultLevelVolume.AddId);
+                    }
+                }
+            }
+
+            foreach (var space in input.Overrides.Spaces)
+            {
+                // if the space level ID is not in level layouts, then we assume it has been removed and assign the default
+                if (space.Value.Level == null)// || levelLayouts.SingleOrDefault(x => x.AddId == space.Value.Level.AddId) == null)
+                {
+                    if (defaultLevelVolume != null)
+                    {
+                        var autoLevel = new SpacesValueLevel(defaultLevelVolume.AddId, defaultLevelVolume.Name, defaultLevelVolume.BuildingName);
+                        space.Value.Level = autoLevel;
+                        space.Identity.LevelAddId = autoLevel.AddId;
+                    }
+                }
+            }
+        }
+
+        private static List<SpaceBoundary> GetTemporarySpaceBoundaries(SpacePlanningInputs input, List<LevelVolume> levelVolumes, List<LevelLayout> levelLayouts, LevelVolume defaultLevelVolume)
+        {
+            foreach (var space in input.Overrides.Additions.Spaces)
+            {
+                if (space.Value.Level == null)
+                {
+                    if (defaultLevelVolume != null)
+                    {
+                        space.Value.Level = new SpacesOverrideAdditionValueLevel(defaultLevelVolume.AddId, defaultLevelVolume.Name, defaultLevelVolume.BuildingName);
+                    }
+                }
+            }
+
+            foreach (var space in input.Overrides.Spaces)
+            {
+                // if the space level ID is not in level layouts, then we assume it has been removed and assign the default
+                if (space.Value.Level == null)// || levelLayouts.SingleOrDefault(x => x.AddId == space.Value.Level.AddId) == null)
+                {
+                    if (defaultLevelVolume != null)
+                    {
+                        var autoLevel = new SpacesValueLevel(defaultLevelVolume.AddId, defaultLevelVolume.Name, defaultLevelVolume.BuildingName);
+                        space.Value.Level = autoLevel;
+                        space.Identity.LevelAddId = autoLevel.AddId;
+                        space.Identity.TemporaryReferenceLevel = true;
+                    }
+                }
+            }
+            // This was causing all kinds of unpredictable behavior, with spaces coming back from the dead after having been removed, etc.
+            // var tempSpaces = input.Overrides.Spaces.CreateElements(
+            //     input.Overrides.Additions.Spaces,
+            //     input.Overrides.Removals.Spaces,
+            //     (add) => SpaceBoundary.Create(add, levelLayouts, levelVolumes),
+            //     (sb, identity) => sb.Match(identity),
+            //     (sb, edit) => sb.Update(edit, levelLayouts, levelVolumes),
+            //     null);
+
+            return new List<SpaceBoundary>();
         }
 
         private static void RemoveAutoGeneratedSpacesContainedByRemovals(List<SpaceBoundary> spaces, IList<SpacesOverrideRemoval> removals)
@@ -211,19 +321,63 @@ namespace SpacePlanning
                     else
                     {
                         var largestSpace = difference.OrderByDescending(p => Math.Abs(p.Area())).First();
+                        if (largestSpace.Area() < 0.1)
+                        {
+                            spaces.Remove(space);
+                            continue;
+                        }
                         space.Boundary = largestSpace;
                     }
                 }
             }
         }
 
+
+        private static void RemoveAutoGeneratedSpacesContainedByAdditions(List<SpaceBoundary> spaces, IList<SpacesOverrideAddition> additions)
+        {
+            var addedAreasByLevel = additions.GroupBy(r => r.Value?.Level?.AddId ?? r.Value?.Level?.Name ?? "Level 1").ToDictionary(grp => grp.Key ?? "none", grp => grp.Select(r => new Profile(r.Value.Boundary.Perimeter, r.Value.Boundary.Voids)).ToList());
+
+            var allUnmodifiedSpaces = spaces.Where(s => !s.AdditionalProperties.ContainsKey("associatedIdentities") && s.Boundary != null).ToList();
+            for (int i = 0; i < allUnmodifiedSpaces.Count; i++)
+            {
+                var space = allUnmodifiedSpaces[i];
+                var spaceLevel = space.LevelAddId;
+                if (addedAreasByLevel.TryGetValue(spaceLevel, out var addedAreas) || addedAreasByLevel.TryGetValue(space.LevelVolume.Name, out addedAreas))
+                {
+                    var nonNullRemovedAreas = addedAreas.Where(a => a != null && a.Perimeter != null);
+                    if (!nonNullRemovedAreas.Any())
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        var difference = Profile.Difference(new[] { space.Boundary }, nonNullRemovedAreas);
+                        if (difference.Count == 0)
+                        {
+                            spaces.Remove(space);
+                        }
+                        else
+                        {
+                            var largestSpace = difference.OrderByDescending(p => Math.Abs(p.Area())).First();
+                            if (largestSpace.Area() < 0.1)
+                            {
+                                spaces.Remove(space);
+                                continue;
+                            }
+                            space.Boundary = largestSpace;
+                        }
+                    }
+                    catch
+                    {
+                        spaces.Remove(space);
+                    }
+                }
+            }
+        }
+
+
         private static void RemoveUnmatchedOverrides(IList<SpacesOverride> edits, IList<SpacesOverrideAddition> additions, List<LevelLayout> levelLayouts)
         {
-            // If we created a single dummy level layout, just assume all spaces belong to that and don't bother filtering.
-            if (levelLayouts.Any(l => l.Name.Contains("dummy")))
-            {
-                return;
-            }
             foreach (var edit in new List<SpacesOverride>(edits))
             {
                 var matchingLevelLayout =
@@ -245,6 +399,55 @@ namespace SpacePlanning
                     levelLayouts.FirstOrDefault(ll => addition.Value?.LevelLayout?.AddId != null && ll.LevelVolume.AddId + "-layout" == addition.Value?.LevelLayout?.AddId) ??
                     levelLayouts.FirstOrDefault(ll => ll.LevelVolume.Name + " Layout" == addition.Value?.LevelLayout?.Name);
                 if (matchingLevelLayout == null)
+                {
+                    var levelName = addition.Value.Level?.Name ?? "Unknown Level";
+                    MessageManager.AddWarning($"Some spaces assigned to {levelName} were not created because the level was not found.");
+                    additions.Remove(addition);
+                }
+            }
+        }
+
+        private static void RemoveOverridesAtRemovedLevels(IList<SpacesOverride> edits, IList<SpacesOverrideAddition> additions, List<LevelVolume> levelVolumes)
+        {
+            // If we created a single dummy level layout, just assume all spaces belong to that and don't bother filtering.
+            // If there is only one level volume, assume that any drawn spaces belong to it.
+            if (levelVolumes.Count <= 1 || levelVolumes.Any(l => l.Name.Contains("dummy")))
+            {
+                return;
+            }
+            foreach (var edit in new List<SpacesOverride>(edits))
+            {
+
+                // Ignore additions that were never assigned a level because we will assign them to the default level later.
+                if (edit.Value?.Level == null)
+                {
+                    continue;
+                }
+
+
+                var matchingLevelVolume =
+                    levelVolumes.FirstOrDefault(ll => edit.Value?.Level?.AddId != null && ll.AddId == edit.Value?.Level?.AddId) ??
+                    levelVolumes.FirstOrDefault(ll => ll.Name == edit.Value?.Level?.Name);
+
+                if (matchingLevelVolume == null)
+                {
+                    edits.Remove(edit);
+                }
+            }
+
+            foreach (var addition in new List<SpacesOverrideAddition>(additions))
+            {
+                // Ignore additions that were never assigned a level because we will assign them to the default level later.
+                if (addition.Value?.Level == null)
+                {
+                    continue;
+                }
+
+                var matchingLevelVolume =
+                    levelVolumes.FirstOrDefault(ll => addition.Value?.Level?.AddId != null && ll.AddId == addition.Value?.Level?.AddId) ??
+                    levelVolumes.FirstOrDefault(ll => ll.Name == addition.Value?.Level?.Name);
+
+                if (matchingLevelVolume == null)
                 {
                     var levelName = addition.Value.Level?.Name ?? "Unknown Level";
                     MessageManager.AddWarning($"Some spaces assigned to {levelName} were not created because the level was not found.");
@@ -300,9 +503,17 @@ namespace SpacePlanning
             if (inputModels.TryGetValue("Core", out var coresModel))
             {
                 var coreElements = coresModel.AllElementsOfType<ServiceCore>();
+                if (coreElements == null)
+                {
+
+                }
 
                 foreach (var lvl in levelVolumes)
                 {
+                    if (lvl.Profile == null)
+                    {
+                        continue;
+                    }
                     coresByLevel.Add(lvl.Id.ToString(), new List<ServiceCore>());
                     foreach (var core in coreElements)
                     {
@@ -361,29 +572,6 @@ namespace SpacePlanning
             }
 
             return (circulationSegmentsByLevel, verticalCirculationByLevel, coresByLevel, wallsByLevel);
-        }
-
-        /// <summary>
-        /// If we have floors, we shrink our internal level volumes so they sit on top of / don't intersect with the floors.
-        /// </summary>
-        /// <param name="floorsModel">The floors model, which may or may not exist</param>
-        /// <param name="lvl">The level volume</param>
-        private static void AdjustLevelVolumesToFloors(Model floorsModel, LevelVolume lvl)
-        {
-            if (floorsModel != null)
-            {
-                var floorAtLevel = floorsModel.AllElementsOfType<Floor>().FirstOrDefault(f => Math.Abs(lvl.Transform.Origin.Z - f.Transform.Origin.Z) < (f.Thickness * 1.1));
-                if (floorAtLevel != null)
-                {
-                    lvl.Height -= floorAtLevel.Thickness;
-                    var floorFaceOffset = (floorAtLevel.Transform.Origin.Z + floorAtLevel.Thickness) - lvl.Transform.Origin.Z;
-                    if (floorFaceOffset > 0.001)
-                    {
-                        lvl.Transform.Concatenate(new Transform(0, 0, floorFaceOffset));
-                        lvl.Height -= floorFaceOffset;
-                    }
-                }
-            }
         }
     }
 }

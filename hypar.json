@@ -60,6 +60,10 @@
         "Level Add Id": {
           "type": "string"
         },
+        "Temporary Reference Level": {
+          "type": "boolean",
+          "default": false
+        },
         "Original Boundary": {
           "$ref": "https://schemas.hypar.io/Polygon.json"
         },
@@ -126,6 +130,12 @@
         },
         "Boundary": {
           "$hyparRelativeToTransform": true,
+          "$hyparThickenEdges": {
+            "default": {
+              "leftWidth": 0.0762,
+              "rightWidth": 0.0762
+            }
+          },
           "$hyparControlDisplay": {
             "colorScheme": "Program Colors",
             "label": "Program Type"
@@ -189,27 +199,6 @@
                 }
               }
             },
-            "Level Layout": {
-              "$hyparRelation": {
-                "$ref": "https://schemas.hypar.io/LevelVolume.json"
-              },
-              "type": "object",
-              "$hyparOrder": 2,
-              "properties": {
-                "Name": {
-                  "type": "string"
-                },
-                "Building Name": {
-                  "type": "string"
-                },
-                "Add Id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
-                }
-              }
-            },
             "Program Type": {
               "description": "What program should be assigned to this zone?",
               "type": [
@@ -237,6 +226,12 @@
             },
             "Boundary": {
               "$hyparRelativeToTransform": true,
+              "$hyparThickenEdges": {
+                "default": {
+                  "leftWidth": 0.0762,
+                  "rightWidth": 0.0762
+                }
+              },
               "$hyparControlDisplay": {
                 "colorScheme": "Program Colors",
                 "label": "Program Type"
@@ -254,6 +249,19 @@
       },
       "perParent": "Level",
       "perProperty": true
+    }
+  },
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Autocreate Spaces": {
+        "$hyparDeprecated": true,
+        "type": [
+          "boolean",
+          "null"
+        ],
+        "default": false
+      }
     }
   },
   "outputs": [],
