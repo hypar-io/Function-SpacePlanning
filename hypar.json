@@ -129,6 +129,13 @@
           }
         },
         "Boundary": {
+          "$hyparEditorTerms": {
+            "polygon": "Space",
+            "polygons": "Spaces",
+            "edge": "Wall",
+            "edges": "Walls",
+            "edge-width": "Thickness"
+          },
           "$hyparRelativeToTransform": true,
           "$hyparThickenEdges": {
             "default": {
@@ -225,6 +232,13 @@
               }
             },
             "Boundary": {
+              "$hyparEditorTerms": {
+                "polygon": "Space",
+                "polygons": "Spaces",
+                "edge": "Wall",
+                "edges": "Walls",
+                "edge-width": "Thickness"
+              },
               "$hyparRelativeToTransform": true,
               "$hyparThickenEdges": {
                 "default": {
