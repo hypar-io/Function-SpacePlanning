@@ -7,6 +7,9 @@ namespace Elements
     {
         public bool? Enclosed { get; set; }
         public int CountPlaced { get; set; }
+
+        [JsonProperty("Default Wall Type")]
+        public string DefaultWallType { get; set; }
         public int RemainingToPlace
         {
             get

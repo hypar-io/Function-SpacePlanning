@@ -301,6 +301,7 @@ namespace Elements
                 fullReq.CountPlaced++;
                 sb.FulfilledProgramRequirement = fullReq;
                 sb.ProgramGroup = fullReq.ProgramGroup;
+                sb.DefaultWallType = fullReq.DefaultWallType;
             }
             sb.ProgramName = fullyQualifiedName;
             sb.ParentCentroid = xform.OfPoint(profile.Perimeter.Centroid());
@@ -353,10 +354,11 @@ namespace Elements
                 fullReq.CountPlaced++;
                 this.FulfilledProgramRequirement = fullReq;
                 this.ProgramRequirement = fullReq.Id;
-                if (fullReq.Enclosed == true && this.Boundary.GetEdgeThickness() == null)
+                if ((fullReq.Enclosed == true || fullReq.DefaultWallType == "Solid" || fullReq.DefaultWallType == "Glass") && this.Boundary.GetEdgeThickness() == null)
                 {
                     this.Boundary.SetEdgeThickness(Units.InchesToMeters(3), Units.InchesToMeters(3));
                 }
+                this.DefaultWallType = fullReq.DefaultWallType;
             }
             this.ProgramType = displayName;
         }
