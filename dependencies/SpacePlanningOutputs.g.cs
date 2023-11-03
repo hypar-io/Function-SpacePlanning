@@ -17,16 +17,13 @@ namespace SpacePlanning
     public class SpacePlanningOutputs: SystemResults
     {
 
-
         /// <summary>
         /// Construct a SpacePlanningOutputs with default inputs.
         /// This should be used for testing only.
         /// </summary>
         public SpacePlanningOutputs() : base()
         {
-
         }
-
 
 	}
 }
