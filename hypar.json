@@ -295,5 +295,6 @@
   "thumbnail_id": "7353a890-82a6-4ab3-80ff-e8d6862a4878",
   "filters": {},
   "last_updated": "2023-06-07T12:21:54.870637",
-  "cli_version": "1.6.0"
+  "cli_version": "1.6.0",
+  "stream_model": true
 }
