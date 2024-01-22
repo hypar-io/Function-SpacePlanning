@@ -45,29 +45,23 @@ namespace SpacePlanning
             }
 
             var levels = levelsModel?.AllElementsOfType<Level>();
+            var levelGroups = levelsModel?.AllElementsOfType<LevelGroup>();
 
             if (levelVolumes.Count == 0)
             {
-                if (levels != null && levels.Any())
+                if (levelGroups != null && levelGroups.Any())
                 {
-                    // TODO: handle separate level groups
-                    var levelsOrdered = levels.OrderBy(l => l.Elevation);
-                    for (int i = 0; i < levelsOrdered.Count() - 1; i++)
+                    foreach (var levelGroup in levelGroups)
                     {
-                        var currLevel = levelsOrdered.ElementAt(i);
-                        var nextLevel = levelsOrdered.ElementAt(i + 1);
-                        var levelVolume = new LevelVolume
-                        {
-                            Level = currLevel.Id,
-                            Height = nextLevel.Elevation - currLevel.Elevation,
-                            Transform = new Transform(0, 0, currLevel.Elevation),
-                            Name = currLevel.Name ?? $"Level {i + 1}",
-                            AddId = currLevel.Name ?? $"Level {i + 1}"
-                        };
-                        levelVolumes.Add(levelVolume);
+                        levelVolumes.AddRange(CreateLevelVolumes(levelGroup.Levels));
                     }
                 }
+                else if (levels != null && levels.Any())
+                {
+                    levelVolumes.AddRange(CreateLevelVolumes(levels));
+                }
             }
+
             foreach (var lv in levelVolumes)
             {
                 if (lv.Mass.HasValue && conceptualMassModel?.Elements.TryGetValue(lv.Mass.Value, out var massElem) == true && massElem is ConceptualMass mass)
@@ -576,6 +570,26 @@ namespace SpacePlanning
             }
 
             return (circulationSegmentsByLevel, verticalCirculationByLevel, coresByLevel, wallsByLevel);
+        }
+
+        private static IEnumerable<LevelVolume> CreateLevelVolumes(IEnumerable<Level> levels)
+        {
+            var levelsOrdered = levels.OrderBy(l => l.Elevation);
+            for (int i = 0; i < levelsOrdered.Count() - 1; i++)
+            {
+                var currLevel = levelsOrdered.ElementAt(i);
+                var nextLevel = levelsOrdered.ElementAt(i + 1);
+                var levelVolume = new LevelVolume
+                {
+                    Level = currLevel.Id,
+                    Height = nextLevel.Elevation - currLevel.Elevation,
+                    Transform = new Transform(0, 0, currLevel.Elevation),
+                    Name = currLevel.Name ?? $"Level {i + 1}",
+                    AddId = currLevel.Name ?? $"Level {i + 1}"
+                };
+                
+                yield return levelVolume;
+            }
         }
     }
 }
