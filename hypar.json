@@ -289,7 +289,8 @@
     "https://schemas.hypar.io/LevelElements.json",
     "https://schemas.hypar.io/ConceptualMass.json",
     "https://schemas.hypar.io/LevelLayout.json",
-    "https://schemas.hypar.io/ViewScope.json"
+    "https://schemas.hypar.io/ViewScope.json",
+    "https://schemas.hypar.io/LevelGroup.json"
   ],
   "repository_url": "https://github.com/hypar-io/Function-SpacePlanning",
   "thumbnail_id": "7353a890-82a6-4ab3-80ff-e8d6862a4878",
