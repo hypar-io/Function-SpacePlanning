@@ -63,7 +63,7 @@ namespace SpacePlanning
             {
                 this.store = new UrlModelStore<SpacePlanningInputs>();
             }
-            
+            args.StreamModel = true;
 
             var l = new InvocationWrapper<SpacePlanningInputs,SpacePlanningOutputs> (store, SpacePlanning.Execute);
             var output = await l.InvokeAsync(args);
