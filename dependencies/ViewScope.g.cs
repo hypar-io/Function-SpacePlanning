@@ -27,12 +27,14 @@ namespace Elements
     public partial class ViewScope : Element
     {
         [JsonConstructor]
-        public ViewScope(BBox3 @boundingBox, Camera @camera, bool? @lockRotation, bool? @clipWithBoundingBox, ViewScopeClippingBehavior? @clippingBehavior, bool? @modal, System.Collections.Generic.IDictionary<string, string> @functionVisibility, IList<object> @actions, System.Guid @id = default, string @name = null)
+        public ViewScope(BBox3 @boundingBox, Camera @camera, bool? @lockRotation, bool? @lockPosition, bool? @lockZoom, bool? @clipWithBoundingBox, ViewScopeClippingBehavior? @clippingBehavior, bool? @modal, System.Collections.Generic.IDictionary<string, string> @functionVisibility, IList<object> @actions, System.Guid @id = default, string @name = null)
             : base(id, name)
         {
             this.BoundingBox = @boundingBox;
             this.Camera = @camera;
             this.LockRotation = @lockRotation;
+            this.LockPosition = @lockPosition;
+            this.LockZoom = @lockZoom;
             this.ClipWithBoundingBox = @clipWithBoundingBox;
             this.ClippingBehavior = @clippingBehavior;
             this.Modal = @modal;
@@ -58,6 +60,14 @@ namespace Elements
         /// <summary>Whether this scope should lock view rotation. True to lock, False to unlock, and null to leave unchanged.</summary>
         [JsonProperty("Lock Rotation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? LockRotation { get; set; }
+    
+        /// <summary>Whether this scope should lock view position. True to lock, False to unlock, and null to leave unchanged.</summary>
+        [JsonProperty("Lock Position", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? LockPosition { get; set; }
+    
+        /// <summary>Whether this scope should lock view zoom. True to lock, False to unlock, and null to leave unchanged.</summary>
+        [JsonProperty("Lock Zoom", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? LockZoom { get; set; }
     
         /// <summary>Whether this scope should clip to the specified bounding box. If false, it only zooms to the bounding box without clipping.</summary>
         [JsonProperty("Clip With Bounding Box", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
