@@ -27,7 +27,7 @@ namespace Elements
     public partial class ConceptualMass : Envelope
     {
         [JsonConstructor]
-        public ConceptualMass(IList<Line> @skeleton, string @primaryUseCategory, System.Guid? @building, IList<System.Guid> @levelIds, Transform @localCoordinateSystem, Profile @profile, double @elevation, double @height, Vector3 @direction, double @rotation, IList<double> @floorToFloorHeights, Transform @transform, Material @material, Representation @representation, bool @isElementDefinition, System.Guid @id, string @name)
+        public ConceptualMass(IList<Line> @skeleton, string @primaryUseCategory, System.Guid? @building, IList<System.Guid> @levelIds, Transform @localCoordinateSystem, Profile @boundary, Profile @profile, double @elevation, double @height, Vector3 @direction, double @rotation, IList<double> @floorToFloorHeights, Transform @transform, Material @material, Representation @representation, bool @isElementDefinition, System.Guid @id, string @name)
             : base(profile, elevation, height, direction, rotation, floorToFloorHeights, transform, material, representation, isElementDefinition, id, name)
         {
             this.Skeleton = @skeleton;
@@ -35,6 +35,7 @@ namespace Elements
             this.Building = @building;
             this.LevelIds = @levelIds;
             this.LocalCoordinateSystem = @localCoordinateSystem;
+            this.Boundary = @boundary;
             }
         
         
@@ -63,6 +64,9 @@ namespace Elements
         /// <summary>A transform representing the local coordinate system for this mass</summary>
         [JsonProperty("Local Coordinate System", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform LocalCoordinateSystem { get; set; }
+    
+        [JsonProperty("Boundary", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Profile Boundary { get; set; }
     
     
     }
